@@ -1,0 +1,19 @@
+{
+  "id": 22,
+  "name": "OS Town Plan Manchester 1:500 (1889-90, 153 sheets)",
+  "description": "Large scale Ordnance Survey town plan of Manchester and Salford at 1:500. Surveyed 1888-90, published 1890-96. 153 digitised sheets.",
+  "source_url": "https://maps.nls.uk/os/townplans-england/manchester.html",
+  "source_type": "map_overlay",
+  "stage": 3,
+  "year_start": 1889,
+  "year_end": 1890,
+  "era": "victorian",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "NLS CC-BY. 153 digitised sheets at 1:500 (extremely detailed). Each with own IIIF endpoint. Already georeferenced by NLS as seamless layer.",
+  "created_at": "2026-02-07 23:01:22",
+  "updated_at": "2026-02-07 23:01:22",
+  "files": []
+}

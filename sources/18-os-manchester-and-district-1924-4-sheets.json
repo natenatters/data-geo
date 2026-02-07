@@ -1,0 +1,19 @@
+{
+  "id": 18,
+  "name": "OS Manchester and District (1924, 4 sheets)",
+  "description": "Ordnance Survey map of Manchester and district on 4 sheets, each 735x1050mm.",
+  "source_url": "https://maps.nls.uk/joins/14005.html",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1924,
+  "year_end": 1924,
+  "era": "modern",
+  "bounds_west": -2.4,
+  "bounds_south": 53.4,
+  "bounds_east": -2.05,
+  "bounds_north": 53.55,
+  "notes": "NLS CC-BY. 4 sheets:\nSheet 1 IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938766/info.json\nSheet 2 IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938769/info.json\nSheet 3 IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938772/info.json\nSheet 3A IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938775/info.json",
+  "created_at": "2026-02-07 23:01:22",
+  "updated_at": "2026-02-07 23:01:22",
+  "files": []
+}

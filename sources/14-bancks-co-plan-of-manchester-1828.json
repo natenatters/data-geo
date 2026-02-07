@@ -1,0 +1,19 @@
+{
+  "id": 14,
+  "name": "Bancks & Co. Plan of Manchester (1828)",
+  "description": "Plan of Manchester with all the most recent improvements. Drawn and engraved by J. & A. Walker. 222x291mm, scale ~1:15,500.",
+  "source_url": "https://maps.nls.uk/view/262720560",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1828,
+  "year_end": 1828,
+  "era": "industrial",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "NLS CC-BY. IIIF: https://map-view.nls.uk/iiif/2/26272%2F262720560/info.json\nAllMaps georeference: https://editor.allmaps.org/georeference?url=https://map-view.nls.uk/iiif/2/26272%252F262720560/info.json",
+  "created_at": "2026-02-07 23:01:22",
+  "updated_at": "2026-02-07 23:01:22",
+  "files": []
+}

@@ -1,0 +1,19 @@
+{
+  "id": 1,
+  "name": "Adshead's Maps of Manchester (1851)",
+  "description": "24 illustrated maps of the township of Manchester divided into municipal wards. Hand-colored sheets showing mills/works (orange), public houses (pink), waterways (blue). Cross-hatching for public buildings, diagonal shading for warehouses/residences. Includes 1841 and 1851 population data.",
+  "source_url": "https://www.digitalcollections.manchester.ac.uk/view/PR-C-00017-00070-MANCHESTER-00022/1",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1851,
+  "year_end": 1851,
+  "era": "victorian",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "IIIF manifest: https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022\nImage service: https://image.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022-000-00001.jp2 (24 sheets, -00001 to -00024)\nCC BY-NC 4.0. Publisher: Joseph Adshead. 840x1040mm per sheet.\nNot georeferenced \u2014 needs AllMaps or manual GCP alignment.",
+  "created_at": "2026-02-07 22:50:19",
+  "updated_at": "2026-02-07 22:50:19",
+  "files": []
+}

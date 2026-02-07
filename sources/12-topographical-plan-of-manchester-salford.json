@@ -1,0 +1,19 @@
+{
+  "id": 12,
+  "name": "Topographical Plan of Manchester & Salford",
+  "description": "Topographical plan with insets, explanatory notes, and distance measurements showing proposed land allotments.",
+  "source_url": "https://www.digitalcollections.manchester.ac.uk/view/PR-R-45670",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1800,
+  "year_end": 1830,
+  "era": "industrial",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "IIIF: https://www.digitalcollections.manchester.ac.uk/iiif/PR-R-45670\nImage: https://image.digitalcollections.manchester.ac.uk/iiif/PR-R-45670-000-00001.jp2\nDate uncertain - estimated early 19th century.",
+  "created_at": "2026-02-07 22:55:47",
+  "updated_at": "2026-02-07 22:55:47",
+  "files": []
+}

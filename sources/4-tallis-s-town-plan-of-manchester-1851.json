@@ -1,0 +1,19 @@
+{
+  "id": 4,
+  "name": "Tallis's Town Plan of Manchester (1851)",
+  "description": "Hand-coloured map published by John Tallis from General Atlas 1850-1851, with vignettes of Royal Infirmary, Town Hall, and Collegiate Church.",
+  "source_url": "https://www.digitalcollections.manchester.ac.uk/view/PR-C-00017-00070-MANCHESTER-00067",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1851,
+  "year_end": 1851,
+  "era": "victorian",
+  "bounds_west": -2.26,
+  "bounds_south": 53.47,
+  "bounds_east": -2.23,
+  "bounds_north": 53.49,
+  "notes": "IIIF: https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00067\nImage: https://image.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00067-000-00001.jp2",
+  "created_at": "2026-02-07 22:55:47",
+  "updated_at": "2026-02-07 22:55:47",
+  "files": []
+}

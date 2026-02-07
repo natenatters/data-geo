@@ -1,0 +1,19 @@
+{
+  "id": 20,
+  "name": "Greater Manchester Administrative Map (1973)",
+  "description": "Administrative map showing Greater Manchester area following local government reorganization effective 1 April 1974. 515x665mm.",
+  "source_url": "https://maps.nls.uk/view/244947210",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1973,
+  "year_end": 1974,
+  "era": "modern",
+  "bounds_west": -2.73,
+  "bounds_south": 53.35,
+  "bounds_east": -1.91,
+  "bounds_north": 53.59,
+  "notes": "NLS CC-BY. IIIF: https://map-view.nls.uk/iiif/2/24494%2F244947210/info.json\nAllMaps georeference: https://editor.allmaps.org/georeference?url=https://map-view.nls.uk/iiif/2/24494%252F244947210/info.json\nDept of Environment.",
+  "created_at": "2026-02-07 23:01:22",
+  "updated_at": "2026-02-07 23:01:22",
+  "files": []
+}

@@ -1,0 +1,19 @@
+{
+  "id": 16,
+  "name": "Railway Map of Manchester & District (1907)",
+  "description": "Official railway map prepared by the Railway Clearing House, London. Scale 1 inch = 1 mile.",
+  "source_url": "https://maps.nls.uk/view/245958604",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1907,
+  "year_end": 1907,
+  "era": "modern",
+  "bounds_west": -2.4,
+  "bounds_south": 53.4,
+  "bounds_east": -2.05,
+  "bounds_north": 53.55,
+  "notes": "NLS CC-BY. IIIF: https://map-view.nls.uk/iiif/2/24595%2F245958604/info.json\nAllMaps georeference: https://editor.allmaps.org/georeference?url=https://map-view.nls.uk/iiif/2/24595%252F245958604/info.json",
+  "created_at": "2026-02-07 23:01:22",
+  "updated_at": "2026-02-07 23:01:22",
+  "files": []
+}
