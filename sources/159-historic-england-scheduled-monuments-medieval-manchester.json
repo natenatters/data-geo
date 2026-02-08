@@ -1,0 +1,22 @@
+{
+  "id": 159,
+  "name": "Historic England Scheduled Monuments — Medieval Manchester (GIS)",
+  "description": "Downloadable GIS shapefiles from Historic England's Open Data Hub for scheduled monuments in Manchester, including the Hanging Bridge/town defences (#1020983) and other medieval sites. Pre-formatted vector data ready for import.",
+  "source_url": "https://historicengland.org.uk/listing/the-list/list-entry/1020983",
+  "source_type": "vector_features",
+  "stage": 1,
+  "year_start": 1100,
+  "year_end": 1500,
+  "era": "medieval",
+  "bounds_west": -2.26,
+  "bounds_south": 53.475,
+  "bounds_east": -2.23,
+  "bounds_north": 53.495,
+  "notes": "GIS data sources:\n- Historic England Open Data Hub: https://opendata-historicengland.hub.arcgis.com/datasets/scheduled-monuments\n- Shapefile downloads: https://historicengland.org.uk/listing/the-list/data-downloads/\n- Greater Manchester HER (GMAAS): https://gmaas.salford.ac.uk/historic-environment-record/ (19,000+ records, available as ESRI shapefiles on request)\n\nKey scheduled monuments:\n- Hanging Bridge & town defences: #1020983 (SJ83859869)\n- Polygon boundaries for protected medieval areas\n\nThis could start at Stage 2 (Acquired) if shapefiles are downloaded directly.\n\nTODO: Download scheduled monument shapefiles from Historic England Open Data Hub, filter to Manchester area, convert to GeoJSON.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 16:40:00",
+  "updated_at": "2026-02-08 16:40:00",
+  "files": []
+}

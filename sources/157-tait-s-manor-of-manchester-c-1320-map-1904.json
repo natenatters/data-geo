@@ -1,0 +1,22 @@
+{
+  "id": 157,
+  "name": "Tait's Manor of Manchester c.1320 Map (1904)",
+  "description": "Reconstruction map from James Tait's 'Mediaeval Manchester and the Beginnings of Lancashire' (Manchester University Press, 1904). Shows the manor boundaries, church, baronal hall, streets (Deansgate, Long Millgate, Smithy Door, Cateaton Street), and settlement extent c.1320. Public domain.",
+  "source_url": "https://archive.org/details/mediaevalmanches00taituoft",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1320,
+  "year_end": 1320,
+  "era": "medieval",
+  "bounds_west": -2.26,
+  "bounds_south": 53.475,
+  "bounds_east": -2.235,
+  "bounds_north": 53.495,
+  "notes": "Public domain (1904, no copyright). Full PDF scan available on archive.org (14.7 MB).\n\nAlso contains a map 'North-Western England in 1086' showing Lancashire's territorial organisation at Domesday.\n\nThe c.1320 map shows:\n- Manor boundaries\n- Church of St Mary (later Cathedral)\n- Baronal hall (Grelley family)\n- Street layout: Deansgate, Long Millgate, Smithy Door, Cateaton Street\n- Settlement extent of medieval Manchester\n\nTait built on Farrer's Lancashire map work. This is one of the earliest scholarly reconstructions of Manchester's medieval layout.\n\nNOTE: The archive.org scan did NOT unfold the map — it's missing from the digitisation (foldoutcount=0). The bleed-through is visible on the verso of the facing page. Need to find a separate scan of this map, or request a rescan.\n\nAlternative sources for the map image:\n- Manchester Central Library local studies collection\n- John Rylands Library, University of Manchester\n- British Library catalogue",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 16:40:00",
+  "updated_at": "2026-02-08 16:40:00",
+  "files": []
+}

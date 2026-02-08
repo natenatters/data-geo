@@ -1,0 +1,22 @@
+{
+  "id": 161,
+  "name": "Nico Ditch Earthwork (pre-Norman, 5th–11th century)",
+  "description": "A 6-mile (9.7km) linear earthwork running from Ashton-under-Lyne to Stretford, passing through Denton, Reddish, Gorton, Levenshulme, Burnage, Rusholme, Platt Fields, Withington, and Chorlton-cum-Hardy. 4-5 yards wide, up to 5 feet deep. U-shaped profile suggests a boundary marker rather than military defence. Possibly a Mercian-Northumbrian boundary. Still visible in sections.",
+  "source_url": "https://historicengland.org.uk/listing/the-list/list-entry/1015132",
+  "source_type": "vector_features",
+  "stage": 1,
+  "year_start": 900,
+  "year_end": 1100,
+  "era": "medieval",
+  "bounds_west": -2.27,
+  "bounds_south": 53.42,
+  "bounds_east": -2.1,
+  "bounds_north": 53.46,
+  "notes": "Scheduled Monument #1015132\nUMAU excavations 1990-1997\n\nCourse: Ashton-under-Lyne → Denton → Reddish → Gorton → Levenshulme → Burnage → Rusholme → Platt Fields → Withington → Chorlton-cum-Hardy → Stretford\n\nDimensions: 4-5 yards wide, up to 5 feet deep, U-shaped profile\n\nStill visible: 300m stretch at Denton Golf Course, traces in Platt Fields Park\n\nThe course is well-documented and could be digitised as a polyline vector feature.\nScheduled monument polygon data available from Historic England GIS downloads.\n\nProvides important context as a pre-existing territorial boundary that would have been a known feature in the 1100-1200 period.\n\nTODO: Download Historic England GIS shapefile for #1015132, trace full course as GeoJSON polyline.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 16:40:00",
+  "updated_at": "2026-02-08 16:40:00",
+  "files": []
+}

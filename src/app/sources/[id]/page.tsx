@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import type { SourceWithFiles, SourceFile, Tile } from '@/lib/types';
-import { ERAS, SOURCE_TYPES, STAGES, PIPELINE_HELP, getStageGateErrors } from '@/lib/types';
+import { STAGES, ERAS, SOURCE_TYPES } from '@/lib/types';
+import type { Era, SourceType } from '@/lib/types';
 import SourceForm from '@/components/SourceForm';
 
 const FILE_TYPES = ['image', 'geotiff', 'geojson', 'czml', 'kml', 'other'] as const;
@@ -18,12 +19,12 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
   const [boundsDraft, setBoundsDraft] = useState({ w: '', s: '', e: '', n: '' });
   const [addingTile, setAddingTile] = useState(false);
   const [tileDraft, setTileDraft] = useState({ url: '', label: '' });
-  const [expandedHelp, setExpandedHelp] = useState<string | null>(null);
   const [savingField, setSavingField] = useState<string | null>(null);
   const [copied, setCopied] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadType, setUploadType] = useState<string>('other');
-  const [gateErrors, setGateErrors] = useState<string[] | null>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const settingsRef = useRef<HTMLDivElement>(null);
 
   function fetchSource() {
     fetch(`/api/sources/${id}`)
@@ -36,6 +37,16 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
   }
 
   useEffect(() => { fetchSource(); }, [id]);
+
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (settingsRef.current && !settingsRef.current.contains(e.target as Node)) {
+        setSettingsOpen(false);
+      }
+    }
+    if (settingsOpen) document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, [settingsOpen]);
 
   async function saveField(field: string, value: string | null) {
     setSavingField(field);
@@ -87,7 +98,6 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
   function startEditing(field: string, currentValue?: string | null) {
     setEditingField(field);
     setDraft(currentValue || '');
-    setGateErrors(null);
   }
 
   function startEditingBounds() {
@@ -98,7 +108,6 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
       e: source?.bounds_east?.toString() || '',
       n: source?.bounds_north?.toString() || '',
     });
-    setGateErrors(null);
   }
 
   function cancelEditing() {
@@ -112,33 +121,6 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
     if (!confirm('Delete this source and all its files?')) return;
     await fetch(`/api/sources/${id}`, { method: 'DELETE' });
     router.push('/sources');
-  }
-
-  async function handleAdvanceStage() {
-    if (!source || source.stage >= 4) return;
-    const errors = getStageGateErrors(source, source.stage + 1);
-    if (errors.length > 0) {
-      setGateErrors(errors);
-      return;
-    }
-    await fetch(`/api/sources/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ stage: source.stage + 1 }),
-    });
-    setGateErrors(null);
-    fetchSource();
-  }
-
-  async function handleRevertStage() {
-    if (!source || source.stage <= 1) return;
-    await fetch(`/api/sources/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ stage: source.stage - 1 }),
-    });
-    setGateErrors(null);
-    fetchSource();
   }
 
   async function handleFileUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -164,6 +146,8 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
     return <div className="text-gray-500 text-sm">Loading...</div>;
   }
 
+  const s = source;
+
   if (editingIdentity) {
     return (
       <div>
@@ -176,41 +160,17 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             Cancel
           </button>
         </div>
-        <SourceForm source={source} />
+        <SourceForm source={s} />
       </div>
     );
   }
 
-  const era = ERAS[source.era];
-  const hasBounds = source.bounds_west !== null;
-  const verifiedCount = source.tiles.filter(t => t.georeferenced).length;
-
-  function toggleHelp(key: string) {
-    setExpandedHelp(prev => prev === key ? null : key);
-  }
-
-  function HelpPanel({ helpKey }: { helpKey: string }) {
-    if (expandedHelp !== helpKey) return null;
-    const help = PIPELINE_HELP[helpKey];
-    if (!help) return null;
-    return (
-      <div className="mt-2 ml-6 p-3 bg-gray-50 rounded-lg border border-gray-200 text-xs space-y-2">
-        <div><span className="font-medium text-gray-700">What:</span> <span className="text-gray-600">{help.what}</span></div>
-        <div><span className="font-medium text-gray-700">Why:</span> <span className="text-gray-600">{help.why}</span></div>
-        <div><span className="font-medium text-gray-700">How:</span> <span className="text-gray-600">{help.how}</span></div>
-        {help.links.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-1">
-            {help.links.map(link => (
-              <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 px-2 py-0.5 bg-white border border-gray-200 rounded-full text-gray-600 hover:text-blue-600 hover:border-blue-300 transition-colors">
-                {link.label} <span className="text-[10px]">&#8599;</span>
-              </a>
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
+  const hasBounds = s.bounds_west !== null;
+  const yearRange = s.year_start
+    ? s.year_end && s.year_end !== s.year_start
+      ? `${s.year_start}–${s.year_end}`
+      : `${s.year_start}`
+    : null;
 
   function CopyButton({ text, field }: { text: string; field: string }) {
     return (
@@ -228,147 +188,160 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
     );
   }
 
-  function HelpButton({ helpKey }: { helpKey: string }) {
-    return (
-      <button
-        onClick={() => toggleHelp(helpKey)}
-        className={`text-xs shrink-0 w-5 h-5 rounded-full border transition-colors ${
-          expandedHelp === helpKey
-            ? 'bg-blue-50 border-blue-300 text-blue-600'
-            : 'border-gray-200 text-gray-400 hover:text-gray-600 hover:border-gray-300'
-        }`}
-        title="Help"
-      >
-        &#8505;
-      </button>
-    );
-  }
-
-  // --- Pipeline URL Row ---
-  function UrlRow({ field, label, value }: { field: string; label: string; value: string | null }) {
+  // Inline editable field for text/url values
+  function EditableField({ field, label, value, type = 'text', placeholder }: {
+    field: string; label: string; value: string | null; type?: 'text' | 'url'; placeholder?: string;
+  }) {
     const isEditing = editingField === field;
     const isSaving = savingField === field;
 
     return (
-      <div className="py-3">
-        <div className="flex items-center gap-2">
-          <span className={`text-sm shrink-0 ${value ? 'text-green-500' : 'text-gray-300'}`}>
-            {value ? '\u2713' : '\u25CB'}
-          </span>
-          <span className="text-sm text-gray-700 font-medium flex-1">{label}</span>
-          {value && <CopyButton text={value} field={field} />}
-          <HelpButton helpKey={field} />
-        </div>
-
+      <div className="flex items-start gap-3 py-2.5 border-b border-gray-100 last:border-0">
+        <span className="text-sm text-gray-500 w-32 shrink-0 pt-0.5">{label}</span>
         {isEditing ? (
-          <div className="ml-6 mt-2 flex gap-2">
+          <div className="flex gap-2 flex-1">
             <input
-              type="url"
+              type={type}
               value={draft}
               onChange={e => setDraft(e.target.value)}
               onKeyDown={e => {
-                if (e.key === 'Enter' && draft.trim()) saveField(field, draft.trim());
+                if (e.key === 'Enter') saveField(field, draft.trim() || null);
                 if (e.key === 'Escape') cancelEditing();
               }}
-              className="flex-1 border border-gray-300 rounded px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="https://..."
+              className="flex-1 border border-gray-300 rounded px-2.5 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder={placeholder}
               autoFocus
               disabled={isSaving}
             />
             <button
-              onClick={() => draft.trim() && saveField(field, draft.trim())}
-              disabled={!draft.trim() || isSaving}
-              className="px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
+              onClick={() => saveField(field, draft.trim() || null)}
+              disabled={isSaving}
+              className="px-2 py-1 bg-blue-600 text-white rounded text-xs font-medium hover:bg-blue-700 disabled:opacity-50"
             >
               {isSaving ? '...' : 'Save'}
             </button>
-            <button onClick={cancelEditing} className="px-2 py-1.5 text-sm text-gray-500 hover:text-gray-700">
+            <button onClick={cancelEditing} className="px-2 py-1 text-xs text-gray-500 hover:text-gray-700">
               Cancel
             </button>
           </div>
-        ) : value ? (
-          <div className="ml-6 mt-1 flex items-center gap-2">
-            <a href={value} target="_blank" rel="noopener noreferrer"
-              className="text-blue-600 hover:underline text-xs truncate">{value}</a>
-            <button onClick={() => startEditing(field, value)}
-              className="text-xs text-gray-400 hover:text-gray-600 shrink-0">Edit</button>
-          </div>
         ) : (
-          <div className="ml-6 mt-1">
-            <button onClick={() => startEditing(field)}
-              className="text-xs text-blue-500 hover:text-blue-700">
-              Paste URL...
+          <div className="flex items-center gap-2 flex-1 min-w-0 group">
+            {value ? (
+              type === 'url' ? (
+                <a href={value} target="_blank" rel="noopener noreferrer"
+                  className="text-sm text-blue-600 hover:underline truncate">{value}</a>
+              ) : (
+                <span className="text-sm text-gray-700">{value}</span>
+              )
+            ) : (
+              <span className="text-sm text-gray-300 italic">Not set</span>
+            )}
+            {value && <CopyButton text={value} field={field} />}
+            <button onClick={() => startEditing(field, value)}
+              className="text-xs text-gray-300 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+              Edit
             </button>
           </div>
         )}
-
-        <HelpPanel helpKey={field} />
       </div>
     );
   }
 
-  // --- Tiles Row ---
-  function TilesRow() {
-    const isSaving = savingField === 'tiles';
-
-    async function toggleVerified(index: number) {
-      const next = source!.tiles.map((t, i) =>
-        i === index ? { ...t, georeferenced: !t.georeferenced } : t
-      );
-      await saveTiles(next);
-    }
-
-    async function removeTile(index: number) {
-      if (!confirm('Remove this tile?')) return;
-      const next = source!.tiles.filter((_, i) => i !== index);
-      await saveTiles(next);
-    }
-
-    async function addTile() {
-      if (!tileDraft.url.trim()) return;
-      const next = [...source!.tiles, {
-        url: tileDraft.url.trim(),
-        label: tileDraft.label.trim() || `Sheet ${source!.tiles.length + 1}`,
-        georeferenced: false,
-      }];
-      setAddingTile(false);
-      setTileDraft({ url: '', label: '' });
-      await saveTiles(next);
-    }
-
-    return (
-      <div className="py-3">
-        <div className="flex items-center gap-2">
-          <span className={`text-sm shrink-0 ${verifiedCount > 0 ? 'text-green-500' : 'text-gray-300'}`}>
-            {verifiedCount > 0 ? '\u2713' : '\u25CB'}
-          </span>
-          <span className="text-sm text-gray-700 font-medium">
-            XYZ Tiles
-            <span className="text-gray-400 font-normal ml-1.5">
-              ({source!.tiles.length} total, {verifiedCount} verified)
+  return (
+    <div className="space-y-4">
+      {/* Header */}
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-xl font-bold text-gray-900">{s.name}</h1>
+          <div className="flex items-center gap-2 mt-1 text-xs">
+            <span
+              className="px-1.5 py-0.5 rounded font-medium text-white"
+              style={{ backgroundColor: ERAS[s.era]?.color || '#6b7280' }}
+            >
+              {ERAS[s.era]?.label || s.era}
             </span>
-          </span>
-          <div className="flex-1" />
+            {yearRange && <span className="text-gray-500">{yearRange}</span>}
+            <span className="text-gray-300">|</span>
+            <span className="text-gray-500">{SOURCE_TYPES[s.source_type]}</span>
+            <span className="text-gray-300">|</span>
+            <span className="text-gray-500">{STAGES[s.stage]}</span>
+          </div>
+        </div>
+        <div className="relative shrink-0" ref={settingsRef}>
           <button
-            onClick={() => { setAddingTile(true); setGateErrors(null); }}
-            className="text-xs text-blue-500 hover:text-blue-700 shrink-0"
+            onClick={() => setSettingsOpen(!settingsOpen)}
+            className="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+            title="Settings"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </button>
+          {settingsOpen && (
+            <div className="absolute right-0 top-full mt-1 bg-white rounded-lg border border-gray-200 shadow-lg py-1 z-10 min-w-[140px]">
+              <button
+                onClick={() => { setSettingsOpen(false); setEditingIdentity(true); }}
+                className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+              >
+                Edit details
+              </button>
+              <button
+                onClick={() => { setSettingsOpen(false); handleDelete(); }}
+                className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+              >
+                Delete source
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Description */}
+      {s.description && (
+        <p className="text-sm text-gray-600">{s.description}</p>
+      )}
+
+      {/* URLs & metadata */}
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <EditableField field="source_url" label="Source URL" value={s.source_url} type="url" placeholder="https://..." />
+        <EditableField field="iiif_url" label="IIIF Manifest" value={s.iiif_url} type="url" placeholder="https://..." />
+        <EditableField field="georeference_url" label="Georeference" value={s.georeference_url} type="url" placeholder="https://annotations.allmaps.org/..." />
+      </div>
+
+      {/* Tiles */}
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-sm font-medium text-gray-700">
+            Tiles
+            <span className="text-gray-400 font-normal ml-1.5">
+              ({s.tiles.length} total{s.tiles.filter(t => t.georeferenced).length > 0 && `, ${s.tiles.filter(t => t.georeferenced).length} verified`})
+            </span>
+          </h2>
+          <button
+            onClick={() => setAddingTile(true)}
+            className="text-xs text-blue-500 hover:text-blue-700"
           >
             + Add
           </button>
-          <HelpButton helpKey="tiles" />
         </div>
 
-        <div className="ml-6 mt-2 space-y-1">
-          {source!.tiles.length === 0 && !addingTile && (
-            <p className="text-xs text-gray-400 italic">No tiles yet</p>
+        <div className="space-y-1">
+          {s.tiles.length === 0 && !addingTile && (
+            <p className="text-xs text-gray-400 italic">No tiles</p>
           )}
-          {source!.tiles.map((tile, i) => (
+          {s.tiles.map((tile, i) => (
             <div key={i} className="flex items-center gap-2 text-xs py-1 group">
               <button
-                onClick={() => toggleVerified(i)}
+                onClick={async () => {
+                  const next = s.tiles.map((t, j) =>
+                    j === i ? { ...t, georeferenced: !t.georeferenced } : t
+                  );
+                  await saveTiles(next);
+                }}
                 className={`shrink-0 ${tile.georeferenced ? 'text-green-500' : 'text-gray-300 hover:text-gray-400'}`}
-                title={tile.georeferenced ? 'Verified — click to unverify' : 'Click to mark verified'}
-                disabled={isSaving}
+                title={tile.georeferenced ? 'Verified' : 'Click to verify'}
+                disabled={savingField === 'tiles'}
               >
                 {tile.georeferenced ? '\u2713' : '\u25CB'}
               </button>
@@ -376,9 +349,13 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
               <span className="text-gray-400 font-mono truncate">{tile.url}</span>
               <CopyButton text={tile.url} field={`tile-${i}`} />
               <button
-                onClick={() => removeTile(i)}
+                onClick={async () => {
+                  if (!confirm('Remove this tile?')) return;
+                  const next = s.tiles.filter((_, j) => j !== i);
+                  await saveTiles(next);
+                }}
                 className="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                title="Remove tile"
+                title="Remove"
               >
                 &times;
               </button>
@@ -399,14 +376,33 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 value={tileDraft.url}
                 onChange={e => setTileDraft(prev => ({ ...prev, url: e.target.value }))}
                 onKeyDown={e => {
-                  if (e.key === 'Enter' && tileDraft.url.trim()) addTile();
+                  if (e.key === 'Enter' && tileDraft.url.trim()) {
+                    const next = [...s.tiles, {
+                      url: tileDraft.url.trim(),
+                      label: tileDraft.label.trim() || `Sheet ${s.tiles.length + 1}`,
+                      georeferenced: false,
+                    }];
+                    setAddingTile(false);
+                    setTileDraft({ url: '', label: '' });
+                    saveTiles(next);
+                  }
                   if (e.key === 'Escape') { setAddingTile(false); setTileDraft({ url: '', label: '' }); }
                 }}
                 className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="https://allmaps.xyz/maps/{hash}/{z}/{x}/{y}.png"
                 autoFocus
               />
-              <button onClick={addTile} disabled={!tileDraft.url.trim()}
+              <button onClick={() => {
+                if (!tileDraft.url.trim()) return;
+                const next = [...s.tiles, {
+                  url: tileDraft.url.trim(),
+                  label: tileDraft.label.trim() || `Sheet ${s.tiles.length + 1}`,
+                  georeferenced: false,
+                }];
+                setAddingTile(false);
+                setTileDraft({ url: '', label: '' });
+                saveTiles(next);
+              }} disabled={!tileDraft.url.trim()}
                 className="px-2 py-1 bg-blue-600 text-white rounded text-xs font-medium hover:bg-blue-700 disabled:opacity-50">
                 Save
               </button>
@@ -417,71 +413,44 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             </div>
           )}
         </div>
-
-        <HelpPanel helpKey="tiles" />
       </div>
-    );
-  }
 
-  // --- Bounds Row ---
-  function BoundsRow() {
-    const isEditing = editingField === 'bounds';
-    const isSaving = savingField === 'bounds';
-
-    return (
-      <div className="py-3">
-        <div className="flex items-center gap-2">
-          <span className={`text-sm shrink-0 ${hasBounds ? 'text-green-500' : 'text-gray-300'}`}>
-            {hasBounds ? '\u2713' : '\u25CB'}
-          </span>
-          <span className="text-sm text-gray-700 font-medium flex-1">Spatial Extent</span>
-          {!isEditing && (
+      {/* Bounds */}
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="flex items-center justify-between mb-2">
+          <h2 className="text-sm font-medium text-gray-700">Spatial Extent</h2>
+          {editingField !== 'bounds' && (
             <button onClick={startEditingBounds}
-              className="text-xs text-blue-500 hover:text-blue-700 shrink-0">
+              className="text-xs text-gray-400 hover:text-gray-600">
               {hasBounds ? 'Edit' : 'Set'}
             </button>
           )}
-          <HelpButton helpKey="bounds" />
         </div>
 
-        {isEditing ? (
-          <div className="ml-6 mt-2 space-y-2">
+        {editingField === 'bounds' ? (
+          <div className="space-y-2">
             <div className="grid grid-cols-2 gap-2 max-w-xs">
-              <div>
-                <label className="block text-[11px] text-gray-500 mb-0.5">West (lon)</label>
-                <input type="number" step="any" value={boundsDraft.w}
-                  onChange={e => setBoundsDraft(prev => ({ ...prev, w: e.target.value }))}
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={isSaving} />
-              </div>
-              <div>
-                <label className="block text-[11px] text-gray-500 mb-0.5">East (lon)</label>
-                <input type="number" step="any" value={boundsDraft.e}
-                  onChange={e => setBoundsDraft(prev => ({ ...prev, e: e.target.value }))}
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={isSaving} />
-              </div>
-              <div>
-                <label className="block text-[11px] text-gray-500 mb-0.5">South (lat)</label>
-                <input type="number" step="any" value={boundsDraft.s}
-                  onChange={e => setBoundsDraft(prev => ({ ...prev, s: e.target.value }))}
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={isSaving} />
-              </div>
-              <div>
-                <label className="block text-[11px] text-gray-500 mb-0.5">North (lat)</label>
-                <input type="number" step="any" value={boundsDraft.n}
-                  onChange={e => setBoundsDraft(prev => ({ ...prev, n: e.target.value }))}
-                  className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  disabled={isSaving} />
-              </div>
+              {[
+                { key: 'w' as const, label: 'West (lon)' },
+                { key: 'e' as const, label: 'East (lon)' },
+                { key: 's' as const, label: 'South (lat)' },
+                { key: 'n' as const, label: 'North (lat)' },
+              ].map(({ key, label }) => (
+                <div key={key}>
+                  <label className="block text-[11px] text-gray-500 mb-0.5">{label}</label>
+                  <input type="number" step="any" value={boundsDraft[key]}
+                    onChange={e => setBoundsDraft(prev => ({ ...prev, [key]: e.target.value }))}
+                    className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    disabled={savingField === 'bounds'} />
+                </div>
+              ))}
             </div>
             <div className="flex gap-2">
               <button
                 onClick={() => saveBounds(boundsDraft.w, boundsDraft.s, boundsDraft.e, boundsDraft.n)}
-                disabled={isSaving}
+                disabled={savingField === 'bounds'}
                 className="px-3 py-1 bg-blue-600 text-white rounded text-xs font-medium hover:bg-blue-700 disabled:opacity-50">
-                {isSaving ? '...' : 'Save'}
+                {savingField === 'bounds' ? '...' : 'Save'}
               </button>
               <button onClick={cancelEditing}
                 className="px-2 py-1 text-xs text-gray-500 hover:text-gray-700">Cancel</button>
@@ -492,114 +461,12 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             </div>
           </div>
         ) : hasBounds ? (
-          <div className="ml-6 mt-1 text-xs text-gray-500 font-mono">
-            W:{source!.bounds_west} S:{source!.bounds_south} E:{source!.bounds_east} N:{source!.bounds_north}
+          <div className="text-xs text-gray-500 font-mono">
+            W:{s.bounds_west} S:{s.bounds_south} E:{s.bounds_east} N:{s.bounds_north}
           </div>
         ) : (
-          <div className="ml-6 mt-1 text-xs text-gray-400 italic">
-            Not set — needed to position the overlay
-          </div>
+          <p className="text-xs text-gray-400 italic">Not set</p>
         )}
-
-        <HelpPanel helpKey="bounds" />
-      </div>
-    );
-  }
-
-  // --- Gate errors for advance ---
-  const nextStage = source.stage < 4 ? source.stage + 1 : null;
-  const advanceErrors = nextStage ? getStageGateErrors(source, nextStage) : [];
-  const canAdvance = nextStage !== null && advanceErrors.length === 0;
-
-  return (
-    <div className="space-y-4">
-      {/* Header */}
-      <div>
-        <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <h1 className="text-xl font-bold text-gray-900">{source.name}</h1>
-            {source.description && (
-              <p className="text-sm text-gray-500 mt-0.5 line-clamp-2">{source.description}</p>
-            )}
-          </div>
-          <div className="flex gap-1 shrink-0">
-            <button onClick={() => setEditingIdentity(true)}
-              className="px-2.5 py-1 text-xs text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded">
-              Edit details
-            </button>
-            <button onClick={handleDelete}
-              className="px-2.5 py-1 text-xs text-gray-400 hover:text-red-600 hover:bg-red-50 rounded">
-              Delete
-            </button>
-          </div>
-        </div>
-        <div className="flex items-center gap-2 mt-2 flex-wrap">
-          <span className="px-1.5 py-0.5 rounded text-xs font-medium text-white"
-            style={{ backgroundColor: era?.color || '#6b7280' }}>
-            {era?.label || source.era}
-          </span>
-          <span className="text-xs text-gray-500">{SOURCE_TYPES[source.source_type]}</span>
-          {(source.year_start || source.year_end) && (
-            <>
-              <span className="text-xs text-gray-300">&middot;</span>
-              <span className="text-xs text-gray-500">
-                {source.year_start || '?'} &ndash; {source.year_end || '?'}
-              </span>
-            </>
-          )}
-          <span className="text-xs text-gray-300">&middot;</span>
-          <span className="text-xs text-gray-500">Stage {source.stage}: {STAGES[source.stage]}</span>
-        </div>
-      </div>
-
-      {/* Pipeline Card */}
-      <div className="bg-white rounded-lg border border-gray-200">
-        <div className="px-4 py-3 border-b border-gray-100">
-          <h2 className="text-sm font-medium text-gray-700">Pipeline</h2>
-        </div>
-        <div className="px-4 divide-y divide-gray-100">
-          <UrlRow field="source_url" label="Source URL" value={source.source_url} />
-          <UrlRow field="iiif_url" label="IIIF Manifest" value={source.iiif_url} />
-          <UrlRow field="georeference_url" label="Georeference Annotation" value={source.georeference_url} />
-          <TilesRow />
-          <BoundsRow />
-        </div>
-
-        {/* Stage Controls */}
-        <div className="px-4 py-3 border-t border-gray-200 bg-gray-50 rounded-b-lg">
-          <div className="flex items-center gap-3">
-            {nextStage && (
-              <button
-                onClick={handleAdvanceStage}
-                disabled={!canAdvance}
-                className={`px-4 py-2 text-sm rounded-lg font-medium transition-colors ${canAdvance
-                  ? 'bg-blue-600 text-white hover:bg-blue-700'
-                  : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                }`}
-              >
-                Advance to {STAGES[nextStage]}
-              </button>
-            )}
-            {source.stage > 1 && (
-              <button onClick={handleRevertStage}
-                className="text-xs text-gray-400 hover:text-gray-600">
-                Revert to {STAGES[source.stage - 1]}
-              </button>
-            )}
-          </div>
-          {/* Inline gate errors */}
-          {!canAdvance && nextStage && (gateErrors !== null ? (
-            <div className="mt-2 space-y-1">
-              {gateErrors.map((err, i) => (
-                <p key={i} className="text-xs text-red-500">{err}</p>
-              ))}
-            </div>
-          ) : (
-            <p className="mt-2 text-xs text-gray-400">
-              Missing: {advanceErrors.map(e => e.replace(/^Stage \d requires /, '')).join(', ')}
-            </p>
-          ))}
-        </div>
       </div>
 
       {/* Notes */}
@@ -607,9 +474,9 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-sm font-medium text-gray-700">Notes</h2>
           {editingField !== 'notes' && (
-            <button onClick={() => startEditing('notes', source.notes)}
+            <button onClick={() => startEditing('notes', s.notes)}
               className="text-xs text-gray-400 hover:text-gray-600">
-              {source.notes ? 'Edit' : 'Add'}
+              {s.notes ? 'Edit' : 'Add'}
             </button>
           )}
         </div>
@@ -634,8 +501,8 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 className="px-2 py-1.5 text-sm text-gray-500 hover:text-gray-700">Cancel</button>
             </div>
           </div>
-        ) : source.notes ? (
-          <p className="text-sm text-gray-600 whitespace-pre-wrap">{source.notes}</p>
+        ) : s.notes ? (
+          <p className="text-sm text-gray-600 whitespace-pre-wrap">{s.notes}</p>
         ) : (
           <p className="text-xs text-gray-400 italic">No notes</p>
         )}
@@ -643,16 +510,38 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
 
       {/* Files */}
       <div className="bg-white rounded-lg border border-gray-200 p-4">
-        <h2 className="text-sm font-medium text-gray-700 mb-3">
-          Files
-          {source.files.length > 0 && (
-            <span className="text-gray-400 font-normal ml-1">({source.files.length})</span>
-          )}
-        </h2>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-medium text-gray-700">
+            Files
+            {s.files.length > 0 && (
+              <span className="text-gray-400 font-normal ml-1">({s.files.length})</span>
+            )}
+          </h2>
+          <div className="flex items-center gap-2">
+            <select
+              value={uploadType}
+              onChange={e => setUploadType(e.target.value)}
+              className="border border-gray-200 rounded px-2 py-1 text-xs text-gray-600"
+            >
+              {FILE_TYPES.map(t => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+            <label className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded cursor-pointer transition-colors">
+              {uploading ? 'Uploading...' : 'Upload'}
+              <input
+                type="file"
+                className="hidden"
+                onChange={handleFileUpload}
+                disabled={uploading}
+              />
+            </label>
+          </div>
+        </div>
 
-        {source.files.length > 0 && (
-          <div className="space-y-1 mb-3">
-            {source.files.map((file: SourceFile) => (
+        {s.files.length > 0 ? (
+          <div className="space-y-1">
+            {s.files.map((file: SourceFile) => (
               <div key={file.id} className="flex items-center justify-between py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 group">
                 <div className="flex items-center gap-2 text-sm min-w-0">
                   <span className="px-1.5 py-0.5 bg-gray-100 rounded text-[11px] font-mono text-gray-500">{file.filetype}</span>
@@ -667,28 +556,9 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
               </div>
             ))}
           </div>
+        ) : (
+          <p className="text-xs text-gray-400 italic">No files</p>
         )}
-
-        <div className="flex items-center gap-2">
-          <select
-            value={uploadType}
-            onChange={e => setUploadType(e.target.value)}
-            className="border border-gray-200 rounded px-2 py-1.5 text-xs text-gray-600"
-          >
-            {FILE_TYPES.map(t => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
-          <label className="px-3 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 rounded cursor-pointer transition-colors">
-            {uploading ? 'Uploading...' : 'Upload'}
-            <input
-              type="file"
-              className="hidden"
-              onChange={handleFileUpload}
-              disabled={uploading}
-            />
-          </label>
-        </div>
       </div>
     </div>
   );

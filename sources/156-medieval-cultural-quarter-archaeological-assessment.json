@@ -1,0 +1,31 @@
+{
+  "id": 156,
+  "name": "Medieval Cultural Quarter Archaeological Assessment (UMAU)",
+  "description": "The most comprehensive archaeological assessment of medieval Manchester. Contains plans of the three concentric ditch system around the castle/manor promontory, trench plans from 1900, 1983, and 1997 excavations, and evidence for the Hanging Ditch deposits (12th-13th century pottery, animal bone, leather, metalwork).",
+  "source_url": "https://chethamsschoolofmusic.com/app/uploads/sites/2/2016/09/Part-1-Text.pdf",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1100,
+  "year_end": 1500,
+  "era": "medieval",
+  "bounds_west": -2.25,
+  "bounds_south": 53.483,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "UMAU (University of Manchester Archaeological Unit) reports.\n\nFree PDFs available:\n- Vol 1 (Main Report): https://chethamsschoolofmusic.com/app/uploads/sites/2/2016/09/Part-1-Text.pdf\n- Vol 1 (Illustrations): https://stollerhall.com/app/uploads/sites/2/2016/09/Part-2-Cover-Ills-1-16.pdf\n- Vol 2 (Appendices): https://chethamsschoolofmusic.com/app/uploads/sites/2/2016/09/Vol-2-Text.pdf\n\nKey content for digitisation:\n- Plans at 1:2000 scale showing ditch system\n- Location maps of excavation trenches\n- Section drawings of inner rock-cut ditch (10m wide, 4m deep)\n- Evidence for middle ditch (5m wide) and outer ditch (3-4m wide, 1-2m deep)\n- Discussion of whether ditches relate to Norman castle or Saxon burh\n\nTODO: Download illustrations PDF, extract trench plans, digitise ditch system as GeoJSON polylines.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 16:40:00",
+  "updated_at": "2026-02-08 17:10:00",
+  "files": [
+    {
+      "id": 1,
+      "source_id": 156,
+      "filename": "156-umau-medieval-cultural-quarter-illustrations.pdf",
+      "filepath": "156-umau-medieval-cultural-quarter-illustrations.pdf",
+      "filetype": "image",
+      "created_at": "2026-02-08 17:10:00"
+    }
+  ]
+}

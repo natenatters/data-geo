@@ -1,0 +1,22 @@
+{
+  "id": 155,
+  "name": "Manchester Castle & Defended Promontory (c.1184)",
+  "description": "The Norman castle/manor at Manchester, first documented in the 1184 Pipe Roll as 'in the custody of Robert de Buron'. Built by the Grelley (Gresle) family on the bluff at the confluence of the Rivers Irk and Irwell. Three concentric ditches defended a promontory approximately 300 yards N-S by 250 yards E-W.",
+  "source_url": "https://www.gatehouse-gazetteer.info/English%20sites/1907.html",
+  "source_type": "vector_features",
+  "stage": 1,
+  "year_start": 1184,
+  "year_end": 1300,
+  "era": "medieval",
+  "bounds_west": -2.25,
+  "bounds_south": 53.483,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "ARCHAEOLOGICAL DATA FOR VECTOR FEATURES:\n\nCastle/Manor site: Grid ref SJ839988 (53.48657N, -2.24409W)\nDefended promontory bounded by: Toad Lane, Hanging Ditch, Cateaton Street, Smithy Bank\n\nThree concentric ditches (UMAU excavations):\n- Inner ditch: rock-cut, 10m wide, 4m deep\n- Middle ditch: 5m wide\n- Outer ditch: 3-4m wide, 1-2m deep\n\nHanging Ditch: 450 yards (410m) long, up to 40 yards (37m) wide\nHanging Bridge: SJ83859869, Scheduled Monument #1020983\n\nChurch of St Mary on the promontory (precursor to Manchester Cathedral)\nBaronal hall of the Grelley family\n\nSources:\n- Gatehouse Gazetteer castle record: https://www.gatehouse-gazetteer.info/English%20sites/1907.html\n- Town defences: http://www.gatehouse-gazetteer.info/English%20sites/1908.html\n- Historic England Scheduled Monument: https://historicengland.org.uk/listing/the-list/list-entry/1020983\n- 1184 Pipe Roll (31 Henry II): earliest written reference to the castle\n\nTODO: Digitise promontory polygon, ditch lines, and key sites as GeoJSON from archaeological data.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 16:40:00",
+  "updated_at": "2026-02-08 16:40:00",
+  "files": []
+}

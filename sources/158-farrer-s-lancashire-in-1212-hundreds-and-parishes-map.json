@@ -1,0 +1,39 @@
+{
+  "id": 158,
+  "name": "Farrer's Lancashire in 1212 — Hundreds & Parishes Map",
+  "description": "Colour fold-out map from William Farrer's 'The Lancashire Pipe Rolls' (1902) showing Lancashire's territorial subdivisions in 1212 (14th year of King John). Black broken lines show hundreds divisions, red lines show 56 parish boundaries including Manchester parish in the Salford Hundred.",
+  "source_url": "https://archive.org/details/lancashirepipero00grea",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1212,
+  "year_end": 1212,
+  "era": "medieval",
+  "bounds_west": -3.1,
+  "bounds_south": 53.3,
+  "bounds_east": -2.0,
+  "bounds_north": 54.25,
+  "notes": "Public domain (1902 publication). Full text available on archive.org in multiple formats.\n\nShows:\n- Salford Hundred containing Manchester\n- Manchester parish as one of 56 Lancashire parishes\n- Hundred boundaries (black broken lines)\n- Parish boundaries (red lines)\n\nThe parish and hundred boundaries could be digitised as GeoJSON polygons.\nLibrary of Congress Maps Division may have a higher-resolution scan.\n\nAlso from this publication: the 1184 Pipe Roll entry (31 Henry II) is the earliest written reference to Manchester Castle — 'in the custody of Robert de Buron'.\n\nTODO: Locate best digital scan, georeference, digitise parish boundaries as vector features.",
+  "iiif_url": "https://iiif.archive.org/image/iiif/3/lancashirepipero00grea%2Flancashirepipero00grea_jp2.zip%2Flancashirepipero00grea_jp2%2Flancashirepipero00grea_0006.jp2/info.json",
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 16:40:00",
+  "updated_at": "2026-02-08 17:10:00",
+  "files": [
+    {
+      "id": 1,
+      "source_id": 158,
+      "filename": "158-farrer-lancashire-1212-north.jpg",
+      "filepath": "158-farrer-lancashire-1212-north.jpg",
+      "filetype": "image",
+      "created_at": "2026-02-08 17:10:00"
+    },
+    {
+      "id": 2,
+      "source_id": 158,
+      "filename": "158-farrer-lancashire-1212-south.jpg",
+      "filepath": "158-farrer-lancashire-1212-south.jpg",
+      "filetype": "image",
+      "created_at": "2026-02-08 17:10:00"
+    }
+  ]
+}

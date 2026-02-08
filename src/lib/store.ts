@@ -3,10 +3,13 @@ import path from 'path';
 import type { Source, SourceFile, SourceWithFiles } from './types';
 
 const SOURCES_DIR = path.join(process.cwd(), 'sources');
+const META_DIR = path.join(process.cwd(), 'sources', 'meta');
 const DATA_DIR = path.join(process.cwd(), 'data');
+const PERIOD_QUALITY_FILE = path.join(META_DIR, 'period-quality.json');
 
 // Ensure dirs exist
 fs.mkdirSync(SOURCES_DIR, { recursive: true });
+fs.mkdirSync(META_DIR, { recursive: true });
 fs.mkdirSync(DATA_DIR, { recursive: true });
 
 interface SourceRecord extends Source {
@@ -225,6 +228,30 @@ export function deleteFile(sourceId: number, fileId: number): boolean {
   return true;
 }
 
+// Adaptive bucket sizes: wider for sparse early periods, narrower for dense recent ones
+const BUCKET_RANGES: { start: number; end: number; size: number }[] = [
+  { start: 0, end: 1500, size: 100 },    // centuries for pre-1500
+  { start: 1500, end: 1750, size: 50 },   // half-centuries
+  { start: 1750, end: 1900, size: 25 },   // quarter-centuries for industrial/victorian
+  { start: 1900, end: 2100, size: 10 },   // decades for modern
+];
+
+function getBucketStart(year: number): number {
+  for (const range of BUCKET_RANGES) {
+    if (year < range.end) {
+      return Math.floor(year / range.size) * range.size;
+    }
+  }
+  return Math.floor(year / 10) * 10;
+}
+
+function getBucketSize(year: number): number {
+  for (const range of BUCKET_RANGES) {
+    if (year < range.end) return range.size;
+  }
+  return 10;
+}
+
 export function getStats() {
   const sources = getAllSources();
 
@@ -240,6 +267,34 @@ export function getStats() {
 
   const eraOrder = ['roman', 'medieval', 'industrial', 'victorian', 'modern'];
 
+  const dated = sources.filter(s => s.year_start != null);
+  const undated = sources.filter(s => s.year_start == null);
+
+  // Build bucketed timeline data
+  const bucketMap = new Map<number, {
+    start: number;
+    end: number;
+    sources: { id: number; name: string; year_start: number; era: string; stage: number; source_type: string }[];
+  }>();
+
+  for (const s of dated) {
+    const bStart = getBucketStart(s.year_start!);
+    const bSize = getBucketSize(s.year_start!);
+    if (!bucketMap.has(bStart)) {
+      bucketMap.set(bStart, { start: bStart, end: bStart + bSize, sources: [] });
+    }
+    bucketMap.get(bStart)!.sources.push({
+      id: s.id,
+      name: s.name,
+      year_start: s.year_start!,
+      era: s.era,
+      stage: s.stage,
+      source_type: s.source_type,
+    });
+  }
+
+  const buckets = Array.from(bucketMap.values()).sort((a, b) => a.start - b.start);
+
   return {
     total: sources.length,
     byStage: Object.entries(byStage)
@@ -250,17 +305,32 @@ export function getStats() {
       .sort((a, b) => eraOrder.indexOf(a.era) - eraOrder.indexOf(b.era)),
     byType: Object.entries(byType)
       .map(([source_type, count]) => ({ source_type, count })),
-    timelineData: sources
-      .filter(s => s.year_start != null)
-      .map(s => ({
-        id: s.id,
-        name: s.name,
-        year_start: s.year_start!,
-        year_end: s.year_end,
-        era: s.era,
-        stage: s.stage,
-        source_type: s.source_type,
-      }))
-      .sort((a, b) => a.year_start - b.year_start),
+    buckets,
+    undated: undated.map(s => ({
+      id: s.id,
+      name: s.name,
+      era: s.era,
+      stage: s.stage,
+      source_type: s.source_type,
+    })),
   };
+}
+
+// --- Period Quality ---
+
+export interface PeriodQuality {
+  start: number;
+  end: number;
+  quality: 'good' | 'sparse' | 'gap' | 'rich';
+  notes?: string;
+}
+
+export function getPeriodQuality(): PeriodQuality[] {
+  if (!fs.existsSync(PERIOD_QUALITY_FILE)) return [];
+  const raw = fs.readFileSync(PERIOD_QUALITY_FILE, 'utf-8');
+  return JSON.parse(raw);
+}
+
+export function setPeriodQuality(periods: PeriodQuality[]): void {
+  fs.writeFileSync(PERIOD_QUALITY_FILE, JSON.stringify(periods, null, 2) + '\n');
 }
