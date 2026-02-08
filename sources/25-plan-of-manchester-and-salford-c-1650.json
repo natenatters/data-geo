@@ -4,7 +4,7 @@
   "description": "Earliest known plan of Manchester, showing the town during the Civil War era. Survives as an inset on later Casson & Berry maps. Shows the Collegiate Church (now Manchester Cathedral) at the centre of the medieval street layout.",
   "source_url": "https://www.digitalcollections.manchester.ac.uk/view/PR-C-00017-00070-MANCHESTER-00057",
   "source_type": "map_overlay",
-  "stage": 1,
+  "stage": 4,
   "year_start": 1650,
   "year_end": 1650,
   "era": "medieval",
@@ -12,10 +12,16 @@
   "bounds_south": 53.46,
   "bounds_east": -2.22,
   "bounds_north": 53.5,
-  "notes": "Not a standalone original — reproduced as inset on Casson & Berry maps (1741-57).\nManchester Digital Collections has IIIF manifest.\nAlso on Flickr: https://www.flickr.com/photos/manchesterarchiveplus/5280463248\nChetham's Library holds key physical copies.",
-  "iiif_url": null,
-  "georeference_url": null,
-  "tiles": [],
+  "notes": "Not a standalone original — reproduced as inset on Casson & Berry maps (1741-57).\nSame IIIF image as sources 9 and 23 — the 1650 plan is an inset in the corner.\nIn AllMaps, create a new map annotation on this image, mask just the 1650 inset, and add GCPs.\nOnce georeferenced, add the mapId as a tile URL below.\n\nManchester Digital Collections has IIIF manifest.\nAlso on Flickr: https://www.flickr.com/photos/manchesterarchiveplus/5280463248\nChetham's Library holds key physical copies.",
+  "iiif_url": "https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00057",
+  "georeference_url": "https://annotations.allmaps.org/?url=https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00057",
+  "tiles": [
+    {
+      "url": "https://allmaps.xyz/maps/1be753af5d4ea995/{z}/{x}/{y}.png",
+      "label": "1650 inset (from Berry map)",
+      "georeferenced": true
+    }
+  ],
   "created_at": "2026-02-08 00:30:24",
   "updated_at": "2026-02-08 00:30:24",
   "files": []

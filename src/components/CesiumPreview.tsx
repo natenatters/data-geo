@@ -11,12 +11,11 @@ declare global {
 }
 
 interface Props {
-  czmlUrl?: string;
   sources?: Source[];
   enabledTiles?: Map<number, Set<number>>;
 }
 
-export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props) {
+export default function CesiumPreview({ sources, enabledTiles }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const viewerRef = useRef<any>(null);
@@ -53,11 +52,11 @@ export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props)
       const viewer = new Cesium.Viewer(containerRef.current, {
         baseLayerPicker: false,
         geocoder: false,
-        homeButton: true,
-        animation: true,
-        timeline: true,
+        homeButton: false,
+        animation: false,
+        timeline: false,
         navigationHelpButton: false,
-        sceneModePicker: true,
+        sceneModePicker: false,
         fullscreenButton: false,
         baseLayer: new Cesium.ImageryLayer(
           new Cesium.UrlTemplateImageryProvider({
@@ -73,30 +72,12 @@ export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props)
         destination: Cesium.Cartesian3.fromDegrees(-2.2426, 53.4808, 15000),
         orientation: {
           heading: 0,
-          pitch: Cesium.Math.toRadians(-45),
+          pitch: Cesium.Math.toRadians(-90),
           roll: 0,
         },
       });
 
-      const start = Cesium.JulianDate.fromDate(new Date(-79, 0, 1));
-      start.dayNumber = 1757582; // Julian day for Jan 1, 79 AD
-      const stop = Cesium.JulianDate.fromIso8601('2025-12-31T23:59:59Z');
-      const current = Cesium.JulianDate.fromIso8601('2025-01-01T00:00:00Z');
-      viewer.clock.startTime = start;
-      viewer.clock.stopTime = stop;
-      viewer.clock.currentTime = current;
-      viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
-      viewer.clock.multiplier = 31536000;
-      viewer.timeline.zoomTo(start, stop);
-
       viewerRef.current = viewer;
-
-      if (czmlUrl) {
-        const dataSource = new Cesium.CzmlDataSource();
-        dataSource.load(czmlUrl).then(() => {
-          viewer.dataSources.add(dataSource);
-        });
-      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to initialize viewer');
     }
@@ -107,7 +88,7 @@ export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props)
         viewerRef.current = null;
       }
     };
-  }, [loaded, czmlUrl]);
+  }, [loaded]);
 
   // Sync imagery layers with sources + enabledTiles
   useEffect(() => {

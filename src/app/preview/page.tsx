@@ -87,7 +87,7 @@ export default function PreviewPage() {
       <div className="flex gap-4" style={{ height: 'calc(100vh - 200px)' }}>
         {/* Viewer */}
         <div className="flex-1 rounded-lg overflow-hidden border border-gray-200">
-          <CesiumPreview czmlUrl="/api/export/czml" sources={sources} enabledTiles={enabledTiles} />
+          <CesiumPreview sources={sources} enabledTiles={enabledTiles} />
         </div>
 
         {/* Sidebar */}
