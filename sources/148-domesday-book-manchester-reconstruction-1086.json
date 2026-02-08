@@ -1,0 +1,22 @@
+{
+  "id": 148,
+  "name": "Domesday Book Manchester — Reconstruction (1086)",
+  "description": "The Domesday Book (1086) records 'Mamecestre' in the Hundred of Salford: a church, a priest, land, and a mill. Scholarly reconstructions map what this tiny settlement looked like.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1086,
+  "year_end": 1086,
+  "era": "medieval",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find scholarly reconstruction maps of Domesday Manchester.\n\nDomesday entry for Manchester (1086):\nHeld by the king. Church of St Mary, 1 priest.\nLand for a few ploughs. A mill.\nVery small — possibly only 200-300 people.\n\nDomesday Salford also recorded separately.\n\nPossible sources:\n- Open Domesday project: https://opendomesday.org/\n- 'The Victoria County History of Lancashire' — detailed Domesday analysis\n- 'A History of the County of Lancaster' (VCH Lancashire)\n- Scholarly articles reconstructing Domesday geography\n- Domesday Geography of Northern England by H.C. Darby\n\nManor held by: Roger de Poitou (initially), then Albert Greslet/Grelly.\nChurch of St Mary = site of present Manchester Cathedral.\nMill location unknown — possibly on the Irk or Irwell.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": 153,
+  "name": "Manchester Civil War Defences — Rosworm's Fortifications (1642-44)",
+  "description": "Colonel John Rosworm's defensive earthworks around Manchester during the Civil War. A German military engineer, he designed ramparts, ditches, and sconces (small forts) around the town perimeter.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1642,
+  "year_end": 1644,
+  "era": "pre-industrial",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find reconstruction of Rosworm's defence line.\n\nJohn Rosworm (also Rossworm/Rosworme), German military engineer.\nHired by Manchester Parliamentarians to design town defences.\nBuilt a circuit of earthwork defences including:\n- Mud ramparts with external ditch\n- Sconces (small angular forts) at key positions\n- Gates/barriers on all approach roads\n- River crossings fortified\n\nThe defence line roughly followed:\n- Hanging Ditch (medieval ditch, reused)\n- Along Deansgate\n- Around the Collegiate Church\n- Down to the river\n\nRosworm published 'Good Service Hitherto Ill Rewarded' (1649) complaining about\nnon-payment — this text describes the fortifications in detail.\nAvailable in Chetham Society publications.\n\nPossible sources for plans:\n- Chetham Society: 'The Civil War in Lancashire' series\n- 'Manchester during the Civil War' by local historians\n- GMAU may have mapped the earthwork traces\n- Compare defensive line with street pattern on 1650 plan\n- Proceedings of Lancashire & Cheshire Antiquarian Society",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

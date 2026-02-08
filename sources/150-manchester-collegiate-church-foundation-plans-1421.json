@@ -1,0 +1,22 @@
+{
+  "id": 150,
+  "name": "Manchester Collegiate Church — Foundation Plans (1421)",
+  "description": "Thomas de la Warre founded the Collegiate Church in 1421, transforming Manchester's parish church into a college of priests. Architectural plans of the original foundation exist.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1421,
+  "year_end": 1500,
+  "era": "medieval",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find original/early architectural plans of the Collegiate Church.\n\n1421: Thomas de la Warre obtains licence to refound St Mary's as a collegiate church.\nWarden + fellows established 1422.\nPerpendicular Gothic style — building we see today largely dates from this period.\nThe nave, choir, and chapter house from the 15th century survive.\n\nPossible sources:\n- Manchester Cathedral archives\n- 'Manchester Cathedral: A History of the Collegiate Church and Cathedral' by Terry Wyke et al.\n- RCHME (Royal Commission on Historical Monuments) survey\n- Historic England listing: Grade I listed building\n- Architectural drawings in John Rylands Library\n- Chetham's Library (founded 1653, adjacent to the cathedral)\n\nChetham's Library itself (founded 1653) is the oldest public library in the English-speaking world.\nHumphrey Chetham's Hospital (now Chetham's School of Music) built 1421 as clergy housing.\nThese buildings together form the oldest surviving complex in Manchester.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

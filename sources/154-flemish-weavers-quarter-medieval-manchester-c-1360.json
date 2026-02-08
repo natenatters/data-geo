@@ -1,0 +1,22 @@
+{
+  "id": 154,
+  "name": "Flemish Weavers' Quarter — Medieval Manchester (c.1360+)",
+  "description": "Flemish weavers settled in Manchester from the 1360s onwards, bringing textile skills that would define the city for 600 years. Their quarter and workshops may be identifiable from later maps and archaeological evidence.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1360,
+  "year_end": 1500,
+  "era": "medieval",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find evidence of the Flemish weavers' settlement location.\n\nEdward III invited Flemish weavers to England in the 1330s-60s.\nManchester received settlers who established fustian weaving (cotton-linen blend).\nThis is the seed of Manchester's entire textile identity.\n\nThe weavers likely settled in a defined quarter — common pattern in medieval towns.\nPossible locations:\n- Near the market area\n- Along the Irk or Irwell (water needed for cloth finishing)\n- Place-name evidence may survive\n\nSources to check:\n- 'The Manchester Man' by Isabella Banks (historical novel but researched)\n- Victoria County History of Lancashire — textile trade sections\n- Chetham Society publications on medieval Manchester\n- 'The Early Manchester Cotton Trade' by Alfred Wadsworth & Julia de Lacy Mann\n- Archaeological evidence from Exchange Square / Cathedral area excavations\n\nBy 1540 (Leland's visit), Manchester was THE textile town of Lancashire.\nBy 1650, the textile quarter would be visible on the town plan.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

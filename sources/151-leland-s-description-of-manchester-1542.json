@@ -1,0 +1,22 @@
+{
+  "id": 151,
+  "name": "Leland's Description of Manchester (1542)",
+  "description": "John Leland's Itinerary (1542) describes Manchester as 'the fairest, best builded, quickest, and most populous town in all Lancashire'. The first detailed written account — could inform a reconstruction map.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1542,
+  "year_end": 1542,
+  "era": "pre-industrial",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find any maps/reconstructions based on Leland's description.\n\nLeland's Itinerary (1542) excerpt on Manchester:\n'Manchester on the south side of the Irwell is the fairest, best builded,\nquickest, and most populous town in all Lancashire.'\n\nHe describes:\n- The bridge over the Irwell\n- The Collegiate Church\n- The streets and buildings\n- The cloth market / textile trade\n- Salford on the other side of the river\n\nLeland's text is in 'The Itinerary of John Leland' (edited by Lucy Toulmin Smith, 1907-10).\nAvailable at Internet Archive.\n\nPossible reconstruction sources:\n- Any scholarly attempt to map Leland's Manchester\n- Tudor town reconstruction drawings\n- Compare with 1650 plan (source 25) — only 108 years later\n\nManchester in 1542: population maybe 2,000-3,000.\nTextile trade well established — fustians, woollens.\nGrammar School recently founded (1515).",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": 147,
+  "name": "Edward the Elder's Burh at Manchester (919 AD)",
+  "description": "In 919 AD, King Edward the Elder sent forces to repair and garrison 'Mameceastre' as a fortified burh against the Vikings. The Anglo-Saxon Chronicle records this as the first mention of Manchester in 500 years.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 919,
+  "year_end": 919,
+  "era": "medieval",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find archaeological reconstructions of the 919 burh.\n\nAnglo-Saxon Chronicle entry (919 AD):\n'King Edward went with the army to Thelwall and ordered the burh to be built and\noccupied and manned; and he ordered another army, also from the people of Mercia,\nto occupy Manchester in Northumbria, and repair and man it.'\n\nLikely location: Castlefield area (reusing Roman fort site) or near the cathedral.\nSome scholars suggest the burh was at the confluence of Irwell and Irk.\n\nPossible sources for reconstruction plans:\n- 'Anglo-Saxon Fortifications' by David Hill & Alexander Rumble (2009)\n- 'Manchester: An Archaeological History' or similar\n- Greater Manchester Archaeological Unit publications\n- Current Archaeology magazine may have covered this\n- Proceedings of the Lancashire & Cheshire Antiquarian Society\n\nKey question: Was the Roman fort site reused, or was the burh built elsewhere?\nArchaeological evidence is sparse — most medieval building destroyed Roman layers.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

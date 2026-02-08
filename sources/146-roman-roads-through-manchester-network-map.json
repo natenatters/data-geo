@@ -1,0 +1,22 @@
+{
+  "id": 146,
+  "name": "Roman Roads Through Manchester — Network Map",
+  "description": "Map of the Roman road network radiating from Mamucium. Roads to Deva (Chester), Bremetennacum (Ribchester), Eboracum (York via Castleshaw), and Condate (Northwich).",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 79,
+  "year_end": 410,
+  "era": "roman",
+  "bounds_west": -2.5,
+  "bounds_south": 53.3,
+  "bounds_east": -1.8,
+  "bounds_north": 53.7,
+  "notes": "RESEARCH TARGET: Find published Roman road maps for the Manchester area.\n\nKnown roads from Mamucium:\n1. South to Condate (Northwich) and Deva (Chester) — roughly modern A56\n2. North to Bremetennacum (Ribchester) — roughly modern A6\n3. East to Castleshaw and Eboracum (York) — over the Pennines\n4. Northeast to Cambodunum (Slack, near Huddersfield)\n\nIvan D. Margary's 'Roman Roads in Britain' (1955, revised 1967) — definitive source.\nOrdnance Survey 'Map of Roman Britain' (multiple editions).\nAlso: 'The Romans in the North West' exhibition materials.\n\nRoman road alignments often visible in modern street patterns:\n- Chester Road / A56 follows Roman alignment\n- Long Millgate may follow Roman road to the north\n- Deansgate name derives from an older road ('Deans Gate').",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

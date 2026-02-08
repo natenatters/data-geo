@@ -1,0 +1,22 @@
+{
+  "id": 144,
+  "name": "Earliest Map of Salford (Research Gap)",
+  "description": "Salford received its borough charter in 1230 — 71 years before Manchester (1301) — and was the administrative centre of the Hundred of Salford covering all of southeast Lancashire. Yet no dedicated pre-1650 map of Salford is known to exist. This entry tracks the search for the earliest cartographic record of Salford town centre (Greengate area).",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1230,
+  "year_end": 1650,
+  "era": "medieval",
+  "bounds_west": -2.255,
+  "bounds_south": 53.483,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH GAP: No dedicated map of Salford town centre is known before c.1650.\n\nSalford's medieval core was at Greengate — market, Hundred Court, borough centre.\nBorough charter: 1230 (Manchester's was 1301).\nHundred of Salford covered: Manchester, Bolton, Bury, Rochdale, Oldham, Middleton, Ashton.\nManor held by the Crown, later granted to various nobles.\n\nMaps titled 'Manchester & Salford' mostly focus on Manchester's side:\n- Source 25: Plan of Manchester & Salford (c.1650) — earliest, but Manchester-centric\n- Source 9: Casson & Berry (1741) — shows both sides of Irwell, Salford secondary\n- Source 11: Green (1787-94) — includes Salford but focus is Manchester\n\nGough Map (c.1360) does NOT show Salford despite it being a borough since 1230.\nSpeed's Lancashire (1610) shows Lancaster inset, not Salford.\n\nPossible leads:\n- Salford manorial court rolls (text, not maps)\n- Lancashire Record Office — estate maps?\n- Chetham's Library — any pre-1650 Salford material?\n- Salford Local History Library (Salford Museum & Art Gallery)\n- The National Archives — Crown manor records for Salford\n\nThis is a genuine cartographic blind spot — a 420-year borough with no known map.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:30:00",
+  "updated_at": "2026-02-08 02:30:00",
+  "files": []
+}

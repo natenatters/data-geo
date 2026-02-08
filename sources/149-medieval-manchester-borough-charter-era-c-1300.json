@@ -1,0 +1,22 @@
+{
+  "id": 149,
+  "name": "Medieval Manchester — Borough Charter Era (c.1300)",
+  "description": "Manchester around the time of its 1301 borough charter. The market town with its church, manor house, market cross, and first defined streets. Scholarly reconstructions show the medieval core.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1282,
+  "year_end": 1350,
+  "era": "medieval",
+  "bounds_west": -2.255,
+  "bounds_south": 53.473,
+  "bounds_east": -2.24,
+  "bounds_north": 53.49,
+  "notes": "RESEARCH TARGET: Find reconstruction maps of medieval Manchester.\n\n1282: Grelly family sell the manor.\n1301: Borough charter granted — market rights, right to elect reeve.\n1311: De la Warre family inherit.\n1322: Scottish raids into Lancashire.\n1348-49: Black Death.\n\nMedieval core centred on:\n- Church of St Mary (now Cathedral)\n- Market place (now Exchange Square area)\n- Hanging Ditch (defensive ditch)\n- Millgate, Deansgate, Market Street\n- Manor house / baron's hall\n\nPossible sources:\n- 'Medieval Manchester' by John Harland\n- 'Manchester: Making the Modern City' (Manchester University Press)\n- Chetham Society publications (19th century antiquarian studies)\n- GMAU excavation reports from Cathedral/Exchange Square area\n- 'The Growth of Manchester' reconstruction drawings\n- Victoria County History of Lancashire\n\nHanging Ditch is key — a defensive ditch that defined the medieval town boundary.\nIts course is preserved in modern street names.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}

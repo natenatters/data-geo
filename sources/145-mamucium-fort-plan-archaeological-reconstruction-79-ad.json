@@ -1,0 +1,22 @@
+{
+  "id": 145,
+  "name": "Mamucium Fort Plan — Archaeological Reconstruction (79 AD)",
+  "description": "Archaeological excavation plans of the Roman fort at Mamucium (Castlefield). Multiple excavations from 1906 onwards have revealed the fort layout, gates, granaries, and vicus.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 79,
+  "year_end": 410,
+  "era": "roman",
+  "bounds_west": -2.258,
+  "bounds_south": 53.473,
+  "bounds_east": -2.248,
+  "bounds_north": 53.478,
+  "notes": "RESEARCH TARGET: Find published excavation plans of Mamucium.\n\nKey excavations:\n- 1906: Charles Roeder excavation\n- 1972: G.D.B. Jones excavation (University of Manchester)\n- 2001-2005: University of Manchester Vicus excavations\n\nPublished plans likely in:\n- 'Roman Manchester' by G.D.B. Jones (1974)\n- 'Roman Manchester: The University of Manchester Excavations within the Vicus 2001-5' (Oxford Archaeology North)\n- Greater Manchester Archaeological Unit reports: http://www.gmau.manchester.ac.uk/pdfs/rmc1.pdf\n- Journal of Roman Studies / Britannia journal articles\n\nFort location: Castlefield, between Liverpool Road and the Medlock.\nFort dimensions: approx 160m x 130m.\nTimber phase c.79 AD, stone rebuild c.160 AD, final phase c.200 AD.\nVicus (civilian settlement) extended east and south of fort.\n\nContact: UoM Archaeology dept, GMAU, Manchester Museum.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 02:51:03",
+  "updated_at": "2026-02-08 02:51:03",
+  "files": []
+}
