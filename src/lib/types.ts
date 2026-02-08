@@ -3,9 +3,11 @@ export type Era = 'roman' | 'medieval' | 'industrial' | 'victorian' | 'modern';
 export type FileType = 'image' | 'geotiff' | 'geojson' | 'czml' | 'kml' | 'other';
 
 export interface Tile {
-  url: string;   // XYZ endpoint e.g. https://allmaps.xyz/maps/{hash}/{z}/{x}/{y}.png
+  url: string;   // XYZ endpoint or WMS base URL
   label: string; // e.g. "Sheet 1", "Ward 3: Ardwick"
   georeferenced: boolean; // true = verified, false = external/unverified
+  type?: 'xyz' | 'wms'; // default: 'xyz'
+  wms_layers?: string;   // WMS layer name(s), required when type='wms'
 }
 
 export interface Source {

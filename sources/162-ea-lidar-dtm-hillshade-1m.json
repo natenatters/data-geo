@@ -1,0 +1,37 @@
+{
+  "id": 162,
+  "name": "Environment Agency LiDAR DTM Hillshade (1m)",
+  "description": "Bare-earth Digital Terrain Model hillshade from Environment Agency LiDAR composite. Strips away buildings and vegetation to show natural terrain — river valleys of the Irwell, Medlock, and Irk, hills, and the pre-urban landscape beneath modern Manchester.",
+  "source_url": "https://environment.data.gov.uk/DefraDataDownload/?mapService=EA/LiDARComposite&Mode=survey",
+  "source_type": "map_overlay",
+  "stage": 4,
+  "year_start": null,
+  "year_end": null,
+  "era": "modern",
+  "bounds_west": -2.35,
+  "bounds_south": 53.43,
+  "bounds_east": -2.15,
+  "bounds_north": 53.53,
+  "notes": "Open Government Licence. 1m resolution LiDAR covering ~99% of England.\n\nWMS endpoint (DTM 1m):\nhttps://environment.data.gov.uk/spatialdata/lidar-composite-digital-terrain-model-dtm-1m/wms\n\nAvailable layers:\n  Lidar_Composite_DTM_1m — raw elevation (greyscale)\n  Lidar_Composite_Elevation_DTM_1m — colour-ramped elevation\n  Lidar_Composite_Hillshade_DTM_1m — hillshade (best for terrain viz)\n\nAlso available: DSM (with buildings/trees) at same endpoint pattern.\nSupports EPSG:4326, EPSG:3857, EPSG:27700.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "created_at": "2026-02-08 20:00:00",
+  "updated_at": "2026-02-08 20:00:00",
+  "files": [],
+  "tiles": [
+    {
+      "url": "https://environment.data.gov.uk/spatialdata/lidar-composite-digital-terrain-model-dtm-1m/wms",
+      "label": "DTM Hillshade",
+      "georeferenced": true,
+      "type": "wms",
+      "wms_layers": "Lidar_Composite_Hillshade_DTM_1m"
+    },
+    {
+      "url": "https://environment.data.gov.uk/spatialdata/lidar-composite-digital-terrain-model-dtm-1m/wms",
+      "label": "DTM Elevation (colour)",
+      "georeferenced": true,
+      "type": "wms",
+      "wms_layers": "Lidar_Composite_Elevation_DTM_1m"
+    }
+  ]
+}

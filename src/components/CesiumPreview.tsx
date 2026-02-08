@@ -135,13 +135,20 @@ export default function CesiumPreview({ sources, enabledTiles }: Props) {
             const tile = source.tiles[idx];
             // Cache-bust using source updated_at so re-georeferenced tiles load fresh
             const cacheBust = source.updated_at ? `${tile.url.includes('?') ? '&' : '?'}_t=${encodeURIComponent(source.updated_at)}` : '';
-            const provider = new Cesium.UrlTemplateImageryProvider({
-              url: tile.url + cacheBust,
-              maximumLevel: 18,
-              tileWidth: 256,
-              tileHeight: 256,
-              credit: source.name,
-            });
+            const provider = tile.type === 'wms'
+              ? new Cesium.WebMapServiceImageryProvider({
+                  url: tile.url,
+                  layers: tile.wms_layers || '',
+                  parameters: { transparent: true, format: 'image/png' },
+                  credit: source.name,
+                })
+              : new Cesium.UrlTemplateImageryProvider({
+                  url: tile.url + cacheBust,
+                  maximumLevel: 18,
+                  tileWidth: 256,
+                  tileHeight: 256,
+                  credit: source.name,
+                });
             const layer = viewer.imageryLayers.addImageryProvider(provider);
             layer.alpha = 0.75;
             currentLayers.set(key, layer);
