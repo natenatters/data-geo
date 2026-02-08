@@ -14,10 +14,18 @@ interface BucketSource {
   source_type: string;
 }
 
+export interface BucketStory {
+  id: number;
+  title: string;
+  year_start: number;
+  era: string;
+}
+
 export interface TimelineBucket {
   start: number;
   end: number;
   sources: BucketSource[];
+  stories: BucketStory[];
 }
 
 export interface PeriodQuality {
@@ -176,6 +184,39 @@ export default function Timeline({
           );
         })}
 
+        {/* Story diamond markers */}
+        {buckets.filter(b => b.stories && b.stories.length > 0).map(bucket => {
+          const left = yearToPercent(bucket.start);
+          const width = yearToPercent(bucket.end) - yearToPercent(bucket.start);
+          const isSelected = selectedBucket === bucket.start;
+          const isHovered = hoveredBucket === bucket.start;
+
+          return (
+            <div
+              key={`story-${bucket.start}`}
+              className="absolute cursor-pointer"
+              style={{
+                left: `${left + width / 2}%`,
+                bottom: '24px',
+                transform: 'translateX(-50%) rotate(45deg)',
+                width: '8px',
+                height: '8px',
+                backgroundColor: '#9333ea',
+                opacity: isSelected ? 1 : isHovered ? 0.9 : 0.8,
+                outline: isSelected ? '2px solid #7c3aed' : 'none',
+                outlineOffset: '1px',
+              }}
+              onMouseEnter={() => setHoveredBucket(bucket.start)}
+              onMouseLeave={() => setHoveredBucket(null)}
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelectBucket(isSelected ? null : bucket.start);
+              }}
+              title={`${bucket.stories.length} stor${bucket.stories.length !== 1 ? 'ies' : 'y'}`}
+            />
+          );
+        })}
+
         {/* Era labels along bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-5">
           {ERA_RANGES.map(({ era, start, end }) => (
@@ -197,8 +238,19 @@ export default function Timeline({
       {hovered && (
         <div className="mt-2 px-3 py-2 bg-gray-50 rounded border border-gray-100 text-xs">
           <div className="font-medium text-gray-700 mb-1">
-            {hovered.start}–{hovered.end} ({hovered.sources.length} source{hovered.sources.length !== 1 ? 's' : ''})
+            {hovered.start}–{hovered.end} ({hovered.sources.length} source{hovered.sources.length !== 1 ? 's' : ''}
+            {hovered.stories && hovered.stories.length > 0 && `, ${hovered.stories.length} stor${hovered.stories.length !== 1 ? 'ies' : 'y'}`})
           </div>
+          {hovered.stories && hovered.stories.length > 0 && (
+            <div className="text-purple-600 space-y-0.5 mb-1">
+              {hovered.stories.map(s => (
+                <div key={s.id} className="truncate flex items-center gap-1">
+                  <span className="inline-block w-2 h-2 rotate-45 bg-purple-500 shrink-0" />
+                  {s.title}
+                </div>
+              ))}
+            </div>
+          )}
           <div className="text-gray-500 space-y-0.5 max-h-24 overflow-y-auto">
             {hovered.sources.slice(0, 8).map(s => (
               <div key={s.id} className="truncate">{s.name}</div>
@@ -223,6 +275,10 @@ export default function Timeline({
               </div>
             );
           })}
+          <div className="flex items-center gap-1">
+            <div className="w-2.5 h-2.5 rotate-45" style={{ backgroundColor: '#9333ea' }} />
+            <span>Story</span>
+          </div>
         </div>
 
         {/* Quality legend */}

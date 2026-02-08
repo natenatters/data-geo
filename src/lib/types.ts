@@ -46,6 +46,20 @@ export interface SourceWithFiles extends Source {
   files: SourceFile[];
 }
 
+export interface Story {
+  id: number;
+  title: string;
+  description: string | null;
+  content: string | null;
+  content_file: string | null;
+  year_start: number;
+  year_end: number | null;
+  era: Era;
+  source_ids: number[];
+  created_at: string;
+  updated_at: string;
+}
+
 export const STAGES: Record<number, string> = {
   1: 'Discovered',
   2: 'Acquired',

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Timeline from '@/components/Timeline';
-import type { TimelineBucket, PeriodQuality } from '@/components/Timeline';
+import type { TimelineBucket, BucketStory, PeriodQuality } from '@/components/Timeline';
 import { STAGES, ERAS, SOURCE_TYPES } from '@/lib/types';
 import type { Era } from '@/lib/types';
 
@@ -17,6 +17,7 @@ interface UndatedSource {
 
 interface Stats {
   total: number;
+  storyTotal: number;
   byStage: { stage: number; count: number }[];
   byEra: { era: string; count: number }[];
   byType: { source_type: string; count: number }[];
@@ -86,9 +87,11 @@ export default function Dashboard() {
     return <div className="text-gray-500 text-sm">Loading...</div>;
   }
 
-  const selectedSources = selectedBucket !== null
-    ? stats.buckets.find(b => b.start === selectedBucket)?.sources || []
+  const selectedBucketData = selectedBucket !== null
+    ? stats.buckets.find(b => b.start === selectedBucket)
     : null;
+  const selectedSources = selectedBucketData?.sources || null;
+  const selectedStories = selectedBucketData?.stories || [];
 
   const datedCount = stats.total - stats.undated.length;
 
@@ -99,6 +102,7 @@ export default function Dashboard() {
         <h1 className="text-xl font-bold text-gray-900">Timeline</h1>
         <div className="text-xs text-gray-500">
           {stats.total} sources ({datedCount} dated, {stats.undated.length} undated)
+          {stats.storyTotal > 0 && <> &middot; {stats.storyTotal} {stats.storyTotal === 1 ? 'story' : 'stories'}</>}
         </div>
       </div>
 
@@ -194,12 +198,11 @@ export default function Dashboard() {
       )}
 
       {/* Selected bucket source list */}
-      {selectedSources && (
+      {selectedSources && selectedSources.length > 0 && (
         <div className="bg-white rounded-lg border border-gray-200 p-4">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-medium text-gray-700">
-              {stats.buckets.find(b => b.start === selectedBucket)!.start}–
-              {stats.buckets.find(b => b.start === selectedBucket)!.end}
+              {selectedBucketData!.start}–{selectedBucketData!.end}
               <span className="text-gray-400 font-normal ml-1.5">
                 ({selectedSources.length} source{selectedSources.length !== 1 ? 's' : ''})
               </span>
@@ -232,6 +235,48 @@ export default function Dashboard() {
                 </span>
                 <span className="text-[10px] text-gray-400 shrink-0">
                   {STAGES[s.stage]}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Selected bucket stories */}
+      {selectedStories.length > 0 && (
+        <div className="bg-purple-50 rounded-lg border border-purple-200 p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-medium text-purple-800">
+              Stories
+              <span className="text-purple-500 font-normal ml-1.5">
+                ({selectedStories.length})
+              </span>
+            </h2>
+            {!selectedSources?.length && (
+              <button
+                onClick={() => setSelectedBucket(null)}
+                className="text-xs text-purple-400 hover:text-purple-600"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+          <div className="space-y-1">
+            {selectedStories.map(s => (
+              <Link
+                key={s.id}
+                href={`/stories/${s.id}`}
+                className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded hover:bg-purple-100 group"
+              >
+                <span className="inline-block w-2.5 h-2.5 rotate-45 bg-purple-500 shrink-0" />
+                <span className="text-sm text-purple-800 truncate flex-1 group-hover:text-purple-600">
+                  {s.title}
+                </span>
+                <span
+                  className="px-1 py-0.5 rounded text-[10px] font-medium text-white shrink-0"
+                  style={{ backgroundColor: ERAS[s.era as Era]?.color || '#6b7280' }}
+                >
+                  {s.year_start}
                 </span>
               </Link>
             ))}

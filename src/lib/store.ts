@@ -1,16 +1,18 @@
 import fs from 'fs';
 import path from 'path';
-import type { Source, SourceFile, SourceWithFiles } from './types';
+import type { Source, SourceFile, SourceWithFiles, Story } from './types';
 
 const SOURCES_DIR = path.join(process.cwd(), 'sources');
 const META_DIR = path.join(process.cwd(), 'sources', 'meta');
 const DATA_DIR = path.join(process.cwd(), 'data');
+const STORIES_DIR = path.join(process.cwd(), 'stories');
 const PERIOD_QUALITY_FILE = path.join(META_DIR, 'period-quality.json');
 
 // Ensure dirs exist
 fs.mkdirSync(SOURCES_DIR, { recursive: true });
 fs.mkdirSync(META_DIR, { recursive: true });
 fs.mkdirSync(DATA_DIR, { recursive: true });
+fs.mkdirSync(STORIES_DIR, { recursive: true });
 
 interface SourceRecord extends Source {
   files: SourceFile[];
@@ -254,6 +256,7 @@ function getBucketSize(year: number): number {
 
 export function getStats() {
   const sources = getAllSources();
+  const stories = getAllStories();
 
   const byStage: Record<number, number> = {};
   const byEra: Record<string, number> = {};
@@ -275,13 +278,14 @@ export function getStats() {
     start: number;
     end: number;
     sources: { id: number; name: string; year_start: number; era: string; stage: number; source_type: string }[];
+    stories: { id: number; title: string; year_start: number; era: string }[];
   }>();
 
   for (const s of dated) {
     const bStart = getBucketStart(s.year_start!);
     const bSize = getBucketSize(s.year_start!);
     if (!bucketMap.has(bStart)) {
-      bucketMap.set(bStart, { start: bStart, end: bStart + bSize, sources: [] });
+      bucketMap.set(bStart, { start: bStart, end: bStart + bSize, sources: [], stories: [] });
     }
     bucketMap.get(bStart)!.sources.push({
       id: s.id,
@@ -293,10 +297,25 @@ export function getStats() {
     });
   }
 
+  for (const story of stories) {
+    const bStart = getBucketStart(story.year_start);
+    const bSize = getBucketSize(story.year_start);
+    if (!bucketMap.has(bStart)) {
+      bucketMap.set(bStart, { start: bStart, end: bStart + bSize, sources: [], stories: [] });
+    }
+    bucketMap.get(bStart)!.stories.push({
+      id: story.id,
+      title: story.title,
+      year_start: story.year_start,
+      era: story.era,
+    });
+  }
+
   const buckets = Array.from(bucketMap.values()).sort((a, b) => a.start - b.start);
 
   return {
     total: sources.length,
+    storyTotal: stories.length,
     byStage: Object.entries(byStage)
       .map(([stage, count]) => ({ stage: parseInt(stage), count }))
       .sort((a, b) => a.stage - b.stage),
@@ -314,6 +333,110 @@ export function getStats() {
       source_type: s.source_type,
     })),
   };
+}
+
+// --- Stories ---
+
+function listStoryFiles(): string[] {
+  return fs.readdirSync(STORIES_DIR)
+    .filter(f => f.endsWith('.json'))
+    .sort((a, b) => {
+      const idA = parseInt(a.split('-')[0]);
+      const idB = parseInt(b.split('-')[0]);
+      return idA - idB;
+    });
+}
+
+function readStory(filename: string): Story {
+  const raw = fs.readFileSync(path.join(STORIES_DIR, filename), 'utf-8');
+  return JSON.parse(raw);
+}
+
+function writeStory(record: Story): void {
+  const slug = slugify(record.title);
+  const filename = `${record.id}-${slug}.json`;
+
+  const existing = listStoryFiles().find(f => f.startsWith(`${record.id}-`));
+  if (existing && existing !== filename) {
+    fs.unlinkSync(path.join(STORIES_DIR, existing));
+  }
+
+  fs.writeFileSync(
+    path.join(STORIES_DIR, filename),
+    JSON.stringify(record, null, 2) + '\n'
+  );
+}
+
+function nextStoryId(): number {
+  const files = listStoryFiles();
+  if (files.length === 0) return 1;
+  const ids = files.map(f => parseInt(f.split('-')[0]));
+  return Math.max(...ids) + 1;
+}
+
+export function getAllStories(): Story[] {
+  return listStoryFiles().map(f => readStory(f));
+}
+
+export function getStory(id: number): Story | null {
+  const file = listStoryFiles().find(f => f.startsWith(`${id}-`));
+  if (!file) return null;
+  return readStory(file);
+}
+
+export function getStoryContent(story: Story): string | null {
+  if (story.content) return story.content;
+  if (story.content_file) {
+    const filePath = path.join(DATA_DIR, story.content_file);
+    if (fs.existsSync(filePath)) {
+      return fs.readFileSync(filePath, 'utf-8');
+    }
+  }
+  return null;
+}
+
+export function createStory(data: Partial<Story>): Story {
+  const id = nextStoryId();
+  const timestamp = now();
+
+  const record: Story = {
+    id,
+    title: data.title || '',
+    description: data.description || null,
+    content: data.content || null,
+    content_file: data.content_file || null,
+    year_start: data.year_start || 0,
+    year_end: data.year_end || null,
+    era: data.era || 'modern',
+    source_ids: data.source_ids || [],
+    created_at: timestamp,
+    updated_at: timestamp,
+  };
+
+  writeStory(record);
+  return record;
+}
+
+export function updateStory(id: number, data: Partial<Story>): Story | null {
+  const existing = getStory(id);
+  if (!existing) return null;
+
+  const updated: Story = {
+    ...existing,
+    ...data,
+    id,
+    updated_at: now(),
+  };
+
+  writeStory(updated);
+  return updated;
+}
+
+export function deleteStory(id: number): boolean {
+  const file = listStoryFiles().find(f => f.startsWith(`${id}-`));
+  if (!file) return false;
+  fs.unlinkSync(path.join(STORIES_DIR, file));
+  return true;
 }
 
 // --- Period Quality ---

@@ -1,0 +1,13 @@
+{
+  "id": 1,
+  "title": "The Casson & Berry Plan of Manchester & Salford",
+  "description": "The story of Russel Casson's survey and John Berry's publication of one of the earliest detailed plans of Manchester, from fieldwork in 1741 through multiple editions to the 1770s.",
+  "content": null,
+  "content_file": "9-berry-research.txt",
+  "year_start": 1741,
+  "year_end": 1757,
+  "era": "industrial",
+  "source_ids": [9],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}
