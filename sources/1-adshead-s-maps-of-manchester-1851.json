@@ -21,102 +21,102 @@
   "tiles": [
     {
       "url": "https://allmaps.xyz/maps/1715d8b684ea497a/{z}/{x}/{y}.png",
-      "label": "Sheet 1",
+      "label": "Sheet 1 — St Anns / St James",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/b017442da87a6eb0/{z}/{x}/{y}.png",
-      "label": "Sheet 2",
+      "label": "Sheet 2 — St Johns / Exchange",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/402234f2563fc2e3/{z}/{x}/{y}.png",
-      "label": "Sheet 3",
+      "label": "Sheet 3 — St Johns (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/17765fcf98964760/{z}/{x}/{y}.png",
-      "label": "Sheet 4",
+      "label": "Sheet 4 — St Johns (pt 3)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/ece8cb14863f5150/{z}/{x}/{y}.png",
-      "label": "Sheet 5",
+      "label": "Sheet 5 — St James (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/dea3cfa97b5bf7c1/{z}/{x}/{y}.png",
-      "label": "Sheet 6",
+      "label": "Sheet 6 — Oxford (pt 1)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/38ffee0c5566ffb0/{z}/{x}/{y}.png",
-      "label": "Sheet 7",
+      "label": "Sheet 7 — Oxford (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/ee28365c05b5cc94/{z}/{x}/{y}.png",
-      "label": "Sheet 8",
+      "label": "Sheet 8 — St Clements (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/13e34c2974ecea41/{z}/{x}/{y}.png",
-      "label": "Sheet 9",
+      "label": "Sheet 9 — St Clements (pt 1)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/899102c8cada43bb/{z}/{x}/{y}.png",
-      "label": "Sheet 10",
+      "label": "Sheet 10 — Collegiate Church / Exchange",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/ebe864b83e3d5a9e/{z}/{x}/{y}.png",
-      "label": "Sheet 11",
+      "label": "Sheet 11 — Collegiate Church (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/060468fa9f3cfa78/{z}/{x}/{y}.png",
-      "label": "Sheet 12",
+      "label": "Sheet 12 — Collegiate Church (pt 3)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/e7e1debfccf715f3/{z}/{x}/{y}.png",
-      "label": "Sheet 13",
+      "label": "Sheet 13 — St Michaels (pt 1)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/695883c7a720e9f7/{z}/{x}/{y}.png",
-      "label": "Sheet 14",
+      "label": "Sheet 14 — New Cross (pt 1)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/4b3701e524583a1e/{z}/{x}/{y}.png",
-      "label": "Sheet 15",
+      "label": "Sheet 15 — New Cross (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/379320745a6df1d1/{z}/{x}/{y}.png",
-      "label": "Sheet 16",
+      "label": "Sheet 16 — New Cross (pt 3)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/1ff2b25c1e995b23/{z}/{x}/{y}.png",
-      "label": "Sheet 17",
+      "label": "Sheet 17 — New Cross (pt 4)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/38e818d71f20f596/{z}/{x}/{y}.png",
-      "label": "Sheet 19",
+      "label": "Sheet 19 — New Cross (pt 6)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/e5a2744b2d6462d5/{z}/{x}/{y}.png",
-      "label": "Sheet 20",
+      "label": "Sheet 20 — St Michaels (pt 2)",
       "georeferenced": true
     },
     {
       "url": "https://allmaps.xyz/maps/f8e0d771c6fcebfd/{z}/{x}/{y}.png",
-      "label": "Sheet 21",
+      "label": "Sheet 21 — St Michaels (pt 3)",
       "georeferenced": true
     }
   ]

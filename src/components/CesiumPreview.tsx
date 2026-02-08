@@ -145,13 +145,6 @@ export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props)
         const enabledIndices = enabledTiles?.get(source.id);
         if (!enabledIndices) continue;
 
-        const rect = source.bounds_west != null ? Cesium.Rectangle.fromDegrees(
-          source.bounds_west,
-          source.bounds_south,
-          source.bounds_east,
-          source.bounds_north
-        ) : undefined;
-
         Array.from(enabledIndices).forEach(idx => {
           const key = `${source.id}-${idx}`;
           if (currentLayers.has(key)) return;
@@ -159,12 +152,13 @@ export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props)
 
           try {
             const tile = source.tiles[idx];
+            // Cache-bust using source updated_at so re-georeferenced tiles load fresh
+            const cacheBust = source.updated_at ? `${tile.url.includes('?') ? '&' : '?'}_t=${encodeURIComponent(source.updated_at)}` : '';
             const provider = new Cesium.UrlTemplateImageryProvider({
-              url: tile.url,
+              url: tile.url + cacheBust,
               maximumLevel: 18,
               tileWidth: 256,
               tileHeight: 256,
-              rectangle: rect,
               credit: source.name,
             });
             const layer = viewer.imageryLayers.addImageryProvider(provider);

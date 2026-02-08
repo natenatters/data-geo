@@ -17,12 +17,14 @@ export default function PreviewPage() {
       .then(r => r.json())
       .then((data: Source[]) => {
         setSources(data);
-        // Enable all tiles for all sources by default
+        // Enable only the first georeferenced source by default
         const initial = new Map<number, Set<number>>();
-        for (const s of data) {
-          if (s.tiles.length > 0) {
-            initial.set(s.id, new Set(s.tiles.map((_, i) => i)));
-          }
+        const first = data.find((s: Source) => s.tiles.some(t => t.georeferenced));
+        if (first) {
+          const geoIndices = first.tiles
+            .map((t, i) => t.georeferenced ? i : -1)
+            .filter(i => i >= 0);
+          initial.set(first.id, new Set(geoIndices));
         }
         setEnabledTiles(initial);
       });
