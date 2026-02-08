@@ -162,7 +162,7 @@ export default function CesiumPreview({ sources, enabledTiles }: Props) {
 
   if (error) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded text-red-600 text-sm">
+      <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded text-red-600 dark:text-red-400 text-sm">
         {error}
       </div>
     );
@@ -171,7 +171,7 @@ export default function CesiumPreview({ sources, enabledTiles }: Props) {
   return (
     <div className="relative w-full h-full">
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded text-gray-500 text-sm">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded text-gray-500 dark:text-gray-400 text-sm">
           Loading CesiumJS...
         </div>
       )}

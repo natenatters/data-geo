@@ -14,14 +14,14 @@ export default function StageIndicator({ stage, size = 'sm' }: { stage: number; 
         {[1, 2, 3, 4].map(s => (
           <div key={s} className="flex items-center gap-1">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium text-white ${
-              s <= stage ? stageColors[s] : 'bg-gray-200 text-gray-500'
+              s <= stage ? stageColors[s] : 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
             }`}>
               {s}
             </div>
-            <span className={`text-xs ${s <= stage ? 'text-gray-900 font-medium' : 'text-gray-400'}`}>
+            <span className={`text-xs ${s <= stage ? 'text-gray-900 dark:text-gray-100 font-medium' : 'text-gray-400 dark:text-gray-500'}`}>
               {STAGES[s]}
             </span>
-            {s < 4 && <div className={`w-8 h-0.5 ${s < stage ? stageColors[s] : 'bg-gray-200'}`} />}
+            {s < 4 && <div className={`w-8 h-0.5 ${s < stage ? stageColors[s] : 'bg-gray-200 dark:bg-gray-700'}`} />}
           </div>
         ))}
       </div>

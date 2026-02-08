@@ -105,7 +105,7 @@ export default function Timeline({
   const hovered = hoveredBucket !== null ? buckets.find(b => b.start === hoveredBucket) : null;
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-4">
+    <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
       {/* Chart area */}
       <div
         className="relative"
@@ -152,9 +152,9 @@ export default function Timeline({
             className="absolute top-0 bottom-6 flex flex-col items-center"
             style={{ left: `${yearToPercent(event.year)}%` }}
           >
-            <div className="w-px h-full bg-gray-300 opacity-50" />
+            <div className="w-px h-full bg-gray-300 dark:bg-gray-600 opacity-50" />
             <div
-              className="absolute top-0 text-[9px] text-gray-400 whitespace-nowrap -translate-x-1/2 -rotate-45 origin-bottom-left"
+              className="absolute top-0 text-[9px] text-gray-400 dark:text-gray-500 whitespace-nowrap -translate-x-1/2 -rotate-45 origin-bottom-left"
               style={{ left: '2px', top: '2px' }}
               title={event.label}
             >
@@ -250,7 +250,7 @@ export default function Timeline({
           {ERA_PROPORTIONS.map(({ era, start, end }) => (
             <div
               key={era}
-              className="absolute text-[10px] text-gray-500 text-center truncate"
+              className="absolute text-[10px] text-gray-500 dark:text-gray-400 text-center truncate"
               style={{
                 left: `${yearToPercent(start)}%`,
                 width: `${yearToPercent(end) - yearToPercent(start)}%`,
@@ -264,13 +264,13 @@ export default function Timeline({
 
       {/* Hover tooltip */}
       {hovered && (
-        <div className="mt-2 px-3 py-2 bg-gray-50 rounded border border-gray-100 text-xs">
-          <div className="font-medium text-gray-700 mb-1">
+        <div className="mt-2 px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded border border-gray-100 dark:border-gray-700 text-xs">
+          <div className="font-medium text-gray-700 dark:text-gray-300 mb-1">
             {hovered.start}–{hovered.end} ({hovered.sources.length} source{hovered.sources.length !== 1 ? 's' : ''}
             {hovered.stories && hovered.stories.length > 0 && `, ${hovered.stories.length} stor${hovered.stories.length !== 1 ? 'ies' : 'y'}`})
           </div>
           {hovered.stories && hovered.stories.length > 0 && (
-            <div className="text-purple-600 space-y-0.5 mb-1">
+            <div className="text-purple-600 dark:text-purple-400 space-y-0.5 mb-1">
               {hovered.stories.map(s => (
                 <div key={s.id} className="truncate flex items-center gap-1">
                   <span className="inline-block w-2 h-2 rotate-45 bg-purple-500 shrink-0" />
@@ -279,12 +279,12 @@ export default function Timeline({
               ))}
             </div>
           )}
-          <div className="text-gray-500 space-y-0.5 max-h-24 overflow-y-auto">
+          <div className="text-gray-500 dark:text-gray-400 space-y-0.5 max-h-24 overflow-y-auto">
             {hovered.sources.slice(0, 8).map(s => (
               <div key={s.id} className="truncate">{s.name}</div>
             ))}
             {hovered.sources.length > 8 && (
-              <div className="text-gray-400">+{hovered.sources.length - 8} more</div>
+              <div className="text-gray-400 dark:text-gray-500">+{hovered.sources.length - 8} more</div>
             )}
           </div>
         </div>
@@ -293,7 +293,7 @@ export default function Timeline({
       {/* Legend row */}
       <div className="flex items-center justify-between mt-3">
         {/* Stage legend */}
-        <div className="flex items-center gap-3 text-[10px] text-gray-500">
+        <div className="flex items-center gap-3 text-[10px] text-gray-500 dark:text-gray-400">
           {[1, 2, 3, 4].map(stage => {
             const colors: Record<number, string> = { 1: '#9ca3af', 2: '#60a5fa', 3: '#fbbf24', 4: '#34d399' };
             return (
@@ -311,7 +311,7 @@ export default function Timeline({
 
         {/* Quality legend */}
         {periodQuality.length > 0 && (
-          <div className="flex items-center gap-3 text-[10px] text-gray-500">
+          <div className="flex items-center gap-3 text-[10px] text-gray-500 dark:text-gray-400">
             {Object.entries(QUALITY_COLORS).map(([quality, color]) => (
               <div key={quality} className="flex items-center gap-1">
                 <div className="w-2.5 h-1 rounded-sm" style={{ backgroundColor: color }} />
@@ -323,7 +323,7 @@ export default function Timeline({
       </div>
 
       {onClickPeriod && (
-        <div className="text-[10px] text-gray-400 mt-1">
+        <div className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">
           Double-click timeline to tag a period
         </div>
       )}

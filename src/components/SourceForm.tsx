@@ -45,6 +45,8 @@ function sourceToFormData(source?: Source): FormData {
   };
 }
 
+const inputClasses = "w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100";
+
 export default function SourceForm({ source }: { source?: Source }) {
   const router = useRouter();
   const [form, setForm] = useState<FormData>(sourceToFormData(source));
@@ -100,48 +102,48 @@ export default function SourceForm({ source }: { source?: Source }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
       {error && (
-        <div className="bg-red-50 text-red-700 px-4 py-2 rounded text-sm">{error}</div>
+        <div className="bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-400 px-4 py-2 rounded text-sm">{error}</div>
       )}
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name *</label>
         <input
           type="text"
           required
           value={form.name}
           onChange={e => update('name', e.target.value)}
-          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={inputClasses}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
         <textarea
           value={form.description}
           onChange={e => update('description', e.target.value)}
           rows={3}
-          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={inputClasses}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Source URL</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Source URL</label>
         <input
           type="url"
           value={form.source_url}
           onChange={e => update('source_url', e.target.value)}
-          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={inputClasses}
           placeholder="https://..."
         />
       </div>
 
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Type</label>
           <select
             value={form.source_type}
             onChange={e => update('source_type', e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={inputClasses}
           >
             {Object.entries(SOURCE_TYPES).map(([val, label]) => (
               <option key={val} value={val}>{label}</option>
@@ -150,11 +152,11 @@ export default function SourceForm({ source }: { source?: Source }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Stage</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Stage</label>
           <select
             value={form.stage}
             onChange={e => update('stage', parseInt(e.target.value))}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={inputClasses}
           >
             {Object.entries(STAGES).map(([val, label]) => (
               <option key={val} value={val}>{val}. {label}</option>
@@ -163,11 +165,11 @@ export default function SourceForm({ source }: { source?: Source }) {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Era</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Era</label>
           <select
             value={form.era}
             onChange={e => update('era', e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={inputClasses}
           >
             {Object.entries(ERAS).map(([val, { label }]) => (
               <option key={val} value={val}>{label}</option>
@@ -178,98 +180,98 @@ export default function SourceForm({ source }: { source?: Source }) {
 
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Year Start</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year Start</label>
           <input
             type="number"
             value={form.year_start}
             onChange={e => update('year_start', e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={inputClasses}
             placeholder="e.g. 79"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Year End</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Year End</label>
           <input
             type="number"
             value={form.year_end}
             onChange={e => update('year_end', e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className={inputClasses}
             placeholder="e.g. 410"
           />
         </div>
       </div>
 
-      <fieldset className="border border-gray-200 rounded p-4">
-        <legend className="text-sm font-medium text-gray-700 px-2">Bounding Box (WGS84)</legend>
+      <fieldset className="border border-gray-200 dark:border-gray-700 rounded p-4">
+        <legend className="text-sm font-medium text-gray-700 dark:text-gray-300 px-2">Bounding Box (WGS84)</legend>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">West (lon)</label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">West (lon)</label>
             <input
               type="number"
               step="any"
               value={form.bounds_west}
               onChange={e => update('bounds_west', e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClasses}
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">East (lon)</label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">East (lon)</label>
             <input
               type="number"
               step="any"
               value={form.bounds_east}
               onChange={e => update('bounds_east', e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClasses}
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">South (lat)</label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">South (lat)</label>
             <input
               type="number"
               step="any"
               value={form.bounds_south}
               onChange={e => update('bounds_south', e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClasses}
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">North (lat)</label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">North (lat)</label>
             <input
               type="number"
               step="any"
               value={form.bounds_north}
               onChange={e => update('bounds_north', e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClasses}
             />
           </div>
         </div>
       </fieldset>
 
-      <fieldset className="border border-gray-200 rounded p-4">
-        <legend className="text-sm font-medium text-gray-700 px-2">Pipeline URLs</legend>
+      <fieldset className="border border-gray-200 dark:border-gray-700 rounded p-4">
+        <legend className="text-sm font-medium text-gray-700 dark:text-gray-300 px-2">Pipeline URLs</legend>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">IIIF Manifest <span className="text-gray-400">(manifest or info.json — needed for Stage 3)</span></label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">IIIF Manifest <span className="text-gray-400 dark:text-gray-500">(manifest or info.json — needed for Stage 3)</span></label>
             <input
               type="url"
               value={form.iiif_url}
               onChange={e => update('iiif_url', e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClasses}
               placeholder="https://..."
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Georeference Annotation <span className="text-gray-400">(e.g. AllMaps annotation — needed for Stage 3)</span></label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Georeference Annotation <span className="text-gray-400 dark:text-gray-500">(e.g. AllMaps annotation — needed for Stage 3)</span></label>
             <input
               type="url"
               value={form.georeference_url}
               onChange={e => update('georeference_url', e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={inputClasses}
               placeholder="https://editor.allmaps.org/..."
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Tiles <span className="text-gray-400">(XYZ endpoints — needed for Stage 4)</span></label>
+            <label className="block text-xs text-gray-500 dark:text-gray-400 mb-1">Tiles <span className="text-gray-400 dark:text-gray-500">(XYZ endpoints — needed for Stage 4)</span></label>
             {form.tiles.length > 0 && (
               <div className="space-y-2 mb-2">
                 {form.tiles.map((tile, i) => (
@@ -284,7 +286,7 @@ export default function SourceForm({ source }: { source?: Source }) {
                           setForm(prev => ({ ...prev, tiles: next }));
                         }}
                       />
-                      <span className="text-xs text-gray-500">Verified</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">Verified</span>
                     </label>
                     <input
                       type="text"
@@ -294,7 +296,7 @@ export default function SourceForm({ source }: { source?: Source }) {
                         next[i] = { ...next[i], label: e.target.value };
                         setForm(prev => ({ ...prev, tiles: next }));
                       }}
-                      className="w-32 border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-32 border border-gray-300 dark:border-gray-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
                       placeholder="Label"
                     />
                     <input
@@ -305,7 +307,7 @@ export default function SourceForm({ source }: { source?: Source }) {
                         next[i] = { ...next[i], url: e.target.value };
                         setForm(prev => ({ ...prev, tiles: next }));
                       }}
-                      className="flex-1 border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="flex-1 border border-gray-300 dark:border-gray-600 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
                       placeholder="https://allmaps.xyz/maps/{hash}/{z}/{x}/{y}.png"
                     />
                     <button
@@ -328,7 +330,7 @@ export default function SourceForm({ source }: { source?: Source }) {
                 const label = `Sheet ${form.tiles.length + 1}`;
                 setForm(prev => ({ ...prev, tiles: [...prev.tiles, { url: '', label, georeferenced: false }] }));
               }}
-              className="text-sm text-blue-600 hover:text-blue-800"
+              className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
             >
               + Add tile
             </button>
@@ -337,12 +339,12 @@ export default function SourceForm({ source }: { source?: Source }) {
       </fieldset>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Notes</label>
         <textarea
           value={form.notes}
           onChange={e => update('notes', e.target.value)}
           rows={3}
-          className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={inputClasses}
         />
       </div>
 
@@ -357,7 +359,7 @@ export default function SourceForm({ source }: { source?: Source }) {
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2 bg-gray-100 text-gray-700 rounded text-sm font-medium hover:bg-gray-200"
+          className="px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700"
         >
           Cancel
         </button>

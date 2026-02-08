@@ -34,16 +34,16 @@ export default function SourcesPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-gray-900">Sources</h1>
-        <span className="text-sm text-gray-500">{sources.length} sources</span>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Sources</h1>
+        <span className="text-sm text-gray-500 dark:text-gray-400">{sources.length} sources</span>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-3 bg-white rounded-lg border border-gray-200 p-3">
+      <div className="flex flex-wrap gap-3 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
         <select
           value={era}
           onChange={e => setEra(e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1 text-sm"
+          className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="">All Eras</option>
           {Object.entries(ERAS).map(([val, { label }]) => (
@@ -54,7 +54,7 @@ export default function SourcesPage() {
         <select
           value={stage}
           onChange={e => setStage(e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1 text-sm"
+          className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="">All Stages</option>
           {Object.entries(STAGES).map(([val, label]) => (
@@ -65,7 +65,7 @@ export default function SourcesPage() {
         <select
           value={sourceType}
           onChange={e => setSourceType(e.target.value)}
-          className="border border-gray-300 rounded px-2 py-1 text-sm"
+          className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-100"
         >
           <option value="">All Types</option>
           {Object.entries(SOURCE_TYPES).map(([val, label]) => (
@@ -74,11 +74,11 @@ export default function SourcesPage() {
         </select>
 
         <div className="flex items-center gap-1 ml-auto">
-          <label className="text-xs text-gray-500">Sort:</label>
+          <label className="text-xs text-gray-500 dark:text-gray-400">Sort:</label>
           <select
             value={sort}
             onChange={e => setSort(e.target.value)}
-            className="border border-gray-300 rounded px-2 py-1 text-sm"
+            className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm dark:bg-gray-800 dark:text-gray-100"
           >
             <option value="year_start">Year</option>
             <option value="stage">Stage</option>
@@ -87,7 +87,7 @@ export default function SourcesPage() {
           </select>
           <button
             onClick={() => setOrder(o => o === 'asc' ? 'desc' : 'asc')}
-            className="border border-gray-300 rounded px-2 py-1 text-sm hover:bg-gray-50"
+            className="border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
           >
             {order === 'asc' ? '\u2191' : '\u2193'}
           </button>
@@ -106,7 +106,7 @@ export default function SourcesPage() {
       </div>
 
       {sources.length === 0 && (
-        <div className="text-center text-gray-500 text-sm py-12">
+        <div className="text-center text-gray-500 dark:text-gray-400 text-sm py-12">
           No sources found. Try adjusting filters or add a new source.
         </div>
       )}

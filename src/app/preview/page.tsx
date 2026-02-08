@@ -82,21 +82,21 @@ export default function PreviewPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-bold text-gray-900">Cesium Preview</h1>
+      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Cesium Preview</h1>
 
       <div className="flex gap-4" style={{ height: 'calc(100vh - 200px)' }}>
         {/* Viewer */}
-        <div className="flex-1 rounded-lg overflow-hidden border border-gray-200">
+        <div className="flex-1 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
           <CesiumPreview sources={sources} enabledTiles={enabledTiles} />
         </div>
 
         {/* Sidebar */}
-        <div className="w-72 bg-white rounded-lg border border-gray-200 p-3 overflow-y-auto">
-          <h3 className="text-sm font-medium text-gray-700 mb-2">
+        <div className="w-72 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-3 overflow-y-auto">
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Sources with Tiles ({sources.length})
           </h3>
           {sources.length === 0 ? (
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
               No sources with tiles yet. Add tiles to sources to see them here.
             </p>
           ) : (
@@ -110,11 +110,11 @@ export default function PreviewPage() {
 
                 return (
                   <div key={s.id}>
-                    <div className="flex items-start gap-2 p-1.5 rounded hover:bg-gray-50">
+                    <div className="flex items-start gap-2 p-1.5 rounded hover:bg-gray-50 dark:hover:bg-gray-800">
                       {isMulti ? (
                         <button
                           onClick={() => toggleExpanded(s.id)}
-                          className="mt-0.5 text-xs text-gray-400 w-4 text-center shrink-0"
+                          className="mt-0.5 text-xs text-gray-400 dark:text-gray-500 w-4 text-center shrink-0"
                         >
                           {isExpanded ? '\u25BC' : '\u25B6'}
                         </button>
@@ -129,8 +129,8 @@ export default function PreviewPage() {
                         className="cursor-pointer select-none"
                         onClick={() => isMulti && toggleExpanded(s.id)}
                       >
-                        <div className={`text-xs leading-tight ${hasGeoTile ? 'text-gray-900' : 'text-gray-500 italic'}`}>{s.name}</div>
-                        <div className="text-[10px] text-gray-500">
+                        <div className={`text-xs leading-tight ${hasGeoTile ? 'text-gray-900 dark:text-gray-100' : 'text-gray-500 dark:text-gray-400 italic'}`}>{s.name}</div>
+                        <div className="text-[10px] text-gray-500 dark:text-gray-400">
                           {s.year_start}–{s.year_end || '?'}
                           {isMulti && ` · ${tileCount} sheets`}
                           {!hasGeoTile && ' · unverified'}
@@ -140,13 +140,13 @@ export default function PreviewPage() {
 
                     {/* Per-sheet toggles for multi-tile sources */}
                     {isMulti && isExpanded && (
-                      <div className="ml-8 border-l border-gray-200 pl-2 mb-1">
+                      <div className="ml-8 border-l border-gray-200 dark:border-gray-700 pl-2 mb-1">
                         {s.tiles.map((tile, i) => {
                           const tileEnabled = enabledTiles.get(s.id)?.has(i) ?? false;
                           return (
                             <label
                               key={i}
-                              className="flex items-center gap-2 py-0.5 px-1 rounded hover:bg-gray-50 cursor-pointer"
+                              className="flex items-center gap-2 py-0.5 px-1 rounded hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer"
                             >
                               <input
                                 type="checkbox"
@@ -154,7 +154,7 @@ export default function PreviewPage() {
                                 onChange={() => toggleTile(s.id, i)}
                                 className="mt-0"
                               />
-                              <span className="text-[11px] text-gray-700">{tile.label}</span>
+                              <span className="text-[11px] text-gray-700 dark:text-gray-300">{tile.label}</span>
                             </label>
                           );
                         })}

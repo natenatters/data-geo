@@ -9,6 +9,8 @@ import SourceForm from '@/components/SourceForm';
 
 const FILE_TYPES = ['image', 'geotiff', 'geojson', 'czml', 'kml', 'other'] as const;
 
+const inputClasses = "border border-gray-300 dark:border-gray-600 rounded px-2.5 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100";
+
 export default function SourceDetailPage({ params }: { params: { id: string } }) {
   const { id } = params;
   const router = useRouter();
@@ -144,7 +146,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
   }
 
   if (!source) {
-    return <div className="text-gray-500 text-sm">Loading...</div>;
+    return <div className="text-gray-500 dark:text-gray-400 text-sm">Loading...</div>;
   }
 
   const s = source;
@@ -153,10 +155,10 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
     return (
       <div>
         <div className="flex items-center gap-3 mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">Edit Source</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Edit Source</h1>
           <button
             onClick={() => { setEditingIdentity(false); fetchSource(); }}
-            className="text-sm text-gray-500 hover:text-gray-700"
+            className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
           >
             Cancel
           </button>
@@ -177,11 +179,11 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
     return (
       <button
         onClick={() => copyToClipboard(text, field)}
-        className="text-gray-300 hover:text-gray-500 transition-colors shrink-0"
+        className="text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-400 transition-colors shrink-0"
         title="Copy to clipboard"
       >
         {copied === field ? (
-          <span className="text-green-500 text-xs">Copied</span>
+          <span className="text-green-500 dark:text-green-400 text-xs">Copied</span>
         ) : (
           <span className="text-xs">&#128203;</span>
         )}
@@ -197,8 +199,8 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
     const isSaving = savingField === field;
 
     return (
-      <div className="flex items-start gap-3 py-2.5 border-b border-gray-100 last:border-0">
-        <span className="text-sm text-gray-500 w-32 shrink-0 pt-0.5">{label}</span>
+      <div className="flex items-start gap-3 py-2.5 border-b border-gray-100 dark:border-gray-800 last:border-0">
+        <span className="text-sm text-gray-500 dark:text-gray-400 w-32 shrink-0 pt-0.5">{label}</span>
         {isEditing ? (
           <div className="flex gap-2 flex-1">
             <input
@@ -209,7 +211,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 if (e.key === 'Enter') saveField(field, draft.trim() || null);
                 if (e.key === 'Escape') cancelEditing();
               }}
-              className="flex-1 border border-gray-300 rounded px-2.5 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`flex-1 ${inputClasses}`}
               placeholder={placeholder}
               autoFocus
               disabled={isSaving}
@@ -221,7 +223,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             >
               {isSaving ? '...' : 'Save'}
             </button>
-            <button onClick={cancelEditing} className="px-2 py-1 text-xs text-gray-500 hover:text-gray-700">
+            <button onClick={cancelEditing} className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
               Cancel
             </button>
           </div>
@@ -230,16 +232,16 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             {value ? (
               type === 'url' ? (
                 <a href={value} target="_blank" rel="noopener noreferrer"
-                  className="text-sm text-blue-600 hover:underline truncate">{value}</a>
+                  className="text-sm text-blue-600 dark:text-blue-400 hover:underline truncate">{value}</a>
               ) : (
-                <span className="text-sm text-gray-700">{value}</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">{value}</span>
               )
             ) : (
-              <span className="text-sm text-gray-300 italic">Not set</span>
+              <span className="text-sm text-gray-300 dark:text-gray-600 italic">Not set</span>
             )}
             {value && <CopyButton text={value} field={field} />}
             <button onClick={() => startEditing(field, value)}
-              className="text-xs text-gray-300 hover:text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+              className="text-xs text-gray-300 dark:text-gray-600 hover:text-gray-600 dark:hover:text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
               Edit
             </button>
           </div>
@@ -253,7 +255,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-gray-900">{s.name}</h1>
+          <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">{s.name}</h1>
           <div className="flex items-center gap-2 mt-1 text-xs">
             <span
               className="px-1.5 py-0.5 rounded font-medium text-white"
@@ -261,17 +263,17 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             >
               {ERAS[s.era]?.label || s.era}
             </span>
-            {yearRange && <span className="text-gray-500">{yearRange}</span>}
-            <span className="text-gray-300">|</span>
-            <span className="text-gray-500">{SOURCE_TYPES[s.source_type]}</span>
-            <span className="text-gray-300">|</span>
-            <span className="text-gray-500">{STAGES[s.stage]}</span>
+            {yearRange && <span className="text-gray-500 dark:text-gray-400">{yearRange}</span>}
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <span className="text-gray-500 dark:text-gray-400">{SOURCE_TYPES[s.source_type]}</span>
+            <span className="text-gray-300 dark:text-gray-600">|</span>
+            <span className="text-gray-500 dark:text-gray-400">{STAGES[s.stage]}</span>
           </div>
         </div>
         <div className="relative shrink-0" ref={settingsRef}>
           <button
             onClick={() => setSettingsOpen(!settingsOpen)}
-            className="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition-colors"
+            className="w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             title="Settings"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -280,16 +282,16 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             </svg>
           </button>
           {settingsOpen && (
-            <div className="absolute right-0 top-full mt-1 bg-white rounded-lg border border-gray-200 shadow-lg py-1 z-10 min-w-[140px]">
+            <div className="absolute right-0 top-full mt-1 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg py-1 z-10 min-w-[140px]">
               <button
                 onClick={() => { setSettingsOpen(false); setEditingIdentity(true); }}
-                className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                className="w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
               >
                 Edit details
               </button>
               <button
                 onClick={() => { setSettingsOpen(false); handleDelete(); }}
-                className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+                className="w-full text-left px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950"
               >
                 Delete source
               </button>
@@ -300,28 +302,28 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
 
       {/* Description */}
       {s.description && (
-        <p className="text-sm text-gray-600">{s.description}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{s.description}</p>
       )}
 
       {/* URLs & metadata */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
         <EditableField field="source_url" label="Source URL" value={s.source_url} type="url" placeholder="https://..." />
         <EditableField field="iiif_url" label="IIIF Manifest" value={s.iiif_url} type="url" placeholder="https://..." />
         <EditableField field="georeference_url" label="Georeference" value={s.georeference_url} type="url" placeholder="https://annotations.allmaps.org/..." />
       </div>
 
       {/* Tiles */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-sm font-medium text-gray-700">
+          <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Tiles
-            <span className="text-gray-400 font-normal ml-1.5">
+            <span className="text-gray-400 dark:text-gray-500 font-normal ml-1.5">
               ({s.tiles.length} total{s.tiles.filter(t => t.georeferenced).length > 0 && `, ${s.tiles.filter(t => t.georeferenced).length} verified`})
             </span>
           </h2>
           <button
             onClick={() => setAddingTile(true)}
-            className="text-xs text-blue-500 hover:text-blue-700"
+            className="text-xs text-blue-500 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300"
           >
             + Add
           </button>
@@ -329,7 +331,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
 
         <div className="space-y-1">
           {s.tiles.length === 0 && !addingTile && (
-            <p className="text-xs text-gray-400 italic">No tiles</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 italic">No tiles</p>
           )}
           {s.tiles.map((tile, i) => (
             <div key={i} className="flex items-center gap-2 text-xs py-1 group">
@@ -340,14 +342,14 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                   );
                   await saveTiles(next);
                 }}
-                className={`shrink-0 ${tile.georeferenced ? 'text-green-500' : 'text-gray-300 hover:text-gray-400'}`}
+                className={`shrink-0 ${tile.georeferenced ? 'text-green-500 dark:text-green-400' : 'text-gray-300 dark:text-gray-600 hover:text-gray-400 dark:hover:text-gray-500'}`}
                 title={tile.georeferenced ? 'Verified' : 'Click to verify'}
                 disabled={savingField === 'tiles'}
               >
                 {tile.georeferenced ? '\u2713' : '\u25CB'}
               </button>
-              <span className="text-gray-700 font-medium shrink-0">{tile.label}</span>
-              <span className="text-gray-400 font-mono truncate">{tile.url}</span>
+              <span className="text-gray-700 dark:text-gray-300 font-medium shrink-0">{tile.label}</span>
+              <span className="text-gray-400 dark:text-gray-500 font-mono truncate">{tile.url}</span>
               <CopyButton text={tile.url} field={`tile-${i}`} />
               <button
                 onClick={async () => {
@@ -355,7 +357,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                   const next = s.tiles.filter((_, j) => j !== i);
                   await saveTiles(next);
                 }}
-                className="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                className="text-gray-300 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
                 title="Remove"
               >
                 &times;
@@ -369,7 +371,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 type="text"
                 value={tileDraft.label}
                 onChange={e => setTileDraft(prev => ({ ...prev, label: e.target.value }))}
-                className="w-28 border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`w-28 ${inputClasses} text-xs`}
                 placeholder="Label"
               />
               <input
@@ -389,7 +391,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                   }
                   if (e.key === 'Escape') { setAddingTile(false); setTileDraft({ url: '', label: '' }); }
                 }}
-                className="flex-1 border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className={`flex-1 ${inputClasses} text-xs`}
                 placeholder="https://allmaps.xyz/maps/{hash}/{z}/{x}/{y}.png"
                 autoFocus
               />
@@ -408,7 +410,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 Save
               </button>
               <button onClick={() => { setAddingTile(false); setTileDraft({ url: '', label: '' }); }}
-                className="px-1 py-1 text-xs text-gray-500 hover:text-gray-700">
+                className="px-1 py-1 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
                 Cancel
               </button>
             </div>
@@ -417,12 +419,12 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
       </div>
 
       {/* Bounds */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-sm font-medium text-gray-700">Spatial Extent</h2>
+          <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">Spatial Extent</h2>
           {editingField !== 'bounds' && (
             <button onClick={startEditingBounds}
-              className="text-xs text-gray-400 hover:text-gray-600">
+              className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
               {hasBounds ? 'Edit' : 'Set'}
             </button>
           )}
@@ -438,10 +440,10 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 { key: 'n' as const, label: 'North (lat)' },
               ].map(({ key, label }) => (
                 <div key={key}>
-                  <label className="block text-[11px] text-gray-500 mb-0.5">{label}</label>
+                  <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">{label}</label>
                   <input type="number" step="any" value={boundsDraft[key]}
                     onChange={e => setBoundsDraft(prev => ({ ...prev, [key]: e.target.value }))}
-                    className="w-full border border-gray-300 rounded px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className={`w-full ${inputClasses} text-xs`}
                     disabled={savingField === 'bounds'} />
                 </div>
               ))}
@@ -454,29 +456,29 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 {savingField === 'bounds' ? '...' : 'Save'}
               </button>
               <button onClick={cancelEditing}
-                className="px-2 py-1 text-xs text-gray-500 hover:text-gray-700">Cancel</button>
+                className="px-2 py-1 text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">Cancel</button>
               {hasBounds && (
                 <button onClick={() => saveBounds('', '', '', '')}
-                  className="px-2 py-1 text-xs text-gray-400 hover:text-red-500 ml-auto">Clear</button>
+                  className="px-2 py-1 text-xs text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 ml-auto">Clear</button>
               )}
             </div>
           </div>
         ) : hasBounds ? (
-          <div className="text-xs text-gray-500 font-mono">
+          <div className="text-xs text-gray-500 dark:text-gray-400 font-mono">
             W:{s.bounds_west} S:{s.bounds_south} E:{s.bounds_east} N:{s.bounds_north}
           </div>
         ) : (
-          <p className="text-xs text-gray-400 italic">Not set</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 italic">Not set</p>
         )}
       </div>
 
       {/* Notes */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex items-center justify-between mb-2">
-          <h2 className="text-sm font-medium text-gray-700">Notes</h2>
+          <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">Notes</h2>
           {editingField !== 'notes' && (
             <button onClick={() => startEditing('notes', s.notes)}
-              className="text-xs text-gray-400 hover:text-gray-600">
+              className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">
               {s.notes ? 'Edit' : 'Add'}
             </button>
           )}
@@ -487,7 +489,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
               value={draft}
               onChange={e => setDraft(e.target.value)}
               rows={4}
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
               autoFocus
               disabled={savingField === 'notes'}
             />
@@ -499,36 +501,36 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 {savingField === 'notes' ? '...' : 'Save'}
               </button>
               <button onClick={cancelEditing}
-                className="px-2 py-1.5 text-sm text-gray-500 hover:text-gray-700">Cancel</button>
+                className="px-2 py-1.5 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">Cancel</button>
             </div>
           </div>
         ) : s.notes ? (
-          <p className="text-sm text-gray-600 whitespace-pre-wrap">{s.notes}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-wrap">{s.notes}</p>
         ) : (
-          <p className="text-xs text-gray-400 italic">No notes</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 italic">No notes</p>
         )}
       </div>
 
       {/* Files */}
-      <div className="bg-white rounded-lg border border-gray-200 p-4">
+      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-sm font-medium text-gray-700">
+          <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Files
             {s.files.length > 0 && (
-              <span className="text-gray-400 font-normal ml-1">({s.files.length})</span>
+              <span className="text-gray-400 dark:text-gray-500 font-normal ml-1">({s.files.length})</span>
             )}
           </h2>
           <div className="flex items-center gap-2">
             <select
               value={uploadType}
               onChange={e => setUploadType(e.target.value)}
-              className="border border-gray-200 rounded px-2 py-1 text-xs text-gray-600"
+              className="border border-gray-200 dark:border-gray-600 rounded px-2 py-1 text-xs text-gray-600 dark:text-gray-400 dark:bg-gray-800"
             >
               {FILE_TYPES.map(t => (
                 <option key={t} value={t}>{t}</option>
               ))}
             </select>
-            <label className="px-3 py-1 text-xs bg-gray-100 hover:bg-gray-200 rounded cursor-pointer transition-colors">
+            <label className="px-3 py-1 text-xs bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 rounded cursor-pointer transition-colors">
               {uploading ? 'Uploading...' : 'Upload'}
               <input
                 type="file"
@@ -550,39 +552,39 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
 
               return (
                 <div key={file.id}>
-                  <div className="flex items-center justify-between py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 group">
+                  <div className="flex items-center justify-between py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 dark:hover:bg-gray-800 group">
                     <div className="flex items-center gap-2 text-sm min-w-0">
-                      <span className="px-1.5 py-0.5 bg-gray-100 rounded text-[11px] font-mono text-gray-500">{file.filetype}</span>
+                      <span className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-[11px] font-mono text-gray-500 dark:text-gray-400">{file.filetype}</span>
                       {isViewable ? (
                         <button
                           onClick={() => setViewingFile(isViewing ? null : file.id)}
-                          className="text-gray-800 hover:text-blue-600 truncate text-left"
+                          className="text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 truncate text-left"
                         >
                           {file.filename}
                         </button>
                       ) : (
-                        <span className="text-gray-800 truncate">{file.filename}</span>
+                        <span className="text-gray-800 dark:text-gray-200 truncate">{file.filename}</span>
                       )}
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       {isViewable && (
                         <button
                           onClick={() => setViewingFile(isViewing ? null : file.id)}
-                          className="text-xs text-gray-400 hover:text-blue-600"
+                          className="text-xs text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400"
                         >
                           {isViewing ? 'Hide' : 'View'}
                         </button>
                       )}
                       <button
                         onClick={() => handleDeleteFile(file.id)}
-                        className="text-xs text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="text-xs text-gray-300 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
                       >
                         Remove
                       </button>
                     </div>
                   </div>
                   {isViewing && (
-                    <div className="mt-1 mb-2 mx-1 rounded border border-gray-200 overflow-hidden bg-gray-50">
+                    <div className="mt-1 mb-2 mx-1 rounded border border-gray-200 dark:border-gray-700 overflow-hidden bg-gray-50 dark:bg-gray-800">
                       {isImage ? (
                         <img
                           src={`/api/files/${file.id}`}
@@ -604,7 +606,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
             })}
           </div>
         ) : (
-          <p className="text-xs text-gray-400 italic">No files</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 italic">No files</p>
         )}
       </div>
     </div>

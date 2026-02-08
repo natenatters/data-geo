@@ -84,7 +84,7 @@ export default function Dashboard() {
   }
 
   if (!stats) {
-    return <div className="text-gray-500 text-sm">Loading...</div>;
+    return <div className="text-gray-500 dark:text-gray-400 text-sm">Loading...</div>;
   }
 
   const selectedBucketData = selectedBucket !== null
@@ -99,8 +99,8 @@ export default function Dashboard() {
     <div className="space-y-4">
       {/* Header row */}
       <div className="flex items-baseline justify-between">
-        <h1 className="text-xl font-bold text-gray-900">Timeline</h1>
-        <div className="text-xs text-gray-500">
+        <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Timeline</h1>
+        <div className="text-xs text-gray-500 dark:text-gray-400">
           {stats.total} sources ({datedCount} dated, {stats.undated.length} undated)
           {stats.storyTotal > 0 && <> &middot; {stats.storyTotal} {stats.storyTotal === 1 ? 'story' : 'stories'}</>}
         </div>
@@ -117,26 +117,26 @@ export default function Dashboard() {
 
       {/* Tag modal */}
       {tagModal && (
-        <div className="bg-white rounded-lg border border-blue-200 shadow-lg p-4 space-y-3">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-blue-200 dark:border-blue-800 shadow-lg p-4 space-y-3">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-700">Tag period quality</h3>
-            <button onClick={() => setTagModal(null)} className="text-xs text-gray-400 hover:text-gray-600">Cancel</button>
+            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Tag period quality</h3>
+            <button onClick={() => setTagModal(null)} className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">Cancel</button>
           </div>
           <div className="flex gap-3 items-end">
             <div>
-              <label className="block text-[11px] text-gray-500 mb-0.5">Start year</label>
+              <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">Start year</label>
               <input type="number" value={tagDraft.start}
                 onChange={e => setTagDraft(prev => ({ ...prev, start: e.target.value }))}
-                className="w-24 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-24 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100" />
             </div>
             <div>
-              <label className="block text-[11px] text-gray-500 mb-0.5">End year</label>
+              <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">End year</label>
               <input type="number" value={tagDraft.end}
                 onChange={e => setTagDraft(prev => ({ ...prev, end: e.target.value }))}
-                className="w-24 border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                className="w-24 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100" />
             </div>
             <div>
-              <label className="block text-[11px] text-gray-500 mb-0.5">Quality</label>
+              <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">Quality</label>
               <div className="flex gap-1">
                 {QUALITY_OPTIONS.map(opt => (
                   <button
@@ -145,7 +145,7 @@ export default function Dashboard() {
                     className={`px-2 py-1 text-xs rounded font-medium transition-colors ${
                       tagDraft.quality === opt.value
                         ? 'text-white'
-                        : 'text-gray-500 bg-gray-100 hover:bg-gray-200'
+                        : 'text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
                     }`}
                     style={tagDraft.quality === opt.value ? { backgroundColor: opt.color } : {}}
                   >
@@ -156,10 +156,10 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <label className="block text-[11px] text-gray-500 mb-0.5">Notes (optional)</label>
+            <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">Notes (optional)</label>
             <input type="text" value={tagDraft.notes}
               onChange={e => setTagDraft(prev => ({ ...prev, notes: e.target.value }))}
-              className="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
               placeholder="e.g. Need more industrial-era maps" />
           </div>
           <button onClick={saveTag}
@@ -172,8 +172,8 @@ export default function Dashboard() {
 
       {/* Period quality tags list */}
       {periodQuality.length > 0 && (
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <h2 className="text-sm font-medium text-gray-700 mb-2">Period quality tags</h2>
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+          <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Period quality tags</h2>
           <div className="space-y-1">
             {periodQuality.map((pq, i) => (
               <div key={i} className="flex items-center gap-2 text-xs py-1 group">
@@ -183,11 +183,11 @@ export default function Dashboard() {
                 >
                   {pq.quality}
                 </span>
-                <span className="text-gray-600">{pq.start}–{pq.end}</span>
-                {pq.notes && <span className="text-gray-400 truncate">{pq.notes}</span>}
+                <span className="text-gray-600 dark:text-gray-400">{pq.start}–{pq.end}</span>
+                {pq.notes && <span className="text-gray-400 dark:text-gray-500 truncate">{pq.notes}</span>}
                 <button
                   onClick={() => deleteTag(i)}
-                  className="text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity ml-auto shrink-0"
+                  className="text-gray-300 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity ml-auto shrink-0"
                 >
                   &times;
                 </button>
@@ -199,17 +199,17 @@ export default function Dashboard() {
 
       {/* Selected bucket source list */}
       {selectedSources && selectedSources.length > 0 && (
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-medium text-gray-700">
+            <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {selectedBucketData!.start}–{selectedBucketData!.end}
-              <span className="text-gray-400 font-normal ml-1.5">
+              <span className="text-gray-400 dark:text-gray-500 font-normal ml-1.5">
                 ({selectedSources.length} source{selectedSources.length !== 1 ? 's' : ''})
               </span>
             </h2>
             <button
               onClick={() => setSelectedBucket(null)}
-              className="text-xs text-gray-400 hover:text-gray-600"
+              className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
             >
               Clear
             </button>
@@ -219,7 +219,7 @@ export default function Dashboard() {
               <Link
                 key={s.id}
                 href={`/sources/${s.id}`}
-                className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 group"
+                className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 dark:hover:bg-gray-800 group"
               >
                 <span
                   className="px-1 py-0.5 rounded text-[10px] font-medium text-white shrink-0"
@@ -227,13 +227,13 @@ export default function Dashboard() {
                 >
                   {s.year_start}
                 </span>
-                <span className="text-sm text-gray-700 truncate flex-1 group-hover:text-blue-600">
+                <span className="text-sm text-gray-700 dark:text-gray-300 truncate flex-1 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                   {s.name}
                 </span>
-                <span className="text-[10px] text-gray-400 shrink-0">
+                <span className="text-[10px] text-gray-400 dark:text-gray-500 shrink-0">
                   {SOURCE_TYPES[s.source_type as keyof typeof SOURCE_TYPES]}
                 </span>
-                <span className="text-[10px] text-gray-400 shrink-0">
+                <span className="text-[10px] text-gray-400 dark:text-gray-500 shrink-0">
                   {STAGES[s.stage]}
                 </span>
               </Link>
@@ -244,18 +244,18 @@ export default function Dashboard() {
 
       {/* Selected bucket stories */}
       {selectedStories.length > 0 && (
-        <div className="bg-purple-50 rounded-lg border border-purple-200 p-4">
+        <div className="bg-purple-50 dark:bg-purple-950 rounded-lg border border-purple-200 dark:border-purple-800 p-4">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-sm font-medium text-purple-800">
+            <h2 className="text-sm font-medium text-purple-800 dark:text-purple-300">
               Stories
-              <span className="text-purple-500 font-normal ml-1.5">
+              <span className="text-purple-500 dark:text-purple-400 font-normal ml-1.5">
                 ({selectedStories.length})
               </span>
             </h2>
             {!selectedSources?.length && (
               <button
                 onClick={() => setSelectedBucket(null)}
-                className="text-xs text-purple-400 hover:text-purple-600"
+                className="text-xs text-purple-400 dark:text-purple-500 hover:text-purple-600 dark:hover:text-purple-300"
               >
                 Clear
               </button>
@@ -266,10 +266,10 @@ export default function Dashboard() {
               <Link
                 key={s.id}
                 href={`/stories/${s.id}`}
-                className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded hover:bg-purple-100 group"
+                className="flex items-center gap-2 py-1.5 px-2 -mx-1 rounded hover:bg-purple-100 dark:hover:bg-purple-900 group"
               >
                 <span className="inline-block w-2.5 h-2.5 rotate-45 bg-purple-500 shrink-0" />
-                <span className="text-sm text-purple-800 truncate flex-1 group-hover:text-purple-600">
+                <span className="text-sm text-purple-800 dark:text-purple-300 truncate flex-1 group-hover:text-purple-600 dark:group-hover:text-purple-200">
                   {s.title}
                 </span>
                 <span
@@ -286,10 +286,10 @@ export default function Dashboard() {
 
       {/* Undated sources */}
       {stats.undated.length > 0 && (
-        <div className="bg-amber-50 rounded-lg border border-amber-200 p-4">
-          <h2 className="text-sm font-medium text-amber-800 mb-2">
+        <div className="bg-amber-50 dark:bg-amber-950 rounded-lg border border-amber-200 dark:border-amber-800 p-4">
+          <h2 className="text-sm font-medium text-amber-800 dark:text-amber-300 mb-2">
             Undated sources
-            <span className="text-amber-600 font-normal ml-1.5">
+            <span className="text-amber-600 dark:text-amber-400 font-normal ml-1.5">
               ({stats.undated.length} need dating)
             </span>
           </h2>
@@ -300,10 +300,10 @@ export default function Dashboard() {
                 href={`/sources/${s.id}`}
                 className="flex items-center gap-2 py-1 text-sm group"
               >
-                <span className="text-amber-700 group-hover:text-blue-600 truncate flex-1">
+                <span className="text-amber-700 dark:text-amber-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 truncate flex-1">
                   {s.name}
                 </span>
-                <span className="text-[10px] text-amber-500 shrink-0">
+                <span className="text-[10px] text-amber-500 dark:text-amber-400 shrink-0">
                   {SOURCE_TYPES[s.source_type as keyof typeof SOURCE_TYPES]}
                 </span>
               </Link>
@@ -315,9 +315,9 @@ export default function Dashboard() {
       {/* Quick stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {stats.byStage.map(({ stage, count }) => (
-          <div key={stage} className="bg-white rounded-lg border border-gray-200 p-3">
-            <div className="text-lg font-bold text-gray-900">{count}</div>
-            <div className="text-xs text-gray-500">{STAGES[stage]}</div>
+          <div key={stage} className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+            <div className="text-lg font-bold text-gray-900 dark:text-gray-100">{count}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400">{STAGES[stage]}</div>
           </div>
         ))}
       </div>
