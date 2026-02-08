@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import type { Source } from '@/lib/types';
 
 declare global {
   interface Window {
@@ -9,10 +10,19 @@ declare global {
   }
 }
 
-export default function CesiumPreview({ czmlUrl }: { czmlUrl?: string }) {
+interface Props {
+  czmlUrl?: string;
+  sources?: Source[];
+  enabledTiles?: Map<number, Set<number>>;
+}
+
+export default function CesiumPreview({ czmlUrl, sources, enabledTiles }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const viewerRef = useRef<any>(null);
+  // Track imagery layers by "sourceId-tileIdx" key
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const layersRef = useRef<Map<string, any>>(new Map());
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState('');
 
@@ -33,6 +43,7 @@ export default function CesiumPreview({ czmlUrl }: { czmlUrl?: string }) {
     }
   }, []);
 
+  // Initialize viewer once
   useEffect(() => {
     if (!loaded || !containerRef.current || viewerRef.current) return;
 
@@ -48,9 +59,13 @@ export default function CesiumPreview({ czmlUrl }: { czmlUrl?: string }) {
         navigationHelpButton: false,
         sceneModePicker: true,
         fullscreenButton: false,
-        imageryProvider: new Cesium.TileMapServiceImageryProvider({
-          url: Cesium.buildModuleUrl('Assets/Textures/NaturalEarthII'),
-        }),
+        baseLayer: new Cesium.ImageryLayer(
+          new Cesium.UrlTemplateImageryProvider({
+            url: 'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            credit: 'CartoDB',
+            maximumLevel: 19,
+          })
+        ),
         terrainProvider: new Cesium.EllipsoidTerrainProvider(),
       });
 
@@ -64,7 +79,6 @@ export default function CesiumPreview({ czmlUrl }: { czmlUrl?: string }) {
       });
 
       const start = Cesium.JulianDate.fromDate(new Date(-79, 0, 1));
-      // Year 79 AD: JS Date year 0 = 1 BC, so 79 AD = year 78 in 0-indexed
       start.dayNumber = 1757582; // Julian day for Jan 1, 79 AD
       const stop = Cesium.JulianDate.fromIso8601('2025-12-31T23:59:59Z');
       const current = Cesium.JulianDate.fromIso8601('2025-01-01T00:00:00Z');
@@ -94,6 +108,75 @@ export default function CesiumPreview({ czmlUrl }: { czmlUrl?: string }) {
       }
     };
   }, [loaded, czmlUrl]);
+
+  // Sync imagery layers with sources + enabledTiles
+  useEffect(() => {
+    const viewer = viewerRef.current;
+    if (!viewer || !loaded) return;
+
+    const Cesium = window.Cesium;
+    const currentLayers = layersRef.current;
+
+    // Build set of desired layer keys
+    const desiredKeys = new Set<string>();
+    if (sources && enabledTiles) {
+      for (const source of sources) {
+        const enabledIndices = enabledTiles.get(source.id);
+        if (!enabledIndices) continue;
+        Array.from(enabledIndices).forEach(idx => {
+          if (idx < source.tiles.length) {
+            desiredKeys.add(`${source.id}-${idx}`);
+          }
+        });
+      }
+    }
+
+    // Remove layers no longer desired
+    Array.from(currentLayers.entries()).forEach(([key, layer]) => {
+      if (!desiredKeys.has(key)) {
+        viewer.imageryLayers.remove(layer, false);
+        currentLayers.delete(key);
+      }
+    });
+
+    // Add layers for newly desired tiles
+    if (sources) {
+      for (const source of sources) {
+        const enabledIndices = enabledTiles?.get(source.id);
+        if (!enabledIndices) continue;
+
+        const rect = source.bounds_west != null ? Cesium.Rectangle.fromDegrees(
+          source.bounds_west,
+          source.bounds_south,
+          source.bounds_east,
+          source.bounds_north
+        ) : undefined;
+
+        Array.from(enabledIndices).forEach(idx => {
+          const key = `${source.id}-${idx}`;
+          if (currentLayers.has(key)) return;
+          if (idx >= source.tiles.length) return;
+
+          try {
+            const tile = source.tiles[idx];
+            const provider = new Cesium.UrlTemplateImageryProvider({
+              url: tile.url,
+              maximumLevel: 18,
+              tileWidth: 256,
+              tileHeight: 256,
+              rectangle: rect,
+              credit: source.name,
+            });
+            const layer = viewer.imageryLayers.addImageryProvider(provider);
+            layer.alpha = 0.75;
+            currentLayers.set(key, layer);
+          } catch (err) {
+            console.warn(`Failed to add imagery for ${key}:`, err);
+          }
+        });
+      }
+    }
+  }, [sources, enabledTiles, loaded]);
 
   if (error) {
     return (

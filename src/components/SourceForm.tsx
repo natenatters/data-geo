@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { Source, SourceType, Era } from '@/lib/types';
+import type { Source, SourceType, Era, Tile } from '@/lib/types';
 import { ERAS, SOURCE_TYPES, STAGES } from '@/lib/types';
 
 type FormData = {
@@ -19,6 +19,9 @@ type FormData = {
   bounds_east: string;
   bounds_north: string;
   notes: string;
+  iiif_url: string;
+  georeference_url: string;
+  tiles: Tile[];
 };
 
 function sourceToFormData(source?: Source): FormData {
@@ -36,6 +39,9 @@ function sourceToFormData(source?: Source): FormData {
     bounds_east: source?.bounds_east?.toString() || '',
     bounds_north: source?.bounds_north?.toString() || '',
     notes: source?.notes || '',
+    iiif_url: source?.iiif_url || '',
+    georeference_url: source?.georeference_url || '',
+    tiles: source?.tiles || [],
   };
 }
 
@@ -64,6 +70,7 @@ export default function SourceForm({ source }: { source?: Source }) {
       bounds_south: form.bounds_south ? parseFloat(form.bounds_south) : null,
       bounds_east: form.bounds_east ? parseFloat(form.bounds_east) : null,
       bounds_north: form.bounds_north ? parseFloat(form.bounds_north) : null,
+      tiles: form.tiles.filter(t => t.url.trim()),
     };
 
     try {
@@ -234,6 +241,85 @@ export default function SourceForm({ source }: { source?: Source }) {
               onChange={e => update('bounds_north', e.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset className="border border-gray-200 rounded p-4">
+        <legend className="text-sm font-medium text-gray-700 px-2">Pipeline URLs</legend>
+        <div className="space-y-3">
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">IIIF URL <span className="text-gray-400">(manifest or info.json — needed for Stage 3)</span></label>
+            <input
+              type="url"
+              value={form.iiif_url}
+              onChange={e => update('iiif_url', e.target.value)}
+              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="https://..."
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">Georeference URL <span className="text-gray-400">(AllMaps annotation — needed for Stage 3)</span></label>
+            <input
+              type="url"
+              value={form.georeference_url}
+              onChange={e => update('georeference_url', e.target.value)}
+              className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="https://editor.allmaps.org/..."
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-500 mb-1">Tiles <span className="text-gray-400">(XYZ endpoints — needed for Stage 4)</span></label>
+            {form.tiles.length > 0 && (
+              <div className="space-y-2 mb-2">
+                {form.tiles.map((tile, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={tile.label}
+                      onChange={e => {
+                        const next = [...form.tiles];
+                        next[i] = { ...next[i], label: e.target.value };
+                        setForm(prev => ({ ...prev, tiles: next }));
+                      }}
+                      className="w-32 border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="Label"
+                    />
+                    <input
+                      type="url"
+                      value={tile.url}
+                      onChange={e => {
+                        const next = [...form.tiles];
+                        next[i] = { ...next[i], url: e.target.value };
+                        setForm(prev => ({ ...prev, tiles: next }));
+                      }}
+                      className="flex-1 border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      placeholder="https://allmaps.xyz/maps/{hash}/{z}/{x}/{y}.png"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = form.tiles.filter((_, j) => j !== i);
+                        setForm(prev => ({ ...prev, tiles: next }));
+                      }}
+                      className="text-red-500 hover:text-red-700 text-sm px-1"
+                    >
+                      &times;
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+            <button
+              type="button"
+              onClick={() => {
+                const label = `Sheet ${form.tiles.length + 1}`;
+                setForm(prev => ({ ...prev, tiles: [...prev.tiles, { url: '', label }] }));
+              }}
+              className="text-sm text-blue-600 hover:text-blue-800"
+            >
+              + Add tile
+            </button>
           </div>
         </div>
       </fieldset>

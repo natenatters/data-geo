@@ -12,8 +12,11 @@
   "bounds_south": 53.46,
   "bounds_east": -2.22,
   "bounds_north": 53.5,
-  "notes": "NLS CC-BY. 49 individual sheets, each with own IIIF endpoint. Already georeferenced by NLS as seamless layer. Individual sheet IDs available from NLS map finder.",
+  "notes": "NLS CC-BY. 49 individual sheets (IDs 231273810 to 231273951).\nNot available as pre-built XYZ tiles on S3 (unlike London).\nNLS viewer only serves them through their own OpenLayers viewer.\n\nTo get Cesium-ready:\n1. Open a sheet e.g. https://maps.nls.uk/view/231273810\n2. Click Georeference to open AllMaps Editor\n3. AllMaps URL pattern: https://editor.allmaps.org/#/georeference?url=https://map-view.nls.uk/iiif/2/{first5}%252F{viewId}/info.json\n4. Place 4+ control points to georeference\n5. Tiles then served at: https://allmaps.xyz/images/{hash}/{z}/{x}/{y}.png\n6. Load that XYZ URL as Cesium imagery layer\n\nIIIF pattern: https://map-view.nls.uk/iiif/2/23127%2F{viewId}/info.json\nFirst sheet: 231273810, last: 231273951",
+  "iiif_url": null,
+  "georeference_url": null,
   "created_at": "2026-02-07 23:01:22",
   "updated_at": "2026-02-07 23:02:25",
-  "files": []
+  "files": [],
+  "tiles": []
 }

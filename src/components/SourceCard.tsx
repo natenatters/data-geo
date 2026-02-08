@@ -7,10 +7,8 @@ import StageIndicator from './StageIndicator';
 
 export default function SourceCard({
   source,
-  onAdvanceStage,
 }: {
   source: Source;
-  onAdvanceStage?: (id: number, newStage: number) => void;
 }) {
   const era = ERAS[source.era];
   const yearRange = source.year_start
@@ -51,17 +49,6 @@ export default function SourceCard({
         >
           View details
         </Link>
-        {onAdvanceStage && source.stage < 4 && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              onAdvanceStage(source.id, source.stage + 1);
-            }}
-            className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded transition-colors"
-          >
-            Advance to Stage {source.stage + 1}
-          </button>
-        )}
       </div>
     </div>
   );

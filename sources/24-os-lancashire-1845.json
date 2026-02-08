@@ -1,0 +1,27 @@
+{
+  "id": 24,
+  "name": "OS Lancashire 1845",
+  "description": "Ordnance Survey map of Lancashire covering Manchester and surrounding area, circa 1845. Georeferenced via AllMaps (NLS) and proven working as Cesium imagery layer in manchester-gis project.",
+  "source_url": "https://maps.nls.uk/view/",
+  "source_type": "map_overlay",
+  "stage": 4,
+  "year_start": 1840,
+  "year_end": 1845,
+  "era": "victorian",
+  "bounds_west": -2.2955,
+  "bounds_south": 53.4565,
+  "bounds_east": -2.1655,
+  "bounds_north": 53.5095,
+  "notes": "From manchester-gis project (proven working in Cesium).\nAllMaps mapId: a3940ebbf9b3662d\nCredit: 1845 OS Lancashire - National Library of Scotland via Allmaps\nCovers wider area than city centre — extends east to Droylsden/Ashton.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "created_at": "2026-02-07 23:44:14",
+  "updated_at": "2026-02-07 23:44:14",
+  "files": [],
+  "tiles": [
+    {
+      "url": "https://allmaps.xyz/images/a3940ebbf9b3662d/{z}/{x}/{y}.png",
+      "label": "Sheet 1"
+    }
+  ]
+}

@@ -13,7 +13,10 @@
   "bounds_east": -2.05,
   "bounds_north": 53.55,
   "notes": "NLS CC-BY. 4 sheets:\nSheet 1 IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938766/info.json\nSheet 2 IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938769/info.json\nSheet 3 IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938772/info.json\nSheet 3A IIIF: https://map-view.nls.uk/iiif/2/24493%2F244938775/info.json",
+  "iiif_url": "https://map-view.nls.uk/iiif/2/24493%2F244938766/info.json",
+  "georeference_url": null,
   "created_at": "2026-02-07 23:01:22",
   "updated_at": "2026-02-07 23:01:22",
-  "files": []
+  "files": [],
+  "tiles": []
 }

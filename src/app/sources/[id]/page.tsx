@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import type { SourceWithFiles, SourceFile } from '@/lib/types';
+import { STAGE_GATES, STAGES, getStageGateErrors } from '@/lib/types';
 import SourceForm from '@/components/SourceForm';
 import StageIndicator from '@/components/StageIndicator';
 
@@ -69,6 +70,11 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
 
   async function handleAdvanceStage() {
     if (!source || source.stage >= 4) return;
+    const errors = getStageGateErrors(source, source.stage + 1);
+    if (errors.length > 0) {
+      alert('Cannot advance:\n\n' + errors.join('\n'));
+      return;
+    }
     await fetch(`/api/sources/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -137,17 +143,66 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
                 Back to Stage {source.stage - 1}
               </button>
             )}
-            {source.stage < 4 && (
-              <button
-                onClick={handleAdvanceStage}
-                className="px-3 py-1.5 text-sm bg-blue-600 text-white hover:bg-blue-700 rounded"
-              >
-                Advance to Stage {source.stage + 1}
-              </button>
-            )}
+            {source.stage < 4 && (() => {
+              const errors = getStageGateErrors(source, source.stage + 1);
+              const canAdvance = errors.length === 0;
+              return (
+                <button
+                  onClick={handleAdvanceStage}
+                  disabled={!canAdvance}
+                  className={`px-3 py-1.5 text-sm rounded ${canAdvance
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
+                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                  title={canAdvance ? undefined : errors.join(', ')}
+                >
+                  Advance to Stage {source.stage + 1}
+                </button>
+              );
+            })()}
           </div>
         </div>
         <StageIndicator stage={source.stage} size="lg" />
+
+        {/* Show requirements for next stage */}
+        {source.stage < 4 && (() => {
+          const nextStage = source.stage + 1;
+          const gate = STAGE_GATES[nextStage];
+          if (!gate) return null;
+          const errors = getStageGateErrors(source, nextStage);
+          if (errors.length === 0) return null;
+          return (
+            <div className="mt-3 p-3 bg-amber-50 border border-amber-200 rounded text-sm">
+              <p className="font-medium text-amber-800 mb-1">
+                To reach Stage {nextStage} ({STAGES[nextStage]}):
+              </p>
+              <ul className="space-y-1">
+                {gate.fields.map(field => {
+                  const val = source[field];
+                  const filled = val !== null && val !== undefined && val !== '';
+                  return (
+                    <li key={field} className={`flex items-center gap-1.5 ${filled ? 'text-green-700' : 'text-amber-700'}`}>
+                      <span>{filled ? '\u2713' : '\u2022'}</span>
+                      <span>{field.replace(/_/g, ' ')}</span>
+                      {filled && <span className="text-xs text-green-600 truncate max-w-xs">({String(val)})</span>}
+                    </li>
+                  );
+                })}
+                {gate.check && (() => {
+                  const checkErr = gate.check(source);
+                  const passed = !checkErr;
+                  return (
+                    <li className={`flex items-center gap-1.5 ${passed ? 'text-green-700' : 'text-amber-700'}`}>
+                      <span>{passed ? '\u2713' : '\u2022'}</span>
+                      <span>tiles</span>
+                      {passed && <span className="text-xs text-green-600">({source.tiles.length} tile{source.tiles.length !== 1 ? 's' : ''})</span>}
+                    </li>
+                  );
+                })()}
+              </ul>
+            </div>
+          );
+        })()}
       </div>
 
       {/* Details */}
@@ -183,6 +238,35 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
               <dt className="text-gray-500">Bounds</dt>
               <dd className="text-gray-900 font-mono text-xs">
                 W:{source.bounds_west} S:{source.bounds_south} E:{source.bounds_east} N:{source.bounds_north}
+              </dd>
+            </div>
+          )}
+          {source.iiif_url && (
+            <div className="col-span-2">
+              <dt className="text-gray-500">IIIF URL</dt>
+              <dd className="text-gray-900 truncate">
+                <a href={source.iiif_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{source.iiif_url}</a>
+              </dd>
+            </div>
+          )}
+          {source.georeference_url && (
+            <div className="col-span-2">
+              <dt className="text-gray-500">Georeference URL</dt>
+              <dd className="text-gray-900 truncate">
+                <a href={source.georeference_url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{source.georeference_url}</a>
+              </dd>
+            </div>
+          )}
+          {source.tiles.length > 0 && (
+            <div className="col-span-2">
+              <dt className="text-gray-500">Tiles ({source.tiles.length})</dt>
+              <dd className="space-y-1 mt-1">
+                {source.tiles.map((tile, i) => (
+                  <div key={i} className="flex items-center gap-2 text-xs">
+                    <span className="text-gray-700 font-medium w-20 shrink-0">{tile.label}</span>
+                    <span className="text-gray-500 font-mono truncate">{tile.url}</span>
+                  </div>
+                ))}
               </dd>
             </div>
           )}

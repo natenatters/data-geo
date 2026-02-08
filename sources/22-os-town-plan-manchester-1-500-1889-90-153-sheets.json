@@ -12,8 +12,11 @@
   "bounds_south": 53.46,
   "bounds_east": -2.22,
   "bounds_north": 53.5,
-  "notes": "NLS CC-BY. 153 digitised sheets at 1:500 (extremely detailed). Each with own IIIF endpoint. Already georeferenced by NLS as seamless layer.",
+  "notes": "NLS CC-BY. 153 digitised sheets at 1:500 (extremely detailed).\nNot available as pre-built XYZ tiles on S3 (unlike London).\n\nTo get Cesium-ready:\n1. Open individual sheet from https://maps.nls.uk/os/townplans-england/manchester.html\n2. Click Georeference to open AllMaps Editor\n3. Place 4+ control points\n4. Tiles served at: https://allmaps.xyz/images/{hash}/{z}/{x}/{y}.png\n5. Load that XYZ URL as Cesium imagery layer\n\nIIIF pattern: https://map-view.nls.uk/iiif/2/{first5}%2F{viewId}/info.json",
+  "iiif_url": null,
+  "georeference_url": null,
   "created_at": "2026-02-07 23:01:22",
   "updated_at": "2026-02-07 23:01:22",
-  "files": []
+  "files": [],
+  "tiles": []
 }

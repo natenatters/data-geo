@@ -13,7 +13,10 @@
   "bounds_east": -1.91,
   "bounds_north": 53.59,
   "notes": "NLS CC-BY. IIIF: https://map-view.nls.uk/iiif/2/24494%2F244947210/info.json\nAllMaps georeference: https://editor.allmaps.org/georeference?url=https://map-view.nls.uk/iiif/2/24494%252F244947210/info.json\nDept of Environment.",
+  "iiif_url": "https://map-view.nls.uk/iiif/2/24494%2F244947210/info.json",
+  "georeference_url": null,
   "created_at": "2026-02-07 23:01:22",
   "updated_at": "2026-02-07 23:01:22",
-  "files": []
+  "files": [],
+  "tiles": []
 }

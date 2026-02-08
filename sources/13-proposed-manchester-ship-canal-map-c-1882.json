@@ -13,7 +13,10 @@
   "bounds_east": -2.15,
   "bounds_north": 53.52,
   "notes": "IIIF: https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00041-00025\nImage: https://image.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00041-00025-000-00001.jp2\nShip Canal proposed ~1882, opened 1894. Wider bounds covering canal route to Mersey.",
+  "iiif_url": "https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00041-00025",
+  "georeference_url": null,
   "created_at": "2026-02-07 22:55:48",
   "updated_at": "2026-02-07 22:55:48",
-  "files": []
+  "files": [],
+  "tiles": []
 }

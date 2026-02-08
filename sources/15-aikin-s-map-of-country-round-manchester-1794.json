@@ -4,7 +4,7 @@
   "description": "Map showing the region within 30-40 miles of Manchester. Originally published in pocket at back of Aikin's descriptive volume. 765x819mm.",
   "source_url": "https://maps.nls.uk/view/262720509",
   "source_type": "map_overlay",
-  "stage": 2,
+  "stage": 4,
   "year_start": 1794,
   "year_end": 1794,
   "era": "industrial",
@@ -12,8 +12,16 @@
   "bounds_south": 53.2,
   "bounds_east": -1.7,
   "bounds_north": 53.75,
-  "notes": "NLS CC-BY. IIIF: https://map-view.nls.uk/iiif/2/26272%2F262720509/info.json\nAllMaps georeference: https://editor.allmaps.org/georeference?url=https://map-view.nls.uk/iiif/2/26272%252F262720509/info.json\nWider area map - 30-40 mile radius from Manchester.",
+  "notes": "NLS CC-BY. IIIF: https://map-view.nls.uk/iiif/2/26272%2F262720509/info.json\nAllMaps georeference: https://editor.allmaps.org/georeference?url=https://map-view.nls.uk/iiif/2/26272%252F262720509/info.json\nWider area map - 30-40 mile radius from Manchester.\n\nAllMaps georeferenced: 7 GCPs (Jan 2026). Wide area map covering ~30-40 mile radius.",
+  "iiif_url": "https://map-view.nls.uk/iiif/2/26272%2F262720509/info.json",
+  "georeference_url": "https://annotations.allmaps.org/?url=https://map-view.nls.uk/iiif/2/26272%252F262720509/info.json",
   "created_at": "2026-02-07 23:01:22",
-  "updated_at": "2026-02-07 23:01:22",
-  "files": []
+  "updated_at": "2026-02-07 23:44:14",
+  "files": [],
+  "tiles": [
+    {
+      "url": "https://allmaps.xyz/images/c15b501b060cecd0/{z}/{x}/{y}.png",
+      "label": "Sheet 1"
+    }
+  ]
 }

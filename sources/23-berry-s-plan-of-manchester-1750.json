@@ -1,0 +1,27 @@
+{
+  "id": 23,
+  "name": "Berry's Plan of Manchester (1750)",
+  "description": "Plan of Manchester by John Berry, showing the town centre in the mid-18th century. Georeferenced via AllMaps and proven working as Cesium imagery layer in manchester-gis project.",
+  "source_url": "https://www.digitalcollections.manchester.ac.uk/view/PR-C-00017-00070-MANCHESTER-00057",
+  "source_type": "map_overlay",
+  "stage": 4,
+  "year_start": 1750,
+  "year_end": 1750,
+  "era": "industrial",
+  "bounds_west": -2.26377,
+  "bounds_south": 53.47093,
+  "bounds_east": -2.22844,
+  "bounds_north": 53.4907,
+  "notes": "From manchester-gis project (proven working in Cesium).\nAllMaps mapId: 811b04a06391adb1\nCredit: 1750 Berry - University of Manchester via Allmaps\nRelated to source 9 (Casson & Berry c.1741-57) — may be same IIIF image, different georeferencing.",
+  "iiif_url": "https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00057",
+  "georeference_url": "https://annotations.allmaps.org/?url=https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00057",
+  "created_at": "2026-02-07 23:44:14",
+  "updated_at": "2026-02-07 23:44:14",
+  "files": [],
+  "tiles": [
+    {
+      "url": "https://allmaps.xyz/images/811b04a06391adb1/{z}/{x}/{y}.png",
+      "label": "Sheet 1"
+    }
+  ]
+}

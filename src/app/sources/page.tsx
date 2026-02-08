@@ -30,14 +30,6 @@ export default function SourcesPage() {
     fetchSources();
   }, [fetchSources]);
 
-  async function handleAdvanceStage(id: number, newStage: number) {
-    await fetch(`/api/sources/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ stage: newStage }),
-    });
-    fetchSources();
-  }
 
   return (
     <div className="space-y-4">
@@ -108,7 +100,7 @@ export default function SourcesPage() {
           <SourceCard
             key={source.id}
             source={source}
-            onAdvanceStage={handleAdvanceStage}
+
           />
         ))}
       </div>

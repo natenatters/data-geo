@@ -15,6 +15,7 @@ export async function GET() {
       era: s.era,
       yearStart: s.year_start,
       yearEnd: s.year_end,
+      tiles: s.tiles,
       bounds: s.bounds_west ? {
         west: s.bounds_west,
         south: s.bounds_south,
