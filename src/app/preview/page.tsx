@@ -13,7 +13,7 @@ export default function PreviewPage() {
   const [expanded, setExpanded] = useState<Set<number>>(new Set());
 
   useEffect(() => {
-    fetch('/api/sources?stage=4')
+    fetch('/api/sources?has_tiles=1')
       .then(r => r.json())
       .then((data: Source[]) => {
         setSources(data);
@@ -91,11 +91,11 @@ export default function PreviewPage() {
         {/* Sidebar */}
         <div className="w-72 bg-white rounded-lg border border-gray-200 p-3 overflow-y-auto">
           <h3 className="text-sm font-medium text-gray-700 mb-2">
-            Cesium-Ready Sources ({sources.length})
+            Sources with Tiles ({sources.length})
           </h3>
           {sources.length === 0 ? (
             <p className="text-xs text-gray-500">
-              No sources at Stage 4 yet. Advance sources through the pipeline to see them here.
+              No sources with tiles yet. Add tiles to sources to see them here.
             </p>
           ) : (
             <div className="space-y-0.5">
@@ -104,6 +104,7 @@ export default function PreviewPage() {
                 const isMulti = tileCount > 1;
                 const state = sourceCheckState(s.id, tileCount);
                 const isExpanded = expanded.has(s.id);
+                const hasGeoTile = s.tiles.some(t => t.georeferenced);
 
                 return (
                   <div key={s.id}>
@@ -126,10 +127,11 @@ export default function PreviewPage() {
                         className="cursor-pointer select-none"
                         onClick={() => isMulti && toggleExpanded(s.id)}
                       >
-                        <div className="text-xs text-gray-900 leading-tight">{s.name}</div>
+                        <div className={`text-xs leading-tight ${hasGeoTile ? 'text-gray-900' : 'text-gray-500 italic'}`}>{s.name}</div>
                         <div className="text-[10px] text-gray-500">
                           {s.year_start}–{s.year_end || '?'}
                           {isMulti && ` · ${tileCount} sheets`}
+                          {!hasGeoTile && ' · unverified'}
                         </div>
                       </div>
                     </div>

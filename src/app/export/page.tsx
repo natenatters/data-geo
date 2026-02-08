@@ -32,7 +32,7 @@ export default function ExportPage() {
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-gray-900">Export</h1>
       <p className="text-sm text-gray-600">
-        Generate export files from all Stage 4 (Cesium-Ready) sources for the consumer Cesium application.
+        Generate export files from all Stage 4 (Map-Ready) sources for map viewer applications.
       </p>
 
       {/* CZML Export */}

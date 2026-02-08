@@ -18,5 +18,11 @@
   "created_at": "2026-02-07 23:01:22",
   "updated_at": "2026-02-07 23:01:22",
   "files": [],
-  "tiles": []
+  "tiles": [
+    {
+      "url": "https://mapseries-tilesets.s3.amazonaws.com/25_inch/os_25k_england/{z}/{x}/{y}.png",
+      "label": "NLS: OS 25-inch 2nd edition",
+      "georeferenced": false
+    }
+  ]
 }

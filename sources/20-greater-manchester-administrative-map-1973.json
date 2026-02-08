@@ -18,5 +18,11 @@
   "created_at": "2026-02-07 23:01:22",
   "updated_at": "2026-02-07 23:01:22",
   "files": [],
-  "tiles": []
+  "tiles": [
+    {
+      "url": "https://mapwarper.net/maps/tile/38360/{z}/{x}/{y}.png",
+      "label": "MapWarper: greater manchester region",
+      "georeferenced": false
+    }
+  ]
 }

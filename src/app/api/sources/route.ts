@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
     era: searchParams.get('era') || undefined,
     stage: searchParams.get('stage') || undefined,
     source_type: searchParams.get('source_type') || undefined,
+    has_tiles: searchParams.get('has_tiles') || undefined,
     sort: searchParams.get('sort') || undefined,
     order: searchParams.get('order') || undefined,
   });

@@ -69,6 +69,7 @@ export function getAllSources(filters?: {
   era?: string;
   stage?: string;
   source_type?: string;
+  has_tiles?: string;
   sort?: string;
   order?: string;
 }): Source[] {
@@ -87,6 +88,9 @@ export function getAllSources(filters?: {
   }
   if (filters?.source_type) {
     sources = sources.filter(s => s.source_type === filters.source_type);
+  }
+  if (filters?.has_tiles === '1') {
+    sources = sources.filter(s => s.tiles.length > 0);
   }
 
   const sortField = filters?.sort || 'year_start';

@@ -21,7 +21,8 @@
   "tiles": [
     {
       "url": "https://allmaps.xyz/images/c15b501b060cecd0/{z}/{x}/{y}.png",
-      "label": "Sheet 1"
+      "label": "Sheet 1",
+      "georeferenced": true
     }
   ]
 }

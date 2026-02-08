@@ -15,7 +15,13 @@
   "notes": "NLS has georeferenced seamless layer (1888-1915) via MapTiler API (requires key, free tier 100k tiles/month).\nMapTiler tilesets: uk-osgb1888 (multi-scale) or uk-osgb10k1888 (6-inch detail only)\nTile URL: https://api.maptiler.com/tiles/uk-osgb10k1888/{z}/{x}/{y}.jpg?key={apikey}\nGet free key: https://cloud.maptiler.com/\n\n4 sheets covering Manchester (earliest editions):\n  CIV.NW (surveyed 1888-89, pub 1894): https://maps.nls.uk/view/101103782\n    IIIF: https://map-view.nls.uk/iiif/2/10110%2F101103782/info.json\n    Bounds: -2.308708,53.481193 to -2.235722,53.510326\n  CIV.NE (surveyed 1888-91, pub 1891): https://maps.nls.uk/view/101103800\n    IIIF: https://map-view.nls.uk/iiif/2/10110%2F101103800/info.json\n    Bounds: -2.235985,53.480936 to -2.162953,53.510111\n  CIV.SW (surveyed 1894, pub 1896): https://maps.nls.uk/view/101103812\n    IIIF: https://map-view.nls.uk/iiif/2/10110%2F101103812/info.json\n    Bounds: -2.308922,53.452274 to -2.235985,53.481407\n  CIV.SE (surveyed 1888-90, pub 1894): https://maps.nls.uk/view/101103827\n    IIIF: https://map-view.nls.uk/iiif/2/10110%2F101103827/info.json\n    Bounds: -2.236249,53.452017 to -2.163266,53.481193\n\nLater editions also available (1909, 1923, 1936, 1946).\nNLS IIIF Image API pattern: https://map-view.nls.uk/iiif/2/{folder}%2F{mapId}/info.json\nCC-BY license.",
   "iiif_url": "https://map-view.nls.uk/iiif/2/10110%2F101103827/info.json",
   "georeference_url": null,
-  "tiles": [],
+  "tiles": [
+    {
+      "url": "https://mapseries-tilesets.s3.amazonaws.com/25_inch/os_25k_england/{z}/{x}/{y}.png",
+      "label": "NLS: OS 25-inch 2nd edition",
+      "georeferenced": false
+    }
+  ],
   "created_at": "2026-02-08 00:30:24",
   "updated_at": "2026-02-08 00:30:24",
   "files": []

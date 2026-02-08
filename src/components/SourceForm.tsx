@@ -249,7 +249,7 @@ export default function SourceForm({ source }: { source?: Source }) {
         <legend className="text-sm font-medium text-gray-700 px-2">Pipeline URLs</legend>
         <div className="space-y-3">
           <div>
-            <label className="block text-xs text-gray-500 mb-1">IIIF URL <span className="text-gray-400">(manifest or info.json — needed for Stage 3)</span></label>
+            <label className="block text-xs text-gray-500 mb-1">IIIF Manifest <span className="text-gray-400">(manifest or info.json — needed for Stage 3)</span></label>
             <input
               type="url"
               value={form.iiif_url}
@@ -259,7 +259,7 @@ export default function SourceForm({ source }: { source?: Source }) {
             />
           </div>
           <div>
-            <label className="block text-xs text-gray-500 mb-1">Georeference URL <span className="text-gray-400">(AllMaps annotation — needed for Stage 3)</span></label>
+            <label className="block text-xs text-gray-500 mb-1">Georeference Annotation <span className="text-gray-400">(e.g. AllMaps annotation — needed for Stage 3)</span></label>
             <input
               type="url"
               value={form.georeference_url}
@@ -274,6 +274,18 @@ export default function SourceForm({ source }: { source?: Source }) {
               <div className="space-y-2 mb-2">
                 {form.tiles.map((tile, i) => (
                   <div key={i} className="flex items-center gap-2">
+                    <label className="flex items-center gap-1 shrink-0" title="Georeferenced (verified)">
+                      <input
+                        type="checkbox"
+                        checked={tile.georeferenced}
+                        onChange={e => {
+                          const next = [...form.tiles];
+                          next[i] = { ...next[i], georeferenced: e.target.checked };
+                          setForm(prev => ({ ...prev, tiles: next }));
+                        }}
+                      />
+                      <span className="text-xs text-gray-500">Verified</span>
+                    </label>
                     <input
                       type="text"
                       value={tile.label}
@@ -314,7 +326,7 @@ export default function SourceForm({ source }: { source?: Source }) {
               type="button"
               onClick={() => {
                 const label = `Sheet ${form.tiles.length + 1}`;
-                setForm(prev => ({ ...prev, tiles: [...prev.tiles, { url: '', label }] }));
+                setForm(prev => ({ ...prev, tiles: [...prev.tiles, { url: '', label, georeferenced: false }] }));
               }}
               className="text-sm text-blue-600 hover:text-blue-800"
             >

@@ -15,7 +15,13 @@
   "notes": "British Library Cotton MS Claudius D VI, f. 12v.\nOriginally part of Paris's Abbreviatio Chronicorum (1250s).\nMap removed in 1929, now stored separately as Cotton MS Claudius D VI/1.\nOriented with north at top (unusual for medieval maps).\n\nBL IIIF (chronicle parent — AVAILABLE):\nManifest: https://bl.digirati.io/iiif/ark:/81055/vdc_100058663012.0x000001\nViewer: https://iiif.bl.uk/uv/#?manifest=https://bl.digirati.io/iiif/ark:/81055/vdc_100058663012.0x000001\n\nBL IIIF (map folio D VI/1 — UNAVAILABLE post-2023 cyber-attack):\nLARK: ark:/81055/vdc_100165157882.0x000001\nConstructed manifest: https://bl.digirati.io/iiif/ark:/81055/vdc_100165157882.0x000001\n\nAnnotated interactive version (Omeka/Neatline):\nhttps://historiacartarum.org/annotated-claudius-map/\nBL blog: https://blogs.bl.uk/digitisedmanuscripts/2020/07/the-maps-of-matthew-paris.html",
   "iiif_url": "https://bl.digirati.io/iiif/ark:/81055/vdc_100058663012.0x000001",
   "georeference_url": null,
-  "tiles": [],
+  "tiles": [
+    {
+      "url": "https://mapwarper.net/maps/tile/57722/{z}/{x}/{y}.png",
+      "label": "MapWarper: Matthew Paris Map of Great Britain",
+      "georeferenced": false
+    }
+  ],
   "created_at": "2026-02-08 01:36:39",
   "updated_at": "2026-02-08 01:36:39",
   "files": []

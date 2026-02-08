@@ -15,7 +15,13 @@
   "notes": "NLS has georeferenced seamless layer for 1890s-1920s via MapTiler API (requires key).\nIIIF available for individual sheets via NLS IIIF Image API 2.0.\nPattern: https://map-view.nls.uk/iiif/2/{folder}%2F{mapId}/info.json\n\nCentral Manchester sheets (16 sheets in CIV 4x4 grid, 1:2500 scale):\n  CIV.2 (Manchester, Salford, 1893): https://maps.nls.uk/view/126522773\n    IIIF: https://map-view.nls.uk/iiif/2/12652%2F126522773/info.json\n    Bounds: -2.272227,53.495652 to -2.235722,53.510224\n  CIV.6 (Manchester, Salford): https://maps.nls.uk/view/126522809\n    IIIF: https://map-view.nls.uk/iiif/2/12652%2F126522809/info.json\n    Bounds: -2.272347,53.481193 to -2.235853,53.495764\n  CIV.7 (Manchester, 1893): https://maps.nls.uk/view/126522815\n    IIIF: https://map-view.nls.uk/iiif/2/12652%2F126522815/info.json\n    Bounds: -2.235985,53.481070 to -2.199481,53.495652\n  CIV.11 (Manchester): https://maps.nls.uk/view/126522842\n    IIIF: https://map-view.nls.uk/iiif/2/12652%2F126522842/info.json\n    Bounds: -2.236117,53.466610 to -2.199625,53.481193\n\nAll 16 CIV sheets: 1-8,10-13,16 at https://maps.nls.uk/os/25inch-england-and-wales/lancashire.html\nCC-BY license.",
   "iiif_url": "https://map-view.nls.uk/iiif/2/12652%2F126522815/info.json",
   "georeference_url": null,
-  "tiles": [],
+  "tiles": [
+    {
+      "url": "https://mapseries-tilesets.s3.amazonaws.com/25_inch/os_25k_england/{z}/{x}/{y}.png",
+      "label": "NLS: OS 25-inch 2nd edition",
+      "georeferenced": false
+    }
+  ],
   "created_at": "2026-02-08 00:30:24",
   "updated_at": "2026-02-08 00:30:24",
   "files": []
