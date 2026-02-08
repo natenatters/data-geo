@@ -24,6 +24,7 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
   const [uploading, setUploading] = useState(false);
   const [uploadType, setUploadType] = useState<string>('other');
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [viewingFile, setViewingFile] = useState<number | null>(null);
   const settingsRef = useRef<HTMLDivElement>(null);
 
   function fetchSource() {
@@ -541,20 +542,66 @@ export default function SourceDetailPage({ params }: { params: { id: string } })
 
         {s.files.length > 0 ? (
           <div className="space-y-1">
-            {s.files.map((file: SourceFile) => (
-              <div key={file.id} className="flex items-center justify-between py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 group">
-                <div className="flex items-center gap-2 text-sm min-w-0">
-                  <span className="px-1.5 py-0.5 bg-gray-100 rounded text-[11px] font-mono text-gray-500">{file.filetype}</span>
-                  <span className="text-gray-800 truncate">{file.filename}</span>
+            {s.files.map((file: SourceFile) => {
+              const isImage = file.filetype === 'image' || /\.(jpg|jpeg|png|gif|webp)$/i.test(file.filename);
+              const isPdf = /\.pdf$/i.test(file.filename);
+              const isViewable = isImage || isPdf;
+              const isViewing = viewingFile === file.id;
+
+              return (
+                <div key={file.id}>
+                  <div className="flex items-center justify-between py-1.5 px-2 -mx-1 rounded hover:bg-gray-50 group">
+                    <div className="flex items-center gap-2 text-sm min-w-0">
+                      <span className="px-1.5 py-0.5 bg-gray-100 rounded text-[11px] font-mono text-gray-500">{file.filetype}</span>
+                      {isViewable ? (
+                        <button
+                          onClick={() => setViewingFile(isViewing ? null : file.id)}
+                          className="text-gray-800 hover:text-blue-600 truncate text-left"
+                        >
+                          {file.filename}
+                        </button>
+                      ) : (
+                        <span className="text-gray-800 truncate">{file.filename}</span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {isViewable && (
+                        <button
+                          onClick={() => setViewingFile(isViewing ? null : file.id)}
+                          className="text-xs text-gray-400 hover:text-blue-600"
+                        >
+                          {isViewing ? 'Hide' : 'View'}
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleDeleteFile(file.id)}
+                        className="text-xs text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                  {isViewing && (
+                    <div className="mt-1 mb-2 mx-1 rounded border border-gray-200 overflow-hidden bg-gray-50">
+                      {isImage ? (
+                        <img
+                          src={`/api/files/${file.id}`}
+                          alt={file.filename}
+                          className="max-w-full h-auto max-h-[600px] object-contain mx-auto block"
+                        />
+                      ) : isPdf ? (
+                        <iframe
+                          src={`/api/files/${file.id}`}
+                          className="w-full border-0"
+                          style={{ height: '600px' }}
+                          title={file.filename}
+                        />
+                      ) : null}
+                    </div>
+                  )}
                 </div>
-                <button
-                  onClick={() => handleDeleteFile(file.id)}
-                  className="text-xs text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-                >
-                  Remove
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <p className="text-xs text-gray-400 italic">No files</p>
