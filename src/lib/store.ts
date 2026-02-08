@@ -273,6 +273,9 @@ export function getStats() {
   const dated = sources.filter(s => s.year_start != null);
   const undated = sources.filter(s => s.year_start == null);
 
+  // Exclude all stage-1 (Discovered) sources from timeline — no visual value yet
+  const timelineDated = dated.filter(s => s.stage > 1);
+
   // Build bucketed timeline data
   const bucketMap = new Map<number, {
     start: number;
@@ -281,7 +284,7 @@ export function getStats() {
     stories: { id: number; title: string; year_start: number; era: string }[];
   }>();
 
-  for (const s of dated) {
+  for (const s of timelineDated) {
     const bStart = getBucketStart(s.year_start!);
     const bSize = getBucketSize(s.year_start!);
     if (!bucketMap.has(bStart)) {

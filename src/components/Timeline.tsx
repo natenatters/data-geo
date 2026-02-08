@@ -35,16 +35,26 @@ export interface PeriodQuality {
   notes?: string;
 }
 
-const ERA_RANGES: { era: Era; start: number; end: number }[] = [
-  { era: 'roman', start: 79, end: 410 },
-  { era: 'medieval', start: 410, end: 1540 },
-  { era: 'industrial', start: 1540, end: 1837 },
-  { era: 'victorian', start: 1837, end: 1901 },
-  { era: 'modern', start: 1901, end: 2030 },
+const ERA_PROPORTIONS: { era: Era; start: number; end: number; widthPct: number }[] = [
+  { era: 'roman', start: 79, end: 410, widthPct: 20 },
+  { era: 'medieval', start: 410, end: 1540, widthPct: 18 },
+  { era: 'industrial', start: 1540, end: 1837, widthPct: 40 },
+  { era: 'victorian', start: 1837, end: 1901, widthPct: 12 },
+  { era: 'modern', start: 1901, end: 2030, widthPct: 10 },
 ];
 
-const MIN_YEAR = 0;
-const MAX_YEAR = 2030;
+// Pre-compute cumulative percent offsets for each era segment
+const ERA_SEGMENTS = (() => {
+  let cumPct = 0;
+  return ERA_PROPORTIONS.map(ep => {
+    const seg = { ...ep, pctStart: cumPct, pctEnd: cumPct + ep.widthPct };
+    cumPct += ep.widthPct;
+    return seg;
+  });
+})();
+
+const MIN_YEAR = ERA_PROPORTIONS[0].start;
+const MAX_YEAR = ERA_PROPORTIONS[ERA_PROPORTIONS.length - 1].end;
 
 const QUALITY_COLORS: Record<string, string> = {
   good: '#22c55e',   // green
@@ -71,7 +81,25 @@ export default function Timeline({
   const maxCount = Math.max(...buckets.map(b => b.sources.length), 1);
 
   function yearToPercent(year: number) {
-    return ((year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR)) * 100;
+    const clamped = Math.max(MIN_YEAR, Math.min(MAX_YEAR, year));
+    for (const seg of ERA_SEGMENTS) {
+      if (clamped <= seg.end) {
+        const t = (clamped - seg.start) / (seg.end - seg.start);
+        return seg.pctStart + t * seg.widthPct;
+      }
+    }
+    return 100; // past all eras
+  }
+
+  function percentToYear(pct: number) {
+    const clamped = Math.max(0, Math.min(100, pct));
+    for (const seg of ERA_SEGMENTS) {
+      if (clamped <= seg.pctEnd) {
+        const t = (clamped - seg.pctStart) / seg.widthPct;
+        return Math.round(seg.start + t * (seg.end - seg.start));
+      }
+    }
+    return MAX_YEAR;
   }
 
   const hovered = hoveredBucket !== null ? buckets.find(b => b.start === hoveredBucket) : null;
@@ -85,8 +113,8 @@ export default function Timeline({
         onDoubleClick={(e) => {
           if (!onClickPeriod) return;
           const rect = e.currentTarget.getBoundingClientRect();
-          const pct = (e.clientX - rect.left) / rect.width;
-          const year = Math.round(MIN_YEAR + pct * (MAX_YEAR - MIN_YEAR));
+          const pct = ((e.clientX - rect.left) / rect.width) * 100;
+          const year = percentToYear(pct);
           onClickPeriod(year);
         }}
       >
@@ -105,7 +133,7 @@ export default function Timeline({
         ))}
 
         {/* Era background bands */}
-        {ERA_RANGES.map(({ era, start, end }) => (
+        {ERA_PROPORTIONS.map(({ era, start, end }) => (
           <div
             key={era}
             className="absolute top-0 bottom-6 opacity-10"
@@ -219,7 +247,7 @@ export default function Timeline({
 
         {/* Era labels along bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-5">
-          {ERA_RANGES.map(({ era, start, end }) => (
+          {ERA_PROPORTIONS.map(({ era, start, end }) => (
             <div
               key={era}
               className="absolute text-[10px] text-gray-500 text-center truncate"
