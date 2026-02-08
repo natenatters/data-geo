@@ -1,0 +1,22 @@
+{
+  "id": 40,
+  "name": "City of Manchester Plan — Nicholas Plan (1945)",
+  "description": "The seminal post-war planning document for Manchester by City Surveyor Rowland Nicholas. Contains maps of proposed ring roads, zoned districts, and redevelopment areas.",
+  "source_url": "https://archive.org/details/1945-city-of-manchester-plan_202011",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1945,
+  "year_end": 1945,
+  "era": "modern",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "Full digitized book on Internet Archive with IIIF.\nContains multiple maps including fold-out proposed city centre plan.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 00:30:24",
+  "files": []
+}

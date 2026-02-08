@@ -1,0 +1,27 @@
+{
+  "id": 42,
+  "name": "OS 1:25,000 Provisional Edition — Manchester (1959)",
+  "description": "Medium-scale Ordnance Survey mapping of Manchester from the late 1950s.",
+  "source_url": "https://manchester.publicprofiler.org/beta/",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1959,
+  "year_end": 1959,
+  "era": "modern",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "Georeferenced overlay on Public Profiler (select 'OS 1:25000 Provisional Edition 1959').\nScanned by Andy Robinson.\nNLS also has sheets: https://maps.nls.uk/os/25k-gb-1937-61/\n\nFree S3 seamless tile layer (1945-1965 outline series):\nhttps://mapseries-tilesets.s3.amazonaws.com/os/25000_outline/{z}/{x}/{y}.png (zoom 1-16)\nAvailable georeferenced on Manchester Historical Maps: https://manchester.publicprofiler.org/beta/",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [
+    {
+      "url": "https://mapseries-tilesets.s3.amazonaws.com/os/25000_outline/{z}/{x}/{y}.png",
+      "label": "Sheet 1"
+    }
+  ],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 01:06:03",
+  "files": []
+}

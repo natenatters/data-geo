@@ -1,0 +1,22 @@
+{
+  "id": 139,
+  "name": "Ortelius's Map of England and Wales (1573)",
+  "description": "Abraham Ortelius's map of England and Wales from the Theatrum Orbis Terrarum (1570+). 'Angliae, Scotiae, et Hiberniae, sive Britannicar: Insularum Descriptio'.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1573,
+  "year_end": 1573,
+  "era": "pre-industrial",
+  "bounds_west": -6,
+  "bounds_south": 49.5,
+  "bounds_east": 2,
+  "bounds_north": 56,
+  "notes": "Abraham Ortelius (1527-1598), Theatrum Orbis Terrarum (first modern atlas, 1570).\nEngland/Wales map added in later editions.\nBased on Humphrey Lhuyd's map of England and Wales.\nWidely available in digitized form.\nNLS may have copies in their atlas collections.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

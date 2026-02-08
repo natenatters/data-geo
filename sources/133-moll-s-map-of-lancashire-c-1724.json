@@ -1,0 +1,22 @@
+{
+  "id": 133,
+  "name": "Moll's Map of Lancashire (c.1724)",
+  "description": "Hermann Moll's county map of Lancashire. Moll was one of the most prolific cartographers of the early 18th century.",
+  "source_url": "https://maps.nls.uk/counties/lancashire.html",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1724,
+  "year_end": 1724,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Hermann Moll (c.1654-1732), German-born London cartographer.\nPublished numerous county maps and atlases.\nLancashire map from 'A Set of Fifty New and Correct Maps' (c.1724).\nAlso produced maps for 'The Compleat Geographer' and various atlases.\nNLS Lancashire county maps page may have this digitized.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

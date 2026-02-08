@@ -1,0 +1,22 @@
+{
+  "id": 131,
+  "name": "Morden's Map of Lancashire (1695)",
+  "description": "Robert Morden's county map of Lancashire from the 1695 edition of Camden's 'Britannia'. First county maps based on new surveys since Saxton.",
+  "source_url": "https://maps.nls.uk/counties/lancashire.html",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1695,
+  "year_end": 1695,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Robert Morden (c.1650-1703).\nPublished in Gibson's 1695 edition of Camden's Britannia.\nFirst county maps to show roads (following Ogilby's survey).\nFirst maps with longitude/latitude and a scale bar.\nMultiple editions: 1695, 1722, 1753.\nNLS has digitized versions on Lancashire county maps page.\nAlso widely available on antiquemaps.com.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": 27,
+  "name": "Pigot's Plan of Manchester (1808)",
+  "description": "First edition of James Pigot's plan of Manchester. Pigot first appears in a 1794 Manchester business directory as an engraver; began publishing maps from 1804.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1808,
+  "year_end": 1808,
+  "era": "industrial",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "Flickr scans from Manchester Archive Plus.\nMultiple Pigot editions exist: 1808, 1811, 1813, 1819, 1821, 1824.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 00:30:24",
+  "files": []
+}

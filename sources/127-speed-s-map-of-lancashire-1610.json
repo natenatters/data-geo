@@ -1,0 +1,22 @@
+{
+  "id": 127,
+  "name": "Speed's Map of Lancashire (1610)",
+  "description": "John Speed's iconic county map of Lancashire from 'The Theatre of the Empire of Great Britaine'. Includes town plan inset of Lancaster. Shows Manchester.",
+  "source_url": "https://maps.nls.uk/counties/lancashire.html",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1610,
+  "year_end": 1610,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "From 'The Theatre of the Empire of Great Britaine' (1611-12).\nJohn Speed (1552-1629). Engraved by Jodocus Hondius.\nIncludes decorative cartouche, coat of arms, and inset town plan of Lancaster.\nManchester shown as significant settlement.\nNLS has digitized versions. Also widely available on Wikimedia Commons.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

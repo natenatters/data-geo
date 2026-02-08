@@ -1,0 +1,22 @@
+{
+  "id": 141,
+  "name": "Jansson's Map of Lancashire (c.1646)",
+  "description": "Jan Jansson's county map of Lancashire from his 'Atlas Novus'. Dutch golden age cartography, contemporary and rival to Blaeu.",
+  "source_url": null,
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1646,
+  "year_end": 1646,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Jan Jansson (1588-1664), Amsterdam cartographer.\nRival of Joan Blaeu — both published magnificent atlases.\nLancashire map in Atlas Novus (c.1646).\nBased on Saxton/Speed but with Jansson's distinctive style.\nBeautifully engraved with decorative cartouche.\nNLS or David Rumsey Map Collection may have digitized versions.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

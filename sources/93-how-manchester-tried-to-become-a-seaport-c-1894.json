@@ -1,0 +1,22 @@
+{
+  "id": 93,
+  "name": "How Manchester Tried to Become a Seaport (c.1894)",
+  "description": "Map related to the Manchester Ship Canal project, showing Manchester's ambition to become an inland seaport.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1894,
+  "year_end": 1894,
+  "era": "victorian",
+  "bounds_west": -2.75,
+  "bounds_south": 53.35,
+  "bounds_east": -2.15,
+  "bounds_north": 53.55,
+  "notes": "From Manchester Archives+ Flickr album: Manchester Maps.\nhttps://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:49:20",
+  "updated_at": "2026-02-08 00:49:20",
+  "files": []
+}

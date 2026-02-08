@@ -1,0 +1,22 @@
+{
+  "id": 140,
+  "name": "Norden's Map of Lancashire (c.1607-10)",
+  "description": "John Norden's county survey of Lancashire. Norden attempted a complete county-by-county survey of England but only completed a few counties. Lancashire may survive in manuscript.",
+  "source_url": null,
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1607,
+  "year_end": 1610,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "John Norden (c.1547-1625), surveyor and cartographer.\nAttempted the 'Speculum Britanniae' — a county-by-county survey.\nCompleted Middlesex (1593) and Hertfordshire (1598) fully.\nLancashire survey status uncertain — may exist in manuscript only.\nNorden introduced roads on county maps before Ogilby.\nHistorical significance as early attempted systematic survey.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

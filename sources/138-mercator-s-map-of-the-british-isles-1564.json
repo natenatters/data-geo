@@ -1,0 +1,22 @@
+{
+  "id": 138,
+  "name": "Mercator's Map of the British Isles (1564)",
+  "description": "Gerard Mercator's large wall map of the British Isles. Among the most accurate 16th-century maps of Britain, showing Lancashire and Manchester.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1564,
+  "year_end": 1564,
+  "era": "pre-industrial",
+  "bounds_west": -11,
+  "bounds_south": 49,
+  "bounds_east": 2,
+  "bounds_north": 61,
+  "notes": "Gerard Mercator (1512-1594), pioneer of modern cartography.\n'Angliae, Scotiae et Hiberniae nova descriptio' (1564).\nLarge wall map, highly influential.\nShowed Lancashire in reasonable detail for the era.\nLater incorporated into Mercator's Atlas (1595, posthumous).",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

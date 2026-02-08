@@ -1,0 +1,22 @@
+{
+  "id": 85,
+  "name": "Bacon's Manchester and Environs (1879)",
+  "description": "Bacon's wider plan showing Manchester and surrounding environs.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1879,
+  "year_end": 1879,
+  "era": "victorian",
+  "bounds_west": -2.35,
+  "bounds_south": 53.42,
+  "bounds_east": -2.15,
+  "bounds_north": 53.55,
+  "notes": "From Manchester Archives+ Flickr album: Manchester Maps.\nhttps://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:49:20",
+  "updated_at": "2026-02-08 00:49:20",
+  "files": []
+}

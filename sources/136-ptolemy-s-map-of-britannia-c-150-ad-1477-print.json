@@ -1,0 +1,22 @@
+{
+  "id": 136,
+  "name": "Ptolemy's Map of Britannia (c.150 AD / 1477 print)",
+  "description": "Claudius Ptolemy's map of the British Isles from his Geographia (c.150 AD). First printed 1477 in Bologna. Shows Roman Britain including approximate location of Mancunium.",
+  "source_url": null,
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 150,
+  "year_end": 1477,
+  "era": "roman",
+  "bounds_west": -8,
+  "bounds_south": 49,
+  "bounds_east": 2,
+  "bounds_north": 59,
+  "notes": "Ptolemy's Geographia written c.150 AD in Alexandria.\nFirst printed edition: Bologna 1477.\nShows 'Mancunium' (Manchester's Roman fort) roughly positioned.\nMultiple Renaissance printed editions: 1477, 1482, 1507, 1513, etc.\nNLS may have later printed editions.\nFundamental source for Roman geography of Britain.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

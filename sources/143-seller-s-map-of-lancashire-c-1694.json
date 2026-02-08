@@ -1,0 +1,22 @@
+{
+  "id": 143,
+  "name": "Seller's Map of Lancashire (c.1694)",
+  "description": "John Seller's county map of Lancashire. Seller was Hydrographer to the King.",
+  "source_url": null,
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1694,
+  "year_end": 1694,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "John Seller (fl.1658-1697), Hydrographer to Charles II and James II.\nPublished county maps in various atlases.\nAngliae Contracta and other collections.\nSmaller format county maps, widely circulated.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

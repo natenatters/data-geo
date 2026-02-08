@@ -12,11 +12,11 @@
   "bounds_south": 53.46,
   "bounds_east": -2.22,
   "bounds_north": 53.5,
-  "notes": "IIIF manifest: https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022\nImage service: https://image.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022-000-00001.jp2 (24 sheets, -00001 to -00024)\nCC BY-NC 4.0. Publisher: Joseph Adshead. 840x1040mm per sheet.\n\nAllMaps georeferenced: 20 of 24 sheets (missing 18, 22, 23, 24).\nSheet tile URLs (allmaps.xyz/maps/{mapId}/{z}/{x}/{y}.png):\n  1: 1715d8b684ea497a    2: b017442da87a6eb0    3: 402234f2563fc2e3\n  4: 17765fcf98964760    5: ece8cb14863f5150    6: dea3cfa97b5bf7c1\n  7: 38ffee0c5566ffb0    8: ee28365c05b5cc94    9: 13e34c2974ecea41\n 10: 899102c8cada43bb   11: ebe864b83e3d5a9e   12: 060468fa9f3cfa78\n 13: e7e1debfccf715f3   14: 695883c7a720e9f7   15: 4b3701e524583a1e\n 16: 379320745a6df1d1   17: 1ff2b25c1e995b23   19: 38e818d71f20f596\n 20: e5a2744b2d6462d5   21: f8e0d771c6fcebfd",
+  "notes": "IIIF manifest: https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022\nImage service: https://image.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022-000-00001.jp2 (24 sheets, -00001 to -00024)\nCC BY-NC 4.0. Publisher: Joseph Adshead. 840x1040mm per sheet.\n\nAllMaps georeferenced: 20 of 24 sheets (missing 18, 22, 23, 24).\nSheet tile URLs (allmaps.xyz/maps/{mapId}/{z}/{x}/{y}.png):\n  1: 1715d8b684ea497a    2: b017442da87a6eb0    3: 402234f2563fc2e3\n  4: 17765fcf98964760    5: ece8cb14863f5150    6: dea3cfa97b5bf7c1\n  7: 38ffee0c5566ffb0    8: ee28365c05b5cc94    9: 13e34c2974ecea41\n 10: 899102c8cada43bb   11: ebe864b83e3d5a9e   12: 060468fa9f3cfa78\n 13: e7e1debfccf715f3   14: 695883c7a720e9f7   15: 4b3701e524583a1e\n 16: 379320745a6df1d1   17: 1ff2b25c1e995b23   19: 38e818d71f20f596\n 20: e5a2744b2d6462d5   21: f8e0d771c6fcebfd\nAvailable georeferenced on Manchester Historical Maps: https://manchester.publicprofiler.org/beta/",
   "iiif_url": "https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022",
   "georeference_url": "https://annotations.allmaps.org/?url=https://www.digitalcollections.manchester.ac.uk/iiif/PR-C-00017-00070-MANCHESTER-00022",
   "created_at": "2026-02-07 22:50:19",
-  "updated_at": "2026-02-07 23:44:14",
+  "updated_at": "2026-02-08 01:06:03",
   "files": [],
   "tiles": [
     {

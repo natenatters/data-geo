@@ -1,0 +1,22 @@
+{
+  "id": 66,
+  "name": "Fothergill's Plan of Manchester (1844)",
+  "description": "Coloured plan of Manchester by Fothergill.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1844,
+  "year_end": 1844,
+  "era": "victorian",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "From Manchester Archives+ Flickr album: Manchester Maps.\nhttps://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:49:20",
+  "updated_at": "2026-02-08 00:49:20",
+  "files": []
+}

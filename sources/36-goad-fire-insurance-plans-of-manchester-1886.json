@@ -1,0 +1,22 @@
+{
+  "id": 36,
+  "name": "Goad Fire Insurance Plans of Manchester (1886)",
+  "description": "Extraordinarily detailed fire insurance plans showing building footprints, construction materials, number of floors, height, land use, business names, and fire hazards. 22 sheets at 1:480 (1 inch to 40 feet).",
+  "source_url": "https://britishlibrary.oldmapsonline.org/maps/e3f9813f-7212-5317-9c5b-158e5ea7cad2/",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1886,
+  "year_end": 1900,
+  "era": "victorian",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "22 sheets (Vol. I, 1886); 12+ sheets (1893); 4 volumes total.\nIIIF via Old Maps Online / British Library.\nAlso on Flickr: https://www.flickr.com/photos/manchesterarchiveplus/albums/72157634263396654/\nWikimedia: https://commons.wikimedia.org/wiki/Category:Goad_fire_insurance_maps_of_Manchester\nAvailable georeferenced on Manchester Historical Maps: https://manchester.publicprofiler.org/beta/",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 01:06:03",
+  "files": []
+}

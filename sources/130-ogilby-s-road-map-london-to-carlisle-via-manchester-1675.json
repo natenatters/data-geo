@@ -1,0 +1,22 @@
+{
+  "id": 130,
+  "name": "Ogilby's Road Map: London to Carlisle via Manchester (1675)",
+  "description": "Strip road map from John Ogilby's 'Britannia' (1675) — the first road atlas of England. Shows the London-Carlisle route through Warrington, Wigan, and Preston, passing near Manchester.",
+  "source_url": "https://commons.wikimedia.org/wiki/Category:John_Ogilby_(1675)_Britannia_Atlas",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1675,
+  "year_end": 1675,
+  "era": "pre-industrial",
+  "bounds_west": -3,
+  "bounds_south": 52,
+  "bounds_east": -2,
+  "bounds_north": 54.8,
+  "notes": "John Ogilby's Britannia (1675): 100 strip road maps, first printed road atlas of England.\nPlate 78: London to Carlisle via Warrington, Newton, Wigan, Preston, Garstang.\nPasses through south Lancashire close to Manchester.\n102 copper plates + 200 pages of text. 7,500 miles of road surveyed.\nDigitized: Internet Archive (1698 edition): https://archive.org/details/bim_early-english-books-1641-1700_britannia-or-the-kingd_ogilby-john_1698\nAlso: fulltable.com/vts/m/map/ogilby/mna.htm (all plates).\nRoyal Collection also has a copy.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

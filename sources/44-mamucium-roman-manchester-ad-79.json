@@ -1,0 +1,22 @@
+{
+  "id": 44,
+  "name": "Mamucium: Roman Manchester (AD 79)",
+  "description": "Plan of the Roman fort and settlement at Mamucium (Castlefield). From Manchester Archives+ collection.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 79,
+  "year_end": 410,
+  "era": "roman",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "Flickr Map: \"Mamucium: Roman Manchester, AD79\"\nhttps://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247\nFirst known settlement — fills the Roman era gap.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:49:20",
+  "updated_at": "2026-02-08 00:49:20",
+  "files": []
+}

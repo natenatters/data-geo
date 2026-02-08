@@ -1,0 +1,22 @@
+{
+  "id": 129,
+  "name": "Blaeu's 'Lancastria Palatinatvs' (1645/1662)",
+  "description": "Joan Blaeu's map of Lancashire from the Atlas Maior (1662-5). Dutch golden age cartography based on Saxton and Speed.",
+  "source_url": "https://maps.nls.uk/atlas/blaeu-maior/vol/5",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1645,
+  "year_end": 1665,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Joan Blaeu, Atlas Maior Vol.5 (England, 1662-5).\nTitle: 'Lancastria Palatinatvs Vulgo Lancaster'.\nBased on earlier Saxton/Speed surveys but beautifully re-engraved.\nNLS has complete digitized Atlas Maior.\nFull volume listing: https://maps.nls.uk/atlas/blaeu-maior/list.cfm?vol=5\nAlso listed on NLS Lancashire county maps page.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": 39,
+  "name": "German Target Map of Manchester (c.1941)",
+  "description": "Luftwaffe target/bombing map produced by Oberkommando der Wehrmacht from pre-war Ordnance Survey data. Shows German strategic interest in Manchester's industrial infrastructure.",
+  "source_url": "https://www.oldmapsonline.org/en/Manchester",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1941,
+  "year_end": 1941,
+  "era": "modern",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "Available via Old Maps Online.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 00:30:24",
+  "files": []
+}

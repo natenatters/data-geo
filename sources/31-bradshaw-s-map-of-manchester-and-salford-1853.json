@@ -1,0 +1,22 @@
+{
+  "id": 31,
+  "name": "Bradshaw's Map of Manchester and Salford (1853)",
+  "description": "Town plan by the famous publisher of railway timetables. Published by Bradshaw and Blacklock.",
+  "source_url": "https://www.oldmapsonline.org/en/Manchester",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1853,
+  "year_end": 1853,
+  "era": "victorian",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "Available via Old Maps Online, likely has IIIF.\nScale: 1:17,000.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 00:30:24",
+  "files": []
+}

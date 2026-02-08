@@ -1,0 +1,22 @@
+{
+  "id": 128,
+  "name": "Van den Keere's 'Miniature Speed' Lancashire (1627)",
+  "description": "Pieter van den Keere's miniature county map of Lancashire, based on Speed's maps. Published by George Humble as a pocket atlas.",
+  "source_url": "https://commons.wikimedia.org/wiki/File:17th_Century_map_pf_Lancashire.JPG",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1627,
+  "year_end": 1627,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Pieter van den Keere (Petrus Kaerius), 1571-c.1646.\nOriginally engraved c.1599, first published 1617 in Latin Camden's Britannia by Blaeu.\nGeorge Humble published them 1627 as pocket versions of Speed's atlas.\nKnown as 'Miniature Speed' maps.\nWikimedia Commons: Category:Miniature_Speed_Atlas_(1627)_Pieter_van_den_Keere",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

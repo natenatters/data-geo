@@ -1,0 +1,22 @@
+{
+  "id": 110,
+  "name": "Manchester Bus Fares (1935)",
+  "description": "Map of bus fare zones in Manchester.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1935,
+  "year_end": 1935,
+  "era": "modern",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "From Manchester Archives+ Flickr album: Manchester Maps.\nhttps://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:49:20",
+  "updated_at": "2026-02-08 00:49:20",
+  "files": []
+}

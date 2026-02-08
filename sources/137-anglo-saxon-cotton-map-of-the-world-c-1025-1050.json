@@ -1,0 +1,22 @@
+{
+  "id": 137,
+  "name": "Anglo-Saxon 'Cotton' Map of the World (c.1025-1050)",
+  "description": "One of the earliest medieval maps showing Britain. Mappa mundi from the Cotton collection. British Library Cotton MS Tiberius B.V.",
+  "source_url": "https://www.bl.uk/collection/digitised-manuscripts-archives",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1025,
+  "year_end": 1050,
+  "era": "medieval",
+  "bounds_west": -180,
+  "bounds_south": -90,
+  "bounds_east": 180,
+  "bounds_north": 90,
+  "notes": "BL Cotton MS Tiberius B.V, f. 56v.\nAlso known as the 'Cottonian' or 'Anglo-Saxon' world map.\nOne of the earliest medieval mappae mundi showing recognizable Britain.\nBritain shown in the top-left corner.\nDated c.1025-1050, possibly from Canterbury.\nBL Digitised Manuscripts collection.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

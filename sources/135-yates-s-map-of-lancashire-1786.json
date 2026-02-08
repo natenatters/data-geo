@@ -1,0 +1,22 @@
+{
+  "id": 135,
+  "name": "Yates's Map of Lancashire (1786)",
+  "description": "William Yates's large-scale county survey of Lancashire. The first accurate large-scale map of the county, surveyed 1774-1786.",
+  "source_url": "https://maps.nls.uk/counties/lancashire.html",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1786,
+  "year_end": 1786,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "William Yates (fl.1774-1786).\nScale: 1 inch to 1 mile. Surveyed using triangulation.\nFirst truly accurate large-scale survey of Lancashire.\nShows Manchester in much more detail than earlier county maps.\nPredates the Ordnance Survey by decades.\nNLS has digitized version on Lancashire county maps page.\nHighly sought after by collectors.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

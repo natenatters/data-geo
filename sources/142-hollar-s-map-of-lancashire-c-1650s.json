@@ -1,0 +1,22 @@
+{
+  "id": 142,
+  "name": "Hollar's Map of Lancashire (c.1650s)",
+  "description": "Wenceslaus Hollar's map of Lancashire. Hollar was a Bohemian etcher who worked extensively in England.",
+  "source_url": null,
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1650,
+  "year_end": 1650,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Wenceslaus Hollar (1607-1677), Bohemian-born etcher.\nProduced maps and views across England.\nLancashire map from his English county series.\nSmaller format than Saxton/Speed but finely engraved.\nHollar is best known for his panoramic view of London before the Great Fire.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

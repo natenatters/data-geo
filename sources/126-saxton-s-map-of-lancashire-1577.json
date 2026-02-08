@@ -1,0 +1,22 @@
+{
+  "id": 126,
+  "name": "Saxton's Map of Lancashire (1577)",
+  "description": "Christopher Saxton's county map of Lancashire — part of the first atlas of England and Wales (1579). Engraved by Remigius Hogenberg. Shows Manchester as a small market town.",
+  "source_url": "https://commons.wikimedia.org/wiki/Category:Lord_Burghley's_Atlas_(1579)_-_BL_Royal_MS_18_D_III",
+  "source_type": "map_overlay",
+  "stage": 1,
+  "year_start": 1577,
+  "year_end": 1577,
+  "era": "pre-industrial",
+  "bounds_west": -3.2,
+  "bounds_south": 53.3,
+  "bounds_east": -2,
+  "bounds_north": 54.3,
+  "notes": "Part of Saxton's Atlas of England and Wales (1579), first complete county atlas.\nPatronised by Thomas Seckford. Engraved by Remigius Hogenberg.\nLord Burghley's copy: BL Royal MS 18 D III, ff.15v-16 (Lancashire).\nBurghley annotated it with locations of Catholic families.\nChetham's Library also holds a copy: https://library.chethams.com/collections/101-treasures-of-chethams/saxtons-atlas-of-england-and-wales/\nWikimedia Commons has images from Burghley's Atlas.",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

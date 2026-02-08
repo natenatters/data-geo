@@ -1,0 +1,22 @@
+{
+  "id": 38,
+  "name": "Record of Location of Aerial Bombs — Manchester (1940–41)",
+  "description": "49 annotated OS map sheets recording bomb damage during the Manchester Blitz. Fire bombs (red dots), high explosives (blue dots), line mines (green dots). Red shading = demolished; pink = damaged but standing.",
+  "source_url": "https://luna.manchester.ac.uk/luna/servlet/view/search?q=bomb+damage&sort=reference_number,title",
+  "source_type": "map_overlay",
+  "stage": 2,
+  "year_start": 1940,
+  "year_end": 1941,
+  "era": "modern",
+  "bounds_west": -2.27,
+  "bounds_south": 53.46,
+  "bounds_east": -2.22,
+  "bounds_north": 53.5,
+  "notes": "49 items (1 index + 48 map sheets). IIIF via LUNA (University of Manchester).\nRef: GB127.MISC/1192/1. LUNA collection: maps002~1~1\nBase on OS Revisions 1932-35 at 1:2500 scale.\nIIIF manifest pattern: https://luna.manchester.ac.uk/luna/servlet/iiif/m/maps002~1~1~{ID1}~{ID2}/manifest\nIIIF image pattern: https://luna.manchester.ac.uk/luna/servlet/iiif/maps002~1~1~{ID1}~{ID2}\n\nSheets by OS grid:\n  Index: 337981~123243\n  Sheet 96: pts 6,7,10,11,12,14,15,16 (IDs 342440~123244 through 342531~123251)\n  Sheet 97: pt 13 (342544~123252)\n  Sheet 104: pts 2,3,4,6,7,8,10,11,12,14,15,16 (342557~123253 through 342713~123265)\n  Sheet 104 composite (pts 6+7+10+11): 351132~123655 (city centre)\n  Sheet 105: pts 9,13 (342674~123262, 342726~123266)\n  Sheet 110: pts 12,16 (342843~123275, 342895~123279)\n  Sheet 111: pts 1-11,13-15 (342739~123267 through 342934~123282)\n  Sheet 111A: pts 1,2,3,5,6,7,10,11 (342947~123283 through 343038~123290)\n\nFire bombs = red dots, HE = blue dots, line mines = green dots.\nRed shading = demolished, pink = damaged but standing.\nChristmas Blitz 22-24 Dec 1940 killed ~684 people.\n\nAlso on Flickr: https://www.flickr.com/photos/manchesterarchiveplus/8255052692\nNot seen in public for 60 years before digitization by CHICC.\nUoM Georeferencer: https://manchester.oldmapsonline.org/\nNo AllMaps annotations yet — needs manual georeferencing.",
+  "iiif_url": "https://luna.manchester.ac.uk/luna/servlet/iiif/m/maps002~1~1~337981~123243/manifest",
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:30:24",
+  "updated_at": "2026-02-08 00:30:24",
+  "files": []
+}

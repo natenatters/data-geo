@@ -1,0 +1,22 @@
+{
+  "id": 124,
+  "name": "Gough Map of Britain (c.1360)",
+  "description": "Oldest surviving road map of Great Britain. Shows 'Mamcestre' with road connections. Held at the Bodleian Library, Oxford.",
+  "source_url": "https://digital.bodleian.ox.ac.uk/objects/faeff7fb-f8a7-44b5-95ed-cff9a9ffd198/",
+  "source_type": "reference_data",
+  "stage": 2,
+  "year_start": 1360,
+  "year_end": 1360,
+  "era": "medieval",
+  "bounds_west": -5.7,
+  "bounds_south": 50,
+  "bounds_east": 1.8,
+  "bounds_north": 58.7,
+  "notes": "Bodleian Library MS. Gough Gen. Top. 16.\nDated c.1360 (possibly with later additions).\nShows roads as red lines — earliest known British road map.\nManchester appears as 'Mamcestre' on road network.\nHigh-res IIIF viewer at Digital Bodleian.\nAlso: www.goughmap.org (deep zoom + scholarly annotations).",
+  "iiif_url": "https://iiif.bodleian.ox.ac.uk/iiif/manifest/faeff7fb-f8a7-44b5-95ed-cff9a9ffd198.json",
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

@@ -1,0 +1,22 @@
+{
+  "id": 125,
+  "name": "Münster's 'Anglia II Nova Tabula' (1540)",
+  "description": "First separately printed map of England. By Sebastian Münster for his Geographia (1540). Oriented with east at top. Key lists 17 important English places.",
+  "source_url": "https://maps.nls.uk/countries/england-and-wales/",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1540,
+  "year_end": 1540,
+  "era": "pre-industrial",
+  "bounds_west": -5.7,
+  "bounds_south": 50,
+  "bounds_east": 1.8,
+  "bounds_north": 55.8,
+  "notes": "Sebastian Münster (1488-1552), cosmographer and professor at Basel.\nFirst published in Geographia (1540), later in Cosmographia (1544+).\nOriented with East at top. Extends to Edinburgh, shows Irish east coast.\nNLS has this in their England & Wales collection.\nAlso on Flickr: https://www.flickr.com/photos/reciclassicat/39706787350",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 01:36:39",
+  "updated_at": "2026-02-08 01:36:39",
+  "files": []
+}

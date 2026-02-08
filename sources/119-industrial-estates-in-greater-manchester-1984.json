@@ -1,0 +1,22 @@
+{
+  "id": 119,
+  "name": "Industrial Estates in Greater Manchester (1984)",
+  "description": "Map of industrial estates across Greater Manchester.",
+  "source_url": "https://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "source_type": "reference_data",
+  "stage": 1,
+  "year_start": 1984,
+  "year_end": 1984,
+  "era": "modern",
+  "bounds_west": -2.5,
+  "bounds_south": 53.35,
+  "bounds_east": -2,
+  "bounds_north": 53.6,
+  "notes": "From Manchester Archives+ Flickr album: Manchester Maps.\nhttps://www.flickr.com/photos/manchesterarchiveplus/albums/72157628617413397/with/6593195247",
+  "iiif_url": null,
+  "georeference_url": null,
+  "tiles": [],
+  "created_at": "2026-02-08 00:49:20",
+  "updated_at": "2026-02-08 00:49:20",
+  "files": []
+}
