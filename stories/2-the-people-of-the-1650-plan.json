@@ -1,0 +1,13 @@
+{
+  "id": 2,
+  "title": "The People of the 1650 Plan",
+  "description": "Who were the 5,000 people living inside the oldest known map of Manchester? Humphrey Chetham founding his library, Lord Strange besieging the town, weavers building barricades, and the merchant families whose great-grandchildren would drive the Industrial Revolution.",
+  "content": null,
+  "content_file": "25-1650s-manchester-research.txt",
+  "year_start": 1642,
+  "year_end": 1653,
+  "era": "medieval",
+  "source_ids": [25, 9],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}
