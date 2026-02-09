@@ -1,0 +1,13 @@
+{
+  "id": 13,
+  "title": "After the Romans: Manchester 410-1066",
+  "description": "Manchester's last Roman coins date to ~340 AD. For the next 580 years, the site disappears from the record entirely \u2014 no archaeology, no texts, nothing \u2014 until Edward the Elder fortifies 'Mameceastre' in the Anglo-Saxon Chronicle entry for 919. The place-name survived in the Brittonic tradition as Cair Maunguid (Historia Brittonum, ~828), proving someone remembered the fort. Anglo-Saxon settlers arrived on the Irk/Irwell confluence, bringing the open-field farming system that would outlast everything. But of their lives we know almost nothing \u2014 they left no inscriptions, no documents, no maps. The closest we get to a documented Romano-British family in the North-West is St Patrick's Confessio (~mid-5th century), describing his father Calpurnius's villa estate somewhere in western Britain, with a functioning church and enough wealth to attract Irish slave raids.",
+  "content": null,
+  "content_file": "after-the-romans-research.txt",
+  "year_start": 410,
+  "year_end": 1066,
+  "era": "roman",
+  "source_ids": [],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}
