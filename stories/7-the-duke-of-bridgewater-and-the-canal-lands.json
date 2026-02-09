@@ -1,0 +1,13 @@
+{
+  "id": 7,
+  "title": "The Duke of Bridgewater and the Canal Lands",
+  "description": "The only major landowner who built his Manchester holdings rather than inheriting them. A 16th-century family bequest gave him Worsley's coal, and the canal he built to move it carved a corridor of land purchases straight into the heart of the city.",
+  "content": null,
+  "content_file": "duke-bridgewater-canal-research.txt",
+  "year_start": 1598,
+  "year_end": 1794,
+  "era": "industrial",
+  "source_ids": [11],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

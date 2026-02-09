@@ -1,0 +1,13 @@
+{
+  "id": 4,
+  "title": "The Earl of Derby and the Stanley Lands",
+  "description": "A marriage in 1385 and a battlefield gamble at Bosworth in 1485 built the Stanley empire across Lancashire — the feudal reward system that still held Cheetham, Pilkington, and Bury when Green surveyed Manchester three centuries later.",
+  "content": null,
+  "content_file": "earl-derby-stanley-research.txt",
+  "year_start": 1385,
+  "year_end": 1794,
+  "era": "medieval",
+  "source_ids": [11],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

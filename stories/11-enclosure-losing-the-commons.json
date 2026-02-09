@@ -1,0 +1,13 @@
+{
+  "id": 11,
+  "title": "Enclosure: Losing the Commons",
+  "description": "Between 1750 and 1850, lords used Acts of Parliament to privatise the common land that had sustained rural life for a thousand years. The grazing, the peat, the wood — gone. The choice was stark: stay and starve, or leave for the towns.",
+  "content": null,
+  "content_file": "enclosure-losing-the-commons-research.txt",
+  "year_start": 1750,
+  "year_end": 1850,
+  "era": "industrial",
+  "source_ids": [9, 11],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

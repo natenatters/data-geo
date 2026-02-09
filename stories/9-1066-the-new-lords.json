@@ -1,0 +1,13 @@
+{
+  "id": 9,
+  "title": "1066: The New Lords",
+  "description": "William replaced the entire Anglo-Saxon aristocracy with 200 Norman families and bolted rigid feudal lordship onto an existing communal farming system. The commons survived underneath — but every acre now had a master.",
+  "content": null,
+  "content_file": "norman-conquest-new-lords-research.txt",
+  "year_start": 1066,
+  "year_end": 1150,
+  "era": "medieval",
+  "source_ids": [],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

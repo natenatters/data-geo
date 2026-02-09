@@ -1,0 +1,13 @@
+{
+  "id": 3,
+  "title": "Lord Ducie and the Strangeways Estate",
+  "description": "How a dying woman's bequest to her accountant in 1713 created a Manchester estate that merged with a Gloucestershire peerage through marriage — the chain from medieval Strangeways to the Reynolds-Moreton family who held the land on Green's Plan.",
+  "content": null,
+  "content_file": "lord-ducie-strangeways-research.txt",
+  "year_start": 1713,
+  "year_end": 1794,
+  "era": "industrial",
+  "source_ids": [11, 9],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

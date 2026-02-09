@@ -1,0 +1,13 @@
+{
+  "id": 12,
+  "title": "The Migration: From Common Land to Mill Town",
+  "description": "Manchester's population exploded from 10,000 to 300,000 in a century. They came because the land could no longer hold them — enclosure destroyed the commons, factories undercut the handloom, and the dual economy that had defined Lancashire life since medieval times ended in a single generation.",
+  "content": null,
+  "content_file": "migration-to-the-mills-research.txt",
+  "year_start": 1780,
+  "year_end": 1850,
+  "era": "industrial",
+  "source_ids": [11, 12, 14, 3],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

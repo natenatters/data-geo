@@ -1,0 +1,13 @@
+{
+  "id": 8,
+  "title": "Managing the Manors: Manchester's Townships 1600-1700",
+  "description": "No mayor, no corporation — just the lord of the manor and his court. How 100 officers appointed at Michaelmas governed daily life from dunghills to football bans, while every household combined farming with weaving and the feudal shell slowly cracked around a proto-industrial economy.",
+  "content": null,
+  "content_file": "managing-the-manors-1600-1700-research.txt",
+  "year_start": 1600,
+  "year_end": 1700,
+  "era": "medieval",
+  "source_ids": [9, 11],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

@@ -1,0 +1,13 @@
+{
+  "id": 5,
+  "title": "Brasenose College and the Hulme Trust",
+  "description": "A grieving father left his Manchester fields to fund Oxford scholarships in 1691. The Industrial Revolution turned those fields into a fortune — the strange story behind 'Brazennofe College' on the map and Brazenose Street on the ground.",
+  "content": null,
+  "content_file": "brasenose-college-hulme-research.txt",
+  "year_start": 1691,
+  "year_end": 1794,
+  "era": "industrial",
+  "source_ids": [11, 9],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}

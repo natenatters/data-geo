@@ -1,0 +1,13 @@
+{
+  "id": 14,
+  "title": "The Industrial Acceleration: Canal, Jenny, Steam",
+  "description": "Three developments in thirty years — the Bridgewater Canal (1761), the Spinning Jenny (1764), and steam-powered mills (1781) — created a feedback loop that broke the thousand-year pastoral system and turned Manchester into the world's first industrial city.",
+  "content": null,
+  "content_file": "industrial-acceleration-research.txt",
+  "year_start": 1761,
+  "year_end": 1790,
+  "era": "industrial",
+  "source_ids": [11],
+  "created_at": "2026-02-08 00:00:00",
+  "updated_at": "2026-02-08 00:00:00"
+}
