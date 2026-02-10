@@ -17,11 +17,24 @@ const NarrativeSection = forwardRef<HTMLElement, Props>(
         ref={ref}
         data-period-id={period.id}
         className={`min-h-screen transition-opacity duration-500 ${
-          isActive ? 'opacity-100' : 'opacity-40'
+          isActive ? 'opacity-100' : 'opacity-60'
         }`}
       >
-        {/* Section body — top padding accounts for the fixed period nav bar */}
-        <div className="px-6 sm:px-10 pt-6 pb-10">
+        {/* Section body */}
+        <div className="px-6 sm:px-10 pt-10 pb-10">
+          {/* Section heading */}
+          <div className="mb-6 border-l-4 border-gray-300 dark:border-gray-600 pl-4">
+            <span className="text-xs font-mono text-gray-400 dark:text-gray-500 tabular-nums">
+              {period.yearStart}&ndash;{period.yearEnd}
+            </span>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mt-0.5">
+              {period.title}
+            </h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              {period.subtitle}
+            </p>
+          </div>
+
           {/* Narrative prose */}
           <div className="space-y-4">
             {paragraphs.map((p, i) => (

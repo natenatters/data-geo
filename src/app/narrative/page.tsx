@@ -129,6 +129,21 @@ export default function NarrativePage() {
     };
   }, []);
 
+  // Keyboard navigation: up/down arrows jump between periods
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
+      e.preventDefault();
+      const idx = NARRATIVE_PERIODS.findIndex(p => p.id === activePeriodId);
+      const next = e.key === 'ArrowDown'
+        ? Math.min(idx + 1, NARRATIVE_PERIODS.length - 1)
+        : Math.max(idx - 1, 0);
+      if (next !== idx) scrollTo(NARRATIVE_PERIODS[next].id);
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [activePeriodId]);
+
   // Sidebar track inset (rem) and thumb position
   const TRACK_INSET = 1.5; // rem from top/bottom
   const TRACK_INSET_TOTAL = TRACK_INSET * 2;
@@ -174,6 +189,12 @@ export default function NarrativePage() {
                 <p className="text-sm text-gray-400 dark:text-gray-500 mt-4">
                   Scroll down to begin. The map will update as you read.
                 </p>
+                {/* Animated scroll hint */}
+                <div className="mt-8 flex justify-center animate-bounce">
+                  <svg className="w-5 h-5 text-gray-300 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </div>
               </div>
 
               {/* Period sections */}

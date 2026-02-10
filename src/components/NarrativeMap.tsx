@@ -15,6 +15,10 @@ interface Props {
   activePeriodId: string;
 }
 
+function isDarkMode() {
+  return typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+}
+
 export default function NarrativeMap({ activePeriodId }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +29,7 @@ export default function NarrativeMap({ activePeriodId }: Props) {
   const [error, setError] = useState('');
   const lastPeriodRef = useRef<string>('');
   const builtRef = useRef(false);
+  const darkRef = useRef(isDarkMode());
 
   // Load CesiumJS from CDN
   useEffect(() => {
@@ -51,6 +56,10 @@ export default function NarrativeMap({ activePeriodId }: Props) {
     const Cesium = window.Cesium;
 
     try {
+      const dark = isDarkMode();
+      darkRef.current = dark;
+      const tileStyle = dark ? 'dark_all' : 'light_all';
+
       const viewer = new Cesium.Viewer(containerRef.current, {
         baseLayerPicker: false,
         geocoder: false,
@@ -64,7 +73,7 @@ export default function NarrativeMap({ activePeriodId }: Props) {
         selectionIndicator: false,
         baseLayer: new Cesium.ImageryLayer(
           new Cesium.UrlTemplateImageryProvider({
-            url: 'https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            url: `https://basemaps.cartocdn.com/${tileStyle}/{z}/{x}/{y}.png`,
             credit: 'CartoDB',
             maximumLevel: 19,
           })
@@ -87,7 +96,27 @@ export default function NarrativeMap({ activePeriodId }: Props) {
       setError(err instanceof Error ? err.message : 'Failed to initialize viewer');
     }
 
+    // Watch for dark mode toggle and swap basemap
+    const mo = new MutationObserver(() => {
+      const nowDark = isDarkMode();
+      if (nowDark === darkRef.current || !viewerRef.current) return;
+      darkRef.current = nowDark;
+      const v = viewerRef.current;
+      const layers = v.imageryLayers;
+      layers.removeAll();
+      const style = nowDark ? 'dark_all' : 'light_all';
+      layers.addImageryProvider(
+        new Cesium.UrlTemplateImageryProvider({
+          url: `https://basemaps.cartocdn.com/${style}/{z}/{x}/{y}.png`,
+          credit: 'CartoDB',
+          maximumLevel: 19,
+        })
+      );
+    });
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
     return () => {
+      mo.disconnect();
       if (viewerRef.current && !viewerRef.current.isDestroyed()) {
         viewerRef.current.destroy();
         viewerRef.current = null;
