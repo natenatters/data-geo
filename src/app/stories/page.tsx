@@ -9,7 +9,7 @@ export default function StoriesPage() {
   const [stories, setStories] = useState<Story[]>([]);
 
   useEffect(() => {
-    fetch('/api/stories').then(r => r.json()).then(setStories);
+    fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/data/stories.json`).then(r => r.json()).then(setStories);
   }, []);
 
   return (

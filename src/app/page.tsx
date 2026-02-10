@@ -30,7 +30,7 @@ export default function Dashboard() {
   const [selectedBucket, setSelectedBucket] = useState<number | null>(null);
 
   useEffect(() => {
-    fetch('/api/stats').then(r => r.json()).then(setStats);
+    fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/data/stats.json`).then(r => r.json()).then(setStats);
   }, []);
 
   if (!stats) {

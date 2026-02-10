@@ -1,6 +1,5 @@
 export type SourceType = 'map_overlay' | 'vector_features' | '3d_model' | 'reference_data';
 export type Era = 'roman' | 'medieval' | 'industrial' | 'victorian' | 'modern';
-export type FileType = 'image' | 'geotiff' | 'geojson' | 'czml' | 'kml' | 'other';
 
 export interface Tile {
   url: string;   // XYZ endpoint or WMS base URL
@@ -33,18 +32,6 @@ export interface Source {
   updated_at: string;
 }
 
-export interface SourceFile {
-  id: number;
-  source_id: number;
-  filename: string;
-  filepath: string;
-  filetype: FileType;
-  created_at: string;
-}
-
-export interface SourceWithFiles extends Source {
-  files: SourceFile[];
-}
 
 export interface Story {
   id: number;
@@ -82,38 +69,3 @@ export const SOURCE_TYPES: Record<SourceType, string> = {
   reference_data: 'Reference Data',
 };
 
-// Stage gate requirements — what fields are needed to advance TO each stage
-export const STAGE_GATES: Record<number, {
-  fields: (keyof Source)[];
-  label: string;
-  check?: (source: Source) => string | null;
-}> = {
-  2: { fields: [], label: 'No requirements' },
-  3: { fields: ['georeference_url'], label: 'Georeference annotation required' },
-  4: {
-    fields: [],
-    label: 'At least one georeferenced tile required',
-    check: (source) => source.tiles.some(t => t.georeferenced) ? null : 'Stage 4 requires at least one georeferenced tile',
-  },
-};
-
-
-export function getStageGateErrors(source: Source, targetStage: number): string[] {
-  const errors: string[] = [];
-  // Check all gates up to and including the target stage
-  for (let stage = 2; stage <= targetStage; stage++) {
-    const gate = STAGE_GATES[stage];
-    if (!gate) continue;
-    for (const field of gate.fields) {
-      const val = source[field];
-      if (val === null || val === undefined || val === '') {
-        errors.push(`Stage ${stage} requires ${field.replace(/_/g, ' ')}`);
-      }
-    }
-    if (gate.check) {
-      const err = gate.check(source);
-      if (err) errors.push(err);
-    }
-  }
-  return errors;
-}

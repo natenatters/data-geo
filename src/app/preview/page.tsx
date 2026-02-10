@@ -20,9 +20,10 @@ export default function PreviewPage() {
   const viewerRef = useRef<any>(null);
 
   useEffect(() => {
-    fetch('/api/sources?has_tiles=1')
+    fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/data/sources.json`)
       .then(r => r.json())
-      .then((data: Source[]) => {
+      .then((all: Source[]) => {
+        const data = all.filter(s => s.tiles.length > 0);
         setSources(data);
         // Enable only the first georeferenced source by default
         const initial = new Map<number, Set<number>>();

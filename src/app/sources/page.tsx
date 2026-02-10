@@ -1,35 +1,43 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import type { Source, Era, SourceType } from '@/lib/types';
 import { ERAS, SOURCE_TYPES, STAGES } from '@/lib/types';
 import SourceCard from '@/components/SourceCard';
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export default function SourcesPage() {
-  const [sources, setSources] = useState<Source[]>([]);
+  const [allSources, setAllSources] = useState<Source[]>([]);
   const [era, setEra] = useState('');
   const [stage, setStage] = useState('');
   const [sourceType, setSourceType] = useState('');
   const [sort, setSort] = useState('year_start');
   const [order, setOrder] = useState('asc');
 
-  const fetchSources = useCallback(() => {
-    const params = new URLSearchParams();
-    if (era) params.set('era', era);
-    if (stage) params.set('stage', stage);
-    if (sourceType) params.set('source_type', sourceType);
-    params.set('sort', sort);
-    params.set('order', order);
-
-    fetch(`/api/sources?${params}`)
-      .then(r => r.json())
-      .then(setSources);
-  }, [era, stage, sourceType, sort, order]);
-
   useEffect(() => {
-    fetchSources();
-  }, [fetchSources]);
+    fetch(`${basePath}/data/sources.json`).then(r => r.json()).then(setAllSources);
+  }, []);
 
+  const sources = useMemo(() => {
+    let filtered = [...allSources];
+    if (era) filtered = filtered.filter(s => s.era === era);
+    if (stage) filtered = filtered.filter(s => s.stage === parseInt(stage));
+    if (sourceType) filtered = filtered.filter(s => s.source_type === sourceType);
+
+    const sortOrder = order === 'desc' ? -1 : 1;
+    filtered.sort((a, b) => {
+      const aVal = a[sort as keyof Source];
+      const bVal = b[sort as keyof Source];
+      if (aVal == null && bVal == null) return 0;
+      if (aVal == null) return 1;
+      if (bVal == null) return -1;
+      if (aVal < bVal) return -1 * sortOrder;
+      if (aVal > bVal) return 1 * sortOrder;
+      return 0;
+    });
+    return filtered;
+  }, [allSources, era, stage, sourceType, sort, order]);
 
   return (
     <div className="space-y-4">
@@ -97,17 +105,13 @@ export default function SourcesPage() {
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {sources.map(source => (
-          <SourceCard
-            key={source.id}
-            source={source}
-
-          />
+          <SourceCard key={source.id} source={source} />
         ))}
       </div>
 
       {sources.length === 0 && (
         <div className="text-center text-gray-500 dark:text-gray-400 text-sm py-12">
-          No sources found. Try adjusting filters or add a new source.
+          No sources found. Try adjusting filters.
         </div>
       )}
     </div>
