@@ -180,10 +180,14 @@ const stories = readStories();
 const stats = computeStats(sources, stories);
 const exportConfig = computeExportConfig(sources);
 
-fs.writeFileSync(path.join(OUT_DIR, 'sources.json'), JSON.stringify(sources, null, 2));
-fs.writeFileSync(path.join(OUT_DIR, 'stories.json'), JSON.stringify(stories, null, 2));
-fs.writeFileSync(path.join(OUT_DIR, 'stats.json'), JSON.stringify(stats, null, 2));
-fs.writeFileSync(path.join(OUT_DIR, 'export-config.json'), JSON.stringify(exportConfig, null, 2));
+// Minified for production, readable for debugging
+const pretty = process.env.NODE_ENV !== 'production';
+const stringify = (data) => pretty ? JSON.stringify(data, null, 2) : JSON.stringify(data);
+
+fs.writeFileSync(path.join(OUT_DIR, 'sources.json'), stringify(sources));
+fs.writeFileSync(path.join(OUT_DIR, 'stories.json'), stringify(stories));
+fs.writeFileSync(path.join(OUT_DIR, 'stats.json'), stringify(stats));
+fs.writeFileSync(path.join(OUT_DIR, 'export-config.json'), stringify(exportConfig));
 
 console.log(`Prebuild complete:`);
 console.log(`  ${sources.length} sources → public/data/sources.json`);

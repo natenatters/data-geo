@@ -14,6 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://cesium.com" />
+        <link rel="preconnect" href="https://basemaps.cartocdn.com" />
+        <link rel="dns-prefetch" href="https://allmaps.xyz" />
+      </head>
       <body className="bg-gray-50 dark:bg-gray-950 dark:text-gray-100 min-h-screen">
         <script
           dangerouslySetInnerHTML={{
