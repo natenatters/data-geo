@@ -51,6 +51,7 @@ export default function NarrativePage() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   function scrollTo(id: string) {
+    setActivePeriodId(id);
     const el = sectionRefs.current[id];
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }

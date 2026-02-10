@@ -27,6 +27,7 @@ export default function NarrativeMap({ activePeriodId }: Props) {
   const entitiesByPeriod = useRef<Record<string, any[]>>({});
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState('');
+  const [fading, setFading] = useState(false);
   const lastPeriodRef = useRef<string>('');
   const builtRef = useRef(false);
   const darkRef = useRef(isDarkMode());
@@ -222,44 +223,55 @@ export default function NarrativeMap({ activePeriodId }: Props) {
     lastPeriodRef.current = NARRATIVE_PERIODS[0].id;
   }, [loaded]);
 
-  // Toggle visibility on period change (no remove/re-add)
+  // Toggle visibility on period change with fade transition
   useEffect(() => {
     const viewer = viewerRef.current;
     if (!viewer || !loaded || !builtRef.current) return;
     if (activePeriodId === lastPeriodRef.current) return;
 
-    // Hide old period entities
-    const oldEntities = entitiesByPeriod.current[lastPeriodRef.current];
-    if (oldEntities) {
-      for (const e of oldEntities) e.show = false;
-    }
-
-    // Show new period entities
-    const newEntities = entitiesByPeriod.current[activePeriodId];
-    if (newEntities) {
-      for (const e of newEntities) e.show = true;
-    }
-
-    lastPeriodRef.current = activePeriodId;
-
-    // Fly camera
     const Cesium = window.Cesium;
     const period = NARRATIVE_PERIODS.find(p => p.id === activePeriodId);
     if (!period) return;
 
-    viewer.camera.flyTo({
-      destination: Cesium.Cartesian3.fromDegrees(
-        period.camera.longitude,
-        period.camera.latitude,
-        period.camera.height,
-      ),
-      orientation: {
-        heading: 0,
-        pitch: period.camera.pitch ?? Cesium.Math.toRadians(-90),
-        roll: 0,
-      },
-      duration: 1.5,
-    });
+    // Fade in overlay
+    setFading(true);
+
+    // After overlay is visible, swap entities and start camera fly
+    const swapTimer = setTimeout(() => {
+      // Hide old period entities
+      const oldEntities = entitiesByPeriod.current[lastPeriodRef.current];
+      if (oldEntities) {
+        for (const e of oldEntities) e.show = false;
+      }
+
+      // Show new period entities
+      const newEntities = entitiesByPeriod.current[activePeriodId];
+      if (newEntities) {
+        for (const e of newEntities) e.show = true;
+      }
+
+      lastPeriodRef.current = activePeriodId;
+
+      // Fly camera
+      viewer.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(
+          period.camera.longitude,
+          period.camera.latitude,
+          period.camera.height,
+        ),
+        orientation: {
+          heading: 0,
+          pitch: period.camera.pitch ?? Cesium.Math.toRadians(-90),
+          roll: 0,
+        },
+        duration: 1.5,
+      });
+
+      // Fade out overlay after camera starts moving
+      setTimeout(() => setFading(false), 400);
+    }, 300);
+
+    return () => clearTimeout(swapTimer);
   }, [activePeriodId, loaded]);
 
   if (error) {
@@ -278,6 +290,13 @@ export default function NarrativeMap({ activePeriodId }: Props) {
         </div>
       )}
       <div ref={containerRef} className="w-full h-full" />
+
+      {/* Fade overlay for period transitions */}
+      <div
+        className={`absolute inset-0 bg-gray-100 dark:bg-gray-900 pointer-events-none transition-opacity duration-300 ${
+          fading ? 'opacity-60' : 'opacity-0'
+        }`}
+      />
 
       {/* Legend overlay */}
       {loaded && (
