@@ -6,6 +6,7 @@ import { NARRATIVE_PERIODS } from '@/lib/narrative-periods';
 import NarrativeSection from '@/components/NarrativeSection';
 
 const NarrativeMap = dynamic(() => import('@/components/NarrativeMap'), { ssr: false });
+const NarrativeTree = dynamic(() => import('@/components/NarrativeTree'), { ssr: false });
 
 // Proportional positions for the timeline sidebar (0-1)
 const TIMELINE_ITEMS = (() => {
@@ -20,22 +21,24 @@ const TIMELINE_ITEMS = (() => {
   }));
 })();
 
-// Parse hash: "#period-id:scrollPct" → { id, scrollPct (0-1000) }
-function parseHash(): { id: string; scrollPct: number } {
-  const fallback = { id: NARRATIVE_PERIODS[0].id, scrollPct: 0 };
+// Parse hash: "#period-id:scrollPct:viewMode"
+function parseHash(): { id: string; scrollPct: number; view: 'map' | 'tree' } {
+  const fallback = { id: NARRATIVE_PERIODS[0].id, scrollPct: 0, view: 'map' as const };
   if (typeof window === 'undefined') return fallback;
   const raw = window.location.hash.slice(1);
   if (!raw) return fallback;
-  const [id, pctStr] = raw.split(':');
+  const [id, pctStr, viewStr] = raw.split(':');
   const valid = NARRATIVE_PERIODS.some(p => p.id === id);
   return {
     id: valid ? id : fallback.id,
     scrollPct: pctStr ? parseInt(pctStr, 10) || 0 : 0,
+    view: viewStr === 'tree' ? 'tree' : 'map',
   };
 }
 
 export default function NarrativePage() {
   const [activePeriodId, setActivePeriodId] = useState(NARRATIVE_PERIODS[0].id);
+  const [viewMode, setViewMode] = useState<'map' | 'tree'>('map');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
@@ -56,21 +59,23 @@ export default function NarrativePage() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   }
 
-  // Update URL hash with period + scroll progress (debounced to avoid thrashing)
+  // Update URL hash with period + scroll progress + view mode (debounced)
   const hashTimer = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => {
     clearTimeout(hashTimer.current);
     hashTimer.current = setTimeout(() => {
       const pct = Math.round(scrollProgress * 1000);
-      window.history.replaceState(null, '', `#${activePeriodId}:${pct}`);
+      const suffix = viewMode === 'tree' ? ':tree' : '';
+      window.history.replaceState(null, '', `#${activePeriodId}:${pct}${suffix}`);
     }, 300);
     return () => clearTimeout(hashTimer.current);
-  }, [activePeriodId, scrollProgress]);
+  }, [activePeriodId, scrollProgress, viewMode]);
 
-  // On mount, restore period + scroll position from hash (after hydration)
+  // On mount, restore period + scroll position + view mode from hash
   useEffect(() => {
-    const { id, scrollPct } = parseHash();
+    const { id, scrollPct, view } = parseHash();
     if (id !== NARRATIVE_PERIODS[0].id) setActivePeriodId(id);
+    if (view === 'tree') setViewMode('tree');
     if (scrollPct > 0) {
       const timer = setTimeout(() => {
         const el = scrollContainerRef.current;
@@ -152,9 +157,43 @@ export default function NarrativePage() {
   return (
     <div className="fixed inset-0 top-14 z-0">
       <div className="flex flex-col lg:flex-row h-full">
-        {/* Left: Sticky map */}
-        <div className="h-[60vh] lg:h-full lg:w-1/2 flex-shrink-0">
-          <NarrativeMap activePeriodId={activePeriodId} />
+        {/* Left: Map or Tree view */}
+        <div className="h-[60vh] lg:h-full lg:w-1/2 flex-shrink-0 relative">
+          {viewMode === 'map' ? (
+            <NarrativeMap activePeriodId={activePeriodId} />
+          ) : (
+            <NarrativeTree activePeriodId={activePeriodId} />
+          )}
+
+          {/* View toggle — overlaid top-left */}
+          <div className="absolute top-3 left-3 z-20 flex bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg shadow-md border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <button
+              onClick={() => setViewMode('map')}
+              className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                viewMode === 'map'
+                  ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+              }`}
+            >
+              <svg className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+              </svg>
+              Map
+            </button>
+            <button
+              onClick={() => setViewMode('tree')}
+              className={`px-3 py-1.5 text-xs font-medium transition-colors ${
+                viewMode === 'tree'
+                  ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
+                  : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+              }`}
+            >
+              <svg className="w-3.5 h-3.5 inline-block mr-1 -mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+              Lineage
+            </button>
+          </div>
         </div>
 
         {/* Right: Header + Content + Timeline sidebar */}
