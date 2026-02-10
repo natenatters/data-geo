@@ -41,6 +41,8 @@ export default function NarrativePage() {
   const [viewMode, setViewMode] = useState<'map' | 'tree'>('map');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const isTreeDriving = useRef(false);
+  const treeDriveTimer = useRef<ReturnType<typeof setTimeout>>();
 
   const setSectionRef = useCallback((id: string) => (el: HTMLElement | null) => {
     sectionRefs.current[id] = el;
@@ -52,11 +54,24 @@ export default function NarrativePage() {
   );
 
   const [scrollProgress, setScrollProgress] = useState(0);
+  const activeFraction = TIMELINE_ITEMS.find(t => t.id === activePeriodId)?.fraction ?? 0;
+  const sidebarProgress = viewMode === 'tree' ? activeFraction : scrollProgress;
 
   function scrollTo(id: string) {
     setActivePeriodId(id);
     const el = sectionRefs.current[id];
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // When tree scroll changes the visible period, sync text panel
+  function handleTreePeriodChange(periodId: string) {
+    if (periodId === activePeriodId) return;
+    isTreeDriving.current = true;
+    setActivePeriodId(periodId);
+    const el = sectionRefs.current[periodId];
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    clearTimeout(treeDriveTimer.current);
+    treeDriveTimer.current = setTimeout(() => { isTreeDriving.current = false; }, 800);
   }
 
   // Update URL hash with period + scroll progress + view mode (debounced)
@@ -113,7 +128,7 @@ export default function NarrativePage() {
 
         if (visible.length > 0) {
           const id = visible[0].target.getAttribute('data-period-id');
-          if (id) setActivePeriodId(id);
+          if (id && !isTreeDriving.current) setActivePeriodId(id);
         }
       },
       {
@@ -162,7 +177,7 @@ export default function NarrativePage() {
           {viewMode === 'map' ? (
             <NarrativeMap activePeriodId={activePeriodId} />
           ) : (
-            <NarrativeTree activePeriodId={activePeriodId} />
+            <NarrativeTree activePeriodId={activePeriodId} onPeriodChange={handleTreePeriodChange} />
           )}
 
           {/* View toggle — overlaid top-left */}
@@ -308,17 +323,17 @@ export default function NarrativePage() {
 
               {/* Track line (progress fill — follows scroll) */}
               <div
-                className="absolute left-1/2 -translate-x-px top-6 w-0.5 bg-gray-400 dark:bg-gray-500"
+                className={`absolute left-1/2 -translate-x-px top-6 w-0.5 bg-gray-400 dark:bg-gray-500 ${viewMode === 'tree' ? 'transition-[height] duration-500' : ''}`}
                 style={{
-                  height: `calc(${scrollProgress * 100}% - ${scrollProgress * TRACK_INSET_TOTAL}rem)`,
+                  height: `calc(${sidebarProgress * 100}% - ${sidebarProgress * TRACK_INSET_TOTAL}rem)`,
                 }}
               />
 
               {/* Scroll thumb — moves continuously */}
               <div
-                className="absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gray-900 dark:bg-gray-100 shadow-md border-2 border-white dark:border-gray-900 z-20 pointer-events-none"
+                className={`absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gray-900 dark:bg-gray-100 shadow-md border-2 border-white dark:border-gray-900 z-20 pointer-events-none ${viewMode === 'tree' ? 'transition-[top] duration-500' : ''}`}
                 style={{
-                  top: `calc(${TRACK_INSET - scrollProgress * TRACK_INSET_TOTAL}rem + ${scrollProgress * 100}%)`,
+                  top: `calc(${TRACK_INSET - sidebarProgress * TRACK_INSET_TOTAL}rem + ${sidebarProgress * 100}%)`,
                 }}
               />
 

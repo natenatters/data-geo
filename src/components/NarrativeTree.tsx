@@ -14,6 +14,7 @@ import { NARRATIVE_PERIODS } from '@/lib/narrative-periods';
 
 interface Props {
   activePeriodId: string;
+  onPeriodChange?: (periodId: string) => void;
 }
 
 const LANES: LineageNode['lane'][] = ['crown', 'lancaster', 'cornwall'];
@@ -26,14 +27,20 @@ function yPct(year: number) {
 
 // Total height of the tree in pixels — proportional spacing
 const TREE_HEIGHT = 3000;
+const PADDING_Y = 60;
+const TOTAL_HEIGHT = TREE_HEIGHT + PADDING_Y * 2;
 
 function yPx(year: number) {
-  return ((year - LINEAGE_YEAR_MIN) / YEAR_RANGE) * TREE_HEIGHT;
+  return PADDING_Y + ((year - LINEAGE_YEAR_MIN) / YEAR_RANGE) * TREE_HEIGHT;
 }
 
-export default function NarrativeTree({ activePeriodId }: Props) {
+export default function NarrativeTree({ activePeriodId, onPeriodChange }: Props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeNodeRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const isAutoScrolling = useRef(false);
+  const selfTriggered = useRef(false);
+  const currentPeriodRef = useRef(activePeriodId);
+  currentPeriodRef.current = activePeriodId;
 
   const activePeriod = useMemo(
     () => NARRATIVE_PERIODS.find(p => p.id === activePeriodId),
@@ -70,19 +77,56 @@ export default function NarrativeTree({ activePeriodId }: Props) {
     });
   }, []);
 
-  // Auto-scroll to active period nodes
+  // Auto-scroll to active period nodes — but skip if the tree itself triggered the change
   useEffect(() => {
-    // Find first node in the active period
+    if (selfTriggered.current) {
+      selfTriggered.current = false;
+      return;
+    }
     const activeNode = LINEAGE_NODES.find(n => n.periodId === activePeriodId);
     if (!activeNode) return;
     const el = activeNodeRefs.current[activeNode.id];
     if (el) {
+      isAutoScrolling.current = true;
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { isAutoScrolling.current = false; }, 800);
     }
   }, [activePeriodId]);
 
+  // Detect active period from manual tree scroll
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    function onScroll() {
+      if (!el || isAutoScrolling.current || !onPeriodChange) return;
+      const max = el.scrollHeight - el.clientHeight;
+      const t = max > 0 ? el.scrollTop / max : 0;
+      // Slide the reference point: near top-edge when scrolled up, center in middle, near bottom-edge when scrolled down
+      const bias = 0.1 + t * 0.8;
+      const refPx = el.scrollTop + el.clientHeight * bias;
+      // Build reference points from nodes + period start years (fills gaps where periods have no early nodes)
+      let closestPeriodId = NARRATIVE_PERIODS[0].id;
+      let closestDist = Infinity;
+      for (const node of LINEAGE_NODES) {
+        const dist = Math.abs(yPx((node.yearStart + node.yearEnd) / 2) - refPx);
+        if (dist < closestDist) { closestDist = dist; closestPeriodId = node.periodId; }
+      }
+      for (const period of NARRATIVE_PERIODS) {
+        const dist = Math.abs(yPx(period.yearStart) - refPx);
+        if (dist < closestDist) { closestDist = dist; closestPeriodId = period.id; }
+      }
+      // Only trigger if the period actually changed
+      if (closestPeriodId !== currentPeriodRef.current) {
+        selfTriggered.current = true;
+        onPeriodChange(closestPeriodId);
+      }
+    }
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [onPeriodChange]);
+
   return (
-    <div className="w-full h-full flex flex-col bg-gray-50 dark:bg-gray-950">
+    <div className="w-full h-full flex flex-col bg-gray-50 dark:bg-gray-950 pt-10">
       {/* Lane headers */}
       <div className="flex-shrink-0 grid grid-cols-3 border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm z-10">
         {LANES.map(lane => (
@@ -99,12 +143,14 @@ export default function NarrativeTree({ activePeriodId }: Props) {
       </div>
 
       {/* Scrollable tree */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto scrollbar-none relative">
-        <div className="relative" style={{ height: TREE_HEIGHT }}>
+      <div ref={scrollRef} className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-none relative">
+        <div className="relative" style={{ height: TOTAL_HEIGHT }}>
           {/* Period background bands */}
-          {NARRATIVE_PERIODS.map(period => {
-            const top = yPx(period.yearStart);
-            const height = yPx(period.yearEnd) - top;
+          {NARRATIVE_PERIODS.map((period, periodIdx) => {
+            const isFirst = periodIdx === 0;
+            const isLast = periodIdx === NARRATIVE_PERIODS.length - 1;
+            const top = isFirst ? 0 : yPx(period.yearStart);
+            const height = (isLast ? TOTAL_HEIGHT : yPx(period.yearEnd)) - top;
             const isActive = period.id === activePeriodId;
             return (
               <div
@@ -138,7 +184,7 @@ export default function NarrativeTree({ activePeriodId }: Props) {
           ))}
 
           {/* Cross-lane SVG connections */}
-          <svg className="absolute inset-0 w-full pointer-events-none" style={{ height: TREE_HEIGHT }}>
+          <svg className="absolute inset-0 w-full pointer-events-none" style={{ height: TOTAL_HEIGHT }}>
             {crossLaneLinks.map((link, i) => {
               const isActive = link.from.periodId === activePeriodId || link.to.periodId === activePeriodId;
               return (
@@ -216,7 +262,7 @@ export default function NarrativeTree({ activePeriodId }: Props) {
                         style={{ backgroundColor: LANE_COLORS[lane] }}
                       />
                       {/* Label */}
-                      <div className={`mt-1 text-center whitespace-nowrap ${isActive ? 'max-w-[140px]' : 'max-w-[100px]'}`}>
+                      <div className={`mt-1 text-center ${isActive ? 'max-w-[140px]' : 'max-w-[120px]'}`}>
                         <div className={`font-semibold truncate ${
                           isActive ? 'text-xs text-gray-900 dark:text-gray-100' : 'text-[10px] text-gray-500 dark:text-gray-500'
                         }`}>
