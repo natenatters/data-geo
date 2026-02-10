@@ -121,7 +121,7 @@ function ReadOnlyField({ label, value, type = 'text' }: { label: string; value: 
   return (
     <div className="flex items-start gap-3 py-2.5 border-b border-gray-100 dark:border-gray-800 last:border-0">
       <span className="text-sm text-gray-500 dark:text-gray-400 w-32 shrink-0 pt-0.5">{label}</span>
-      {type === 'url' ? (
+      {type === 'url' && /^https?:\/\//i.test(value) ? (
         <a href={value} target="_blank" rel="noopener noreferrer"
           className="text-sm text-blue-600 dark:text-blue-400 hover:underline truncate">{value}</a>
       ) : (
