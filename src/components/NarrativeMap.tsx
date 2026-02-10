@@ -281,7 +281,7 @@ export default function NarrativeMap({ activePeriodId }: Props) {
 
       {/* Legend overlay */}
       {loaded && (
-        <div className="absolute bottom-3 left-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md pointer-events-none">
+        <div className="hidden lg:block absolute bottom-3 left-3 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-md pointer-events-none">
           <div className="space-y-1">
             {LEGEND_ENTRIES.map(entry => (
               <div key={entry.label} className="flex items-center gap-2">
