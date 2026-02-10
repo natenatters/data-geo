@@ -8,6 +8,7 @@ const links = [
   { href: '/', label: 'Dashboard' },
   { href: '/sources', label: 'Sources' },
   { href: '/stories', label: 'Stories' },
+  { href: '/narrative', label: 'Narrative' },
   { href: '/sources/new', label: 'Add Source' },
   { href: '/preview', label: 'Preview' },
   { href: '/export', label: 'Export' },
