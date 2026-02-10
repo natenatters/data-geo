@@ -13,9 +13,12 @@ declare global {
 interface Props {
   sources?: Source[];
   enabledTiles?: Map<number, Set<number>>;
+  opacities?: Map<number, number>;
+  layerOrder?: number[];
+  onViewerReady?: (viewer: unknown) => void;
 }
 
-export default function CesiumPreview({ sources, enabledTiles }: Props) {
+export default function CesiumPreview({ sources, enabledTiles, opacities, layerOrder, onViewerReady }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const viewerRef = useRef<any>(null);
@@ -78,6 +81,7 @@ export default function CesiumPreview({ sources, enabledTiles }: Props) {
       });
 
       viewerRef.current = viewer;
+      if (onViewerReady) onViewerReady(viewer);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to initialize viewer');
     }
@@ -90,7 +94,7 @@ export default function CesiumPreview({ sources, enabledTiles }: Props) {
     };
   }, [loaded]);
 
-  // Sync imagery layers with sources + enabledTiles
+  // Sync imagery layers with sources + enabledTiles + opacities + layerOrder
   useEffect(() => {
     const viewer = viewerRef.current;
     if (!viewer || !loaded) return;
@@ -120,45 +124,86 @@ export default function CesiumPreview({ sources, enabledTiles }: Props) {
       }
     });
 
-    // Add layers for newly desired tiles
-    if (sources) {
-      for (const source of sources) {
-        const enabledIndices = enabledTiles?.get(source.id);
-        if (!enabledIndices) continue;
+    // Build ordered list of source IDs for layer stacking
+    const order = layerOrder && layerOrder.length > 0
+      ? layerOrder
+      : (sources || []).map(s => s.id);
 
-        Array.from(enabledIndices).forEach(idx => {
-          const key = `${source.id}-${idx}`;
-          if (currentLayers.has(key)) return;
-          if (idx >= source.tiles.length) return;
+    // Add layers for newly desired tiles, in layer order (first = bottom)
+    for (const sourceId of order) {
+      const source = sources?.find(s => s.id === sourceId);
+      if (!source) continue;
+      const enabledIndices = enabledTiles?.get(source.id);
+      if (!enabledIndices) continue;
 
-          try {
-            const tile = source.tiles[idx];
-            // Cache-bust using source updated_at so re-georeferenced tiles load fresh
-            const cacheBust = source.updated_at ? `${tile.url.includes('?') ? '&' : '?'}_t=${encodeURIComponent(source.updated_at)}` : '';
-            const provider = tile.type === 'wms'
-              ? new Cesium.WebMapServiceImageryProvider({
-                  url: tile.url,
-                  layers: tile.wms_layers || '',
-                  parameters: { transparent: true, format: 'image/png' },
-                  credit: source.name,
-                })
-              : new Cesium.UrlTemplateImageryProvider({
-                  url: tile.url + cacheBust,
-                  maximumLevel: 18,
-                  tileWidth: 256,
-                  tileHeight: 256,
-                  credit: source.name,
-                });
-            const layer = viewer.imageryLayers.addImageryProvider(provider);
-            layer.alpha = 0.75;
-            currentLayers.set(key, layer);
-          } catch (err) {
-            console.warn(`Failed to add imagery for ${key}:`, err);
-          }
-        });
-      }
+      Array.from(enabledIndices).sort().forEach(idx => {
+        const key = `${source.id}-${idx}`;
+        if (currentLayers.has(key)) return;
+        if (idx >= source.tiles.length) return;
+
+        try {
+          const tile = source.tiles[idx];
+          const cacheBust = source.updated_at ? `${tile.url.includes('?') ? '&' : '?'}_t=${encodeURIComponent(source.updated_at)}` : '';
+          const provider = tile.type === 'wms'
+            ? new Cesium.WebMapServiceImageryProvider({
+                url: tile.url,
+                layers: tile.wms_layers || '',
+                parameters: { transparent: true, format: 'image/png' },
+                credit: source.name,
+              })
+            : new Cesium.UrlTemplateImageryProvider({
+                url: tile.url + cacheBust,
+                maximumLevel: 18,
+                tileWidth: 256,
+                tileHeight: 256,
+                credit: source.name,
+              });
+          const layer = viewer.imageryLayers.addImageryProvider(provider);
+          layer.alpha = opacities?.get(source.id) ?? 0.75;
+          currentLayers.set(key, layer);
+        } catch (err) {
+          console.warn(`Failed to add imagery for ${key}:`, err);
+        }
+      });
     }
-  }, [sources, enabledTiles, loaded]);
+
+    // Update opacity for all existing layers
+    Array.from(currentLayers.entries()).forEach(([key, layer]) => {
+      const sourceId = parseInt(key.split('-')[0]);
+      layer.alpha = opacities?.get(sourceId) ?? 0.75;
+    });
+
+    // Re-order layers in the viewer to match layerOrder
+    // Index 0 in imageryLayers is the base layer, overlay layers start at 1
+    const baseOffset = 1; // skip base map layer
+    const orderedKeys: string[] = [];
+    for (const sourceId of order) {
+      const source = sources?.find(s => s.id === sourceId);
+      if (!source) continue;
+      const enabledIndices = enabledTiles?.get(source.id);
+      if (!enabledIndices) continue;
+      Array.from(enabledIndices).sort().forEach(idx => {
+        const key = `${source.id}-${idx}`;
+        if (currentLayers.has(key)) orderedKeys.push(key);
+      });
+    }
+
+    // Move each layer to its correct position
+    orderedKeys.forEach((key, targetIdx) => {
+      const layer = currentLayers.get(key);
+      if (!layer) return;
+      const desiredIndex = baseOffset + targetIdx;
+      const currentIndex = viewer.imageryLayers.indexOf(layer);
+      if (currentIndex >= 0 && currentIndex !== desiredIndex) {
+        const diff = desiredIndex - currentIndex;
+        if (diff > 0) {
+          for (let i = 0; i < diff; i++) viewer.imageryLayers.raise(layer);
+        } else {
+          for (let i = 0; i < -diff; i++) viewer.imageryLayers.lower(layer);
+        }
+      }
+    });
+  }, [sources, enabledTiles, opacities, layerOrder, loaded]);
 
   if (error) {
     return (
