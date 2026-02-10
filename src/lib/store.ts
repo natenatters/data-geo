@@ -6,7 +6,6 @@ const SOURCES_DIR = path.join(process.cwd(), 'sources');
 const META_DIR = path.join(process.cwd(), 'sources', 'meta');
 const DATA_DIR = path.join(process.cwd(), 'data');
 const STORIES_DIR = path.join(process.cwd(), 'stories');
-const PERIOD_QUALITY_FILE = path.join(META_DIR, 'period-quality.json');
 
 // Ensure dirs exist
 fs.mkdirSync(SOURCES_DIR, { recursive: true });
@@ -442,21 +441,3 @@ export function deleteStory(id: number): boolean {
   return true;
 }
 
-// --- Period Quality ---
-
-export interface PeriodQuality {
-  start: number;
-  end: number;
-  quality: 'good' | 'sparse' | 'gap' | 'rich';
-  notes?: string;
-}
-
-export function getPeriodQuality(): PeriodQuality[] {
-  if (!fs.existsSync(PERIOD_QUALITY_FILE)) return [];
-  const raw = fs.readFileSync(PERIOD_QUALITY_FILE, 'utf-8');
-  return JSON.parse(raw);
-}
-
-export function setPeriodQuality(periods: PeriodQuality[]): void {
-  fs.writeFileSync(PERIOD_QUALITY_FILE, JSON.stringify(periods, null, 2) + '\n');
-}

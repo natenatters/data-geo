@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Timeline from '@/components/Timeline';
-import type { TimelineBucket, BucketStory, PeriodQuality } from '@/components/Timeline';
+import type { TimelineBucket, BucketStory } from '@/components/Timeline';
 import { STAGES, ERAS, SOURCE_TYPES } from '@/lib/types';
 import type { Era } from '@/lib/types';
 
@@ -25,63 +25,13 @@ interface Stats {
   undated: UndatedSource[];
 }
 
-const QUALITY_OPTIONS: { value: PeriodQuality['quality']; label: string; color: string }[] = [
-  { value: 'rich', label: 'Rich', color: '#3b82f6' },
-  { value: 'good', label: 'Good', color: '#22c55e' },
-  { value: 'sparse', label: 'Sparse', color: '#eab308' },
-  { value: 'gap', label: 'Gap', color: '#ef4444' },
-];
-
 export default function Dashboard() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [selectedBucket, setSelectedBucket] = useState<number | null>(null);
-  const [periodQuality, setPeriodQuality] = useState<PeriodQuality[]>([]);
-  const [tagModal, setTagModal] = useState<{ year: number } | null>(null);
-  const [tagDraft, setTagDraft] = useState({ start: '', end: '', quality: 'sparse' as PeriodQuality['quality'], notes: '' });
 
   useEffect(() => {
     fetch('/api/stats').then(r => r.json()).then(setStats);
-    fetch('/api/periods').then(r => r.json()).then(setPeriodQuality);
   }, []);
-
-  function openTagModal(year: number) {
-    // Round to nearest 50
-    const rounded = Math.round(year / 50) * 50;
-    setTagDraft({
-      start: String(rounded),
-      end: String(rounded + 50),
-      quality: 'sparse',
-      notes: '',
-    });
-    setTagModal({ year });
-  }
-
-  async function saveTag() {
-    const newTag: PeriodQuality = {
-      start: parseInt(tagDraft.start),
-      end: parseInt(tagDraft.end),
-      quality: tagDraft.quality,
-      notes: tagDraft.notes || undefined,
-    };
-    const updated = [...periodQuality, newTag].sort((a, b) => a.start - b.start);
-    await fetch('/api/periods', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updated),
-    });
-    setPeriodQuality(updated);
-    setTagModal(null);
-  }
-
-  async function deleteTag(index: number) {
-    const updated = periodQuality.filter((_, i) => i !== index);
-    await fetch('/api/periods', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(updated),
-    });
-    setPeriodQuality(updated);
-  }
 
   if (!stats) {
     return <div className="text-gray-500 dark:text-gray-400 text-sm">Loading...</div>;
@@ -111,91 +61,7 @@ export default function Dashboard() {
         buckets={stats.buckets}
         selectedBucket={selectedBucket}
         onSelectBucket={setSelectedBucket}
-        periodQuality={periodQuality}
-        onClickPeriod={openTagModal}
       />
-
-      {/* Tag modal */}
-      {tagModal && (
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-blue-200 dark:border-blue-800 shadow-lg p-4 space-y-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Tag period quality</h3>
-            <button onClick={() => setTagModal(null)} className="text-xs text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300">Cancel</button>
-          </div>
-          <div className="flex gap-3 items-end">
-            <div>
-              <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">Start year</label>
-              <input type="number" value={tagDraft.start}
-                onChange={e => setTagDraft(prev => ({ ...prev, start: e.target.value }))}
-                className="w-24 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100" />
-            </div>
-            <div>
-              <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">End year</label>
-              <input type="number" value={tagDraft.end}
-                onChange={e => setTagDraft(prev => ({ ...prev, end: e.target.value }))}
-                className="w-24 border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100" />
-            </div>
-            <div>
-              <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">Quality</label>
-              <div className="flex gap-1">
-                {QUALITY_OPTIONS.map(opt => (
-                  <button
-                    key={opt.value}
-                    onClick={() => setTagDraft(prev => ({ ...prev, quality: opt.value }))}
-                    className={`px-2 py-1 text-xs rounded font-medium transition-colors ${
-                      tagDraft.quality === opt.value
-                        ? 'text-white'
-                        : 'text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'
-                    }`}
-                    style={tagDraft.quality === opt.value ? { backgroundColor: opt.color } : {}}
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div>
-            <label className="block text-[11px] text-gray-500 dark:text-gray-400 mb-0.5">Notes (optional)</label>
-            <input type="text" value={tagDraft.notes}
-              onChange={e => setTagDraft(prev => ({ ...prev, notes: e.target.value }))}
-              className="w-full border border-gray-300 dark:border-gray-600 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-100"
-              placeholder="e.g. Need more industrial-era maps" />
-          </div>
-          <button onClick={saveTag}
-            disabled={!tagDraft.start || !tagDraft.end}
-            className="px-3 py-1.5 bg-blue-600 text-white rounded text-sm font-medium hover:bg-blue-700 disabled:opacity-50">
-            Save tag
-          </button>
-        </div>
-      )}
-
-      {/* Period quality tags list */}
-      {periodQuality.length > 0 && (
-        <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
-          <h2 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Period quality tags</h2>
-          <div className="space-y-1">
-            {periodQuality.map((pq, i) => (
-              <div key={i} className="flex items-center gap-2 text-xs py-1 group">
-                <span
-                  className="px-1.5 py-0.5 rounded text-white font-medium capitalize"
-                  style={{ backgroundColor: QUALITY_OPTIONS.find(o => o.value === pq.quality)?.color || '#6b7280' }}
-                >
-                  {pq.quality}
-                </span>
-                <span className="text-gray-600 dark:text-gray-400">{pq.start}–{pq.end}</span>
-                {pq.notes && <span className="text-gray-400 dark:text-gray-500 truncate">{pq.notes}</span>}
-                <button
-                  onClick={() => deleteTag(i)}
-                  className="text-gray-300 dark:text-gray-600 hover:text-red-500 dark:hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity ml-auto shrink-0"
-                >
-                  &times;
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Selected bucket source list */}
       {selectedSources && selectedSources.length > 0 && (

@@ -1,0 +1,13 @@
+{
+  "id": 17,
+  "title": "From Frontier Fort to Medieval Town: Manchester 919-1540",
+  "description": "In 919 Edward the Elder garrisoned a burh at Manchester against the Vikings. By 1086 it was a village of 200 people with a church and one carucate of land. The Grelley family held it for eight generations (c.1086-1311), built a castle on the Irk/Irwell promontory (documented 1184), and obtained the fair charter (1222/1227). The 1282 inquisition counted 150 burgages; the 1301 charter formalised a borough; the 1359 inquiry took it away again. The de la Warres inherited in 1311; Thomas de la Warre gave up his own manor house in 1421 to found the collegiate church with 3,000 pounds. Flemish weavers arrived in the 1360s. A fulling mill, tanner, and dyer are documented by 1300. By 1542 Leland called it 'the fairest, best builded, quickest, and most populous town of all Lancashire' -- a cloth town of perhaps 3,000 people with stone bridges and a fine Perpendicular Gothic church. The growth was not dramatic. It was 400 years of small increments compounding: a river junction, a market charter, a cloth trade, a church foundation, a grammar school. The real explosion was still 200 years away.",
+  "content": null,
+  "content_file": "medieval-manchester-growth-919-1540-research.txt",
+  "year_start": 919,
+  "year_end": 1540,
+  "era": "medieval",
+  "source_ids": [147, 148, 149, 150, 151, 155, 156, 157, 158, 159, 160, 161],
+  "created_at": "2026-02-09 00:00:00",
+  "updated_at": "2026-02-09 00:00:00"
+}
