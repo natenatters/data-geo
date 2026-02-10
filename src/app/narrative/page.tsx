@@ -238,16 +238,15 @@ export default function NarrativePage() {
                   The Full Picture
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mt-3 max-w-xl leading-relaxed">
-                  Three pots of royal property, each with different rules: the Crown
-                  Estate (public, revenue to Treasury), the Duchy of Lancaster (king&apos;s
-                  private income), and the Duchy of Cornwall (heir&apos;s private income).
-                  Everything else with &ldquo;Duke&rdquo; in the name is just a title with nothing
-                  behind it.
+                  Three separate structures of royal property, each with different
+                  governance: the Crown Estate (managed for the public, revenue to
+                  Treasury), the Duchy of Lancaster (the sovereign&apos;s private estate),
+                  and the Duchy of Cornwall (the heir&apos;s private estate).
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 mt-3 max-w-xl leading-relaxed">
                   Manchester&apos;s connection runs through the Duchy of Lancaster &mdash;
-                  a relationship that stretches back to 1267 and persists, in diminished
-                  form, to this day.
+                  a relationship that stretches back to 1267 and continues, in
+                  evolved form, to this day.
                 </p>
               </div>
             </div>

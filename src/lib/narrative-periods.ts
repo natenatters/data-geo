@@ -50,7 +50,7 @@ export const PALETTE = {
   crown:       '#b8860b', // dark gold — Crown / royal authority
   lancaster:   '#ea580c', // orange — Duchy of Lancaster / Lancaster family
   cornwall:    '#059669', // emerald — Duchy of Cornwall
-  crownEstate: '#1e40af', // deep blue — Crown Estate (modern institutional)
+  crownEstate: '#1e40af', // deep blue — royal lands / Crown Estate
   manchester:  '#dc2626', // red — Manchester / Salford (focal point)
   context:     '#94a3b8', // slate — background / context territories
 } as const;
@@ -60,7 +60,7 @@ export const LEGEND_ENTRIES = [
   { color: PALETTE.crown,       label: 'Crown / Royal' },
   { color: PALETTE.lancaster,   label: 'Duchy of Lancaster' },
   { color: PALETTE.cornwall,    label: 'Duchy of Cornwall' },
-  { color: PALETTE.crownEstate, label: 'Crown Estate' },
+  { color: PALETTE.crownEstate, label: 'Royal Lands' },
   { color: PALETTE.manchester,  label: 'Manchester' },
   { color: PALETTE.context,     label: 'Other territory' },
 ] as const;
@@ -82,7 +82,7 @@ export const NARRATIVE_PERIODS: NarrativePeriod[] = [
     yearEnd: 1066,
     title: 'Before the Conquest',
     subtitle: 'Anglo-Saxon England: a patchwork of earldoms',
-    narrative: `Before 1066, England had no "Crown Estate," no Duchies, and no Dukes. The king was powerful but not all-powerful — he ruled through a council of nobles called the Witan, and land was held by local lords called Thegns and Earls.
+    narrative: `Before 1066, England had no formal royal estate, no Duchies, and no Dukes. The king ruled through a council of nobles called the Witan, and land was held by local lords called Thegns and Earls.
 
 An Earl wasn't just a title — it meant you governed a large region on the king's behalf, collected taxes, raised armies, and administered justice. The biggest earldom in the Midlands was Mercia, a vast territory stretching across central England.
 
@@ -214,11 +214,11 @@ Gaunt was the richest man in England. His income was equivalent to roughly \u00a
 
 Gaunt's power made him a rival to the Crown itself. When his nephew Richard II became king, the tension was constant. When Gaunt died in 1399, Richard made a fatal mistake: he seized the Duchy estates, refusing to let Gaunt's son Henry Bolingbroke inherit.
 
-Bolingbroke invaded England, deposed Richard, and took the throne as Henry IV. His first act as king? Going to Parliament to declare that the Duchy of Lancaster would be held SEPARATELY from all other Crown possessions — forever. He was a usurper with a shaky claim, and he wanted an insurance policy: a private estate that couldn't be taken if he lost the throne.
+Bolingbroke invaded England, deposed Richard, and took the throne as Henry IV. One of his first acts was to have Parliament declare that the Duchy of Lancaster would be held separately from all other Crown possessions — permanently. As a king whose claim rested on conquest rather than clear succession, keeping an independent estate outside the Crown offered a degree of security.
 
 That decision, made out of insecurity in 1399, is why the Duchy of Lancaster still exists as a separate entity today.`,
     glossary: [
-      { term: 'Duchy', definition: 'NOT just a title — an actual property estate with land, income, and special legal status. Only Lancaster and Cornwall have ever been real Duchies in England. All other "Dukes" just got the name.' },
+      { term: 'Duchy', definition: 'A property estate with land, income, and special legal status attached to the ducal title. Only Lancaster and Cornwall have functioned as real Duchies in England; other dukedoms carried the title without territory.' },
       { term: 'Duke', definition: 'The highest rank of nobility. But after Lancaster and Cornwall, the title was handed out as a prestige label with no territory behind it.' },
       { term: 'Duchy of Lancaster', definition: 'The private estate of the Earls/Dukes of Lancaster. Scattered holdings across 40+ counties, not just Lancashire. Becomes the king\'s personal income after 1399.' },
       { term: 'County Palatine', definition: 'Still the governance structure within Lancashire — own courts, own sheriff. But now the Duke IS the king.' },
@@ -262,7 +262,7 @@ Henry VIII's dissolution of the monasteries (1530s-1540s) massively expanded Cro
 
 By this period, the word "Duke" had become mostly meaningless. Dozens of dukedoms were created for royal sons and favourites, but none came with actual land or power. Only Lancaster and Cornwall remained real Duchies with real estates. The concept of "Duke = powerful territorial ruler" lasted about 50 years (1337-1399). After that it was just a label — except for these two.`,
     glossary: [
-      { term: 'Crown', definition: 'NOT the king personally — the abstract legal concept of the state. "Crown property" means state property. The king acts "in right of the Crown" when doing government business.' },
+      { term: 'Crown', definition: 'The abstract legal concept of the state, distinct from the king personally. "Crown property" means state property. The sovereign acts "in right of the Crown" when conducting government business.' },
       { term: 'Duchy of Lancaster', definition: 'The king\'s PRIVATE estate — separate from the Crown. The king acts "in right of the Duchy" when managing it. Different legal person, different rules.' },
       { term: 'The King\'s Two Capacities', definition: 'A legal doctrine: the king is one person but acts in two roles. "In right of the Crown" (public/state) and "in right of the Duchy" (private/personal).' },
       { term: 'Court Leet', definition: 'The local court that governed the Salford Hundred on behalf of the Duchy. Regulated markets, appointed constables, administered justice. Survived until 1971.' },
@@ -338,33 +338,33 @@ By the early 1700s, the Crown estate produced very little revenue. The king was 
     yearEnd: 1837,
     title: 'The Great Bargain of 1760',
     subtitle: 'The king surrenders Crown revenue — but keeps the Duchy',
-    narrative: `By 1760, when George III came to the throne, Crown lands had been so depleted by centuries of sales and seizures that they produced almost no revenue. The king needed Parliament's money to function.
+    narrative: `By 1760, when George III came to the throne, Crown lands had been depleted by centuries of sales and seizures. Revenue was minimal, and the king depended heavily on Parliament for funding.
 
-George III made a deal: he would surrender all revenue from Crown lands to the Treasury. In return, Parliament would pay him a fixed annual sum called the Civil List. This arrangement is the foundation of the modern Crown Estate — the moment royal land became, in effect, public property managed for the nation.
+George III agreed to surrender Crown land revenue to the Treasury in exchange for a fixed annual payment called the Civil List. This created a formal separation between royal lands (now managed for public benefit) and the monarch's personal resources.
 
-But the Duchy of Lancaster was NOT part of this deal. Its separate legal identity — maintained since Henry IV's insistence in 1399 — preserved it. The Duchy remained the king's private income source, outside Parliament's control.
+The Duchy of Lancaster was not included in this arrangement. Its distinct legal status — maintained since 1399 — meant it continued as the sovereign's private estate.
 
-This is the moment that created the three-pot system that still exists today:
+Three separate property structures emerged from this period:
 
-1. The Crown Estate — revenue goes to the Treasury (the public)
-2. The Duchy of Lancaster — revenue goes to the king (private income)
-3. The Duchy of Cornwall — revenue goes to the heir (created in 1337, same principle)
+1. Royal lands (later formalised as the Crown Estate in 1956) — revenue to the Treasury
+2. The Duchy of Lancaster — revenue to the sovereign
+3. The Duchy of Cornwall — revenue to the heir (established 1337)
 
-The Crown Estate went on to be formally established as an independent body by the Crown Estate Acts of 1956 and 1961, managed by commissioners. The Sovereign Grant Act 2011 replaced the Civil List with a percentage-based grant from Crown Estate profits.
+The Crown Estate Acts of 1956 and 1961 placed the royal lands under independent commissioners. The Sovereign Grant Act 2011 replaced the Civil List with a percentage-based grant from Crown Estate profits.
 
-Meanwhile in Manchester, the Salford Hundred's Court Leet — still operating under Duchy authority — continued to function, though with diminishing powers as modern local government institutions emerged.`,
+In Manchester, the Salford Hundred's Court Leet continued operating under Duchy authority, though with diminishing powers as modern local government institutions emerged.`,
     glossary: [
-      { term: 'Crown Estate', definition: 'The formal name (from 1956) for the lands George III surrendered in 1760. Managed by independent commissioners. Revenue goes to the Treasury, not the king.' },
-      { term: 'Civil List', definition: 'The fixed annual payment Parliament gave the king in exchange for Crown land revenue. Replaced by the Sovereign Grant in 2012.' },
-      { term: 'Sovereign Grant', definition: 'Since 2012: the king receives a percentage (currently 12%) of Crown Estate profits, replacing the old Civil List.' },
-      { term: 'Duchy of Lancaster', definition: 'Still the king\'s private estate. NOT surrendered in 1760. Revenue (~\u00a324M/year today) goes directly to the king.' },
-      { term: 'Duchy of Cornwall', definition: 'The heir\'s private estate. Same principle as Lancaster — created 1337, separate from the Crown Estate, income (~\u00a323M/year) goes to the Prince of Wales.' },
-      { term: 'Crown Estate Commissioners', definition: 'The independent board that manages the Crown Estate. The king has no say in how it\'s run.' },
+      { term: 'Crown Estate', definition: 'The formal name (from 1956) for the royal lands George III surrendered in 1760. Managed by independent commissioners, with revenue going to the Treasury.' },
+      { term: 'Civil List', definition: 'The fixed annual payment Parliament gave the sovereign in exchange for Crown land revenue. Replaced by the Sovereign Grant in 2012.' },
+      { term: 'Sovereign Grant', definition: 'Since 2012, the sovereign receives a percentage (currently 12%) of Crown Estate profits, replacing the old Civil List.' },
+      { term: 'Duchy of Lancaster', definition: 'The sovereign\'s private estate, not included in the 1760 arrangement. Revenue (~\u00a324M/year today) goes to the sovereign.' },
+      { term: 'Duchy of Cornwall', definition: 'The heir\'s private estate, created 1337. Separate from the Crown Estate, with income (~\u00a323M/year) going to the Prince of Wales.' },
+      { term: 'Crown Estate Commissioners', definition: 'The independent board that manages the Crown Estate on behalf of the nation.' },
     ],
     territories: [
       { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
-      { id: 'crown_estate_london', label: 'Crown Estate (London)', color: PALETTE.crownEstate, opacity: 0.4 },
-      { id: 'crown_estate_windsor', label: 'Crown Estate (Windsor)', color: PALETTE.crownEstate, opacity: 0.35 },
+      { id: 'crown_estate_london', label: 'Royal Lands (London)', color: PALETTE.crownEstate, opacity: 0.4 },
+      { id: 'crown_estate_windsor', label: 'Royal Lands (Windsor)', color: PALETTE.crownEstate, opacity: 0.35 },
       { id: 'duchy_lancaster_core', label: 'Duchy of Lancaster', color: PALETTE.lancaster, opacity: 0.35 },
       { id: 'duchy_cornwall', label: 'Duchy of Cornwall', color: PALETTE.cornwall, opacity: 0.25 },
       { id: 'salford_hundred', label: 'Salford Hundred (Duchy)', color: PALETTE.manchester, opacity: 0.25 },
@@ -377,8 +377,8 @@ Meanwhile in Manchester, the Salford Hundred's Court Leet — still operating un
     ],
     camera: { longitude: -1.0, latitude: 52.5, height: 600000 },
     keyEntities: [
-      { name: 'George III', role: 'King (1760-1820)', holds: 'Surrendered Crown land revenue to Parliament. Kept the Duchy of Lancaster as private income.' },
-      { name: 'Parliament', role: 'Legislature', holds: 'Gained control of Crown Estate revenue. Pays the king a Civil List (later Sovereign Grant).' },
+      { name: 'George III', role: 'King (1760-1820)', holds: 'Surrendered Crown land revenue to Parliament in exchange for the Civil List. Duchy of Lancaster remained separate.' },
+      { name: 'Parliament', role: 'Legislature', holds: 'Received Crown land revenue. Pays the sovereign a Civil List (later Sovereign Grant).' },
     ],
   },
 
@@ -388,32 +388,30 @@ Meanwhile in Manchester, the Salford Hundred's Court Leet — still operating un
     yearStart: 1837,
     yearEnd: 2026,
     title: 'The Modern Arrangement',
-    subtitle: 'Three pots: Crown Estate, Lancaster, Cornwall',
-    narrative: `Today's system is the result of nearly a thousand years of accumulation, deals, and legal fictions. The king is one person but acts in multiple capacities — and the property is split into distinct pots that follow completely different rules.
+    subtitle: 'Three separate property structures',
+    narrative: `Today's system reflects nearly a thousand years of accumulated legal distinctions. The sovereign acts in multiple capacities, and royal property is divided into three separate structures with different governance.
 
-The Crown Estate is a \u00a315.6 billion portfolio — Regent Street, St James's in London, offshore wind farms, half the UK's seabed, rural estates across the country. It is NOT the king's property. It's managed by independent commissioners, and all revenue goes to the Treasury. The king has no say in how it's run. The Sovereign Grant (currently 12% of Crown Estate profits) is paid back to fund the monarchy.
+The Crown Estate is a \u00a315.6 billion portfolio including Regent Street and St James's in London, offshore wind farms, roughly half the UK's seabed, and rural estates across the country. It is managed by independent commissioners, with all revenue going to the Treasury. The Sovereign Grant (currently 12% of Crown Estate profits) funds the monarchy.
 
-The Duchy of Lancaster (~\u00a3679M in assets, ~18,400 hectares) is the king's private income source, generating ~\u00a324M/year. The king voluntarily pays income tax on it (since 1993) but pays no corporation tax, capital gains tax, or inheritance tax. He cannot sell the assets — they pass automatically to the next king.
+The Duchy of Lancaster (~\u00a3679M in assets, ~18,400 hectares) generates approximately \u00a324M per year for the sovereign. The sovereign has voluntarily paid income tax on Duchy income since 1993. The assets cannot be sold and pass automatically to the next sovereign.
 
-The Duchy of Cornwall (~\u00a31B in assets, ~53,000 hectares) works the same way but for the heir. Prince William currently holds it.
+The Duchy of Cornwall (~\u00a31B in assets, ~53,000 hectares) operates on the same principle for the heir. Prince William currently holds it.
 
-Manchester sits within the historic Salford Hundred, within the historic County Palatine of Lancaster, within the Duchy of Lancaster's jurisdiction. The Duchy's Court Leet in Salford finally ended in 1971. Magistrate appointments by the Duchy ended in 2005. Today, the Duchy appoints Manchester's High Sheriff and Lord Lieutenant (ceremonial), and collects bona vacantia (estates of people who die without wills or relatives).
+Manchester sits within the historic Salford Hundred, within the County Palatine of Lancaster, within the Duchy of Lancaster's jurisdiction. The Duchy's Court Leet in Salford finally ended in 1971, and magistrate appointments by the Duchy ended in 2005. Today, the Duchy appoints Manchester's High Sheriff and Lord Lieutenant (ceremonial roles), and collects bona vacantia (estates of people who die intestate without traceable relatives).
 
-The Crown Estate has almost no Manchester presence — it sold its only significant asset there (Altrincham Retail Park) in 2017 for \u00a363M.
-
-The whole structure exists because a medieval usurper hedged his bets in 1399 — and every king since saw the advantage of keeping an income stream that Parliament can't touch.`,
+The roots of this three-part structure trace back to Henry IV's decision in 1399 to keep the Duchy of Lancaster separate from other Crown possessions — a distinction that survived every upheaval that followed.`,
     glossary: [
-      { term: 'Crown Estate', definition: 'A \u00a315.6B public property portfolio. Revenue goes to the Treasury. The king cannot sell it or control it. Managed by independent commissioners since 1961.' },
-      { term: 'Sovereign Grant', definition: 'The king\'s official funding — 12% of Crown Estate profits. Replaced the Civil List in 2012.' },
-      { term: 'Duchy of Lancaster', definition: 'The king\'s private estate (~\u00a3679M). Generates ~\u00a324M/year income for the king. No corporation tax, no inheritance tax. Cannot be sold.' },
-      { term: 'Duchy of Cornwall', definition: 'The heir\'s private estate (~\u00a31B). Same special status as Lancaster. Currently held by Prince William.' },
-      { term: 'Bona vacantia', definition: 'Estates of people in Greater Manchester who die without a will and without traceable relatives go to the king as Duke of Lancaster — not to the Treasury.' },
-      { term: 'Chancellor of the Duchy of Lancaster', definition: 'Now a cabinet minister with no real Duchy duties. The title survives as a government role — one of the oddest hangovers of the medieval system.' },
+      { term: 'Crown Estate', definition: 'A \u00a315.6B property portfolio managed by independent commissioners since 1961. Revenue goes to the Treasury.' },
+      { term: 'Sovereign Grant', definition: 'The sovereign\'s official funding — currently 12% of Crown Estate profits. Replaced the Civil List in 2012.' },
+      { term: 'Duchy of Lancaster', definition: 'The sovereign\'s private estate (~\u00a3679M in assets). Generates ~\u00a324M/year. Assets pass automatically to the next sovereign.' },
+      { term: 'Duchy of Cornwall', definition: 'The heir\'s private estate (~\u00a31B in assets). Same legal structure as Lancaster. Currently held by Prince William.' },
+      { term: 'Bona vacantia', definition: 'Estates of people in the Duchy of Lancaster\'s jurisdiction who die intestate without traceable relatives pass to the sovereign as Duke of Lancaster.' },
+      { term: 'Chancellor of the Duchy of Lancaster', definition: 'A cabinet minister whose role has evolved beyond Duchy administration. One of several medieval titles still in active government use.' },
     ],
     territories: [
       { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.1 },
-      { id: 'crown_estate_london', label: 'Crown Estate (London)', color: PALETTE.crownEstate, opacity: 0.4 },
-      { id: 'crown_estate_windsor', label: 'Crown Estate (Windsor)', color: PALETTE.crownEstate, opacity: 0.35 },
+      { id: 'crown_estate_london', label: 'Royal Lands (London)', color: PALETTE.crownEstate, opacity: 0.4 },
+      { id: 'crown_estate_windsor', label: 'Royal Lands (Windsor)', color: PALETTE.crownEstate, opacity: 0.35 },
       { id: 'duchy_lancaster_core', label: 'Duchy of Lancaster', color: PALETTE.lancaster, opacity: 0.35 },
       { id: 'duchy_lancaster_yorkshire', label: 'Duchy (Yorkshire)', color: PALETTE.lancaster, opacity: 0.25 },
       { id: 'duchy_lancaster_midlands', label: 'Duchy (Midlands)', color: PALETTE.lancaster, opacity: 0.25 },
@@ -429,9 +427,9 @@ The whole structure exists because a medieval usurper hedged his bets in 1399 �
     ],
     camera: { longitude: -1.5, latitude: 52.5, height: 600000 },
     keyEntities: [
-      { name: 'Charles III', role: 'King & Duke of Lancaster', holds: 'Duchy of Lancaster income (~\u00a324M/year). Crown Estate revenue goes to Treasury, not him.' },
-      { name: 'Prince William', role: 'Heir & Duke of Cornwall', holds: 'Duchy of Cornwall income (~\u00a323M/year). Will swap to Lancaster when he becomes King.' },
-      { name: 'Crown Estate Commissioners', role: 'Independent board', holds: 'Manage the \u00a315.6B Crown Estate. The king has no control over it.' },
+      { name: 'Charles III', role: 'King & Duke of Lancaster', holds: 'Duchy of Lancaster income (~\u00a324M/year). Sovereign Grant funded from Crown Estate revenue.' },
+      { name: 'Prince William', role: 'Heir & Duke of Cornwall', holds: 'Duchy of Cornwall income (~\u00a323M/year). Will hold the Duchy of Lancaster as sovereign.' },
+      { name: 'Crown Estate Commissioners', role: 'Independent board', holds: 'Manage the \u00a315.6B Crown Estate on behalf of the nation.' },
     ],
   },
 ];
