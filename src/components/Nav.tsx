@@ -38,11 +38,11 @@ export default function Nav() {
   return (
     <nav className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center h-14 gap-8">
+        <div className="flex items-center h-14 gap-3 sm:gap-8">
           <Link href="/" className="font-bold text-lg tracking-tight">
             data-geo
           </Link>
-          <div className="flex gap-1 flex-1">
+          <div className="flex gap-1 flex-1 overflow-x-auto scrollbar-none">
             {links.map(link => {
               const active = link.href === '/'
                 ? pathname === '/'
@@ -51,7 +51,7 @@ export default function Nav() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`px-3 py-1.5 rounded text-sm transition-colors ${
+                  className={`px-3 py-1.5 rounded text-sm transition-colors whitespace-nowrap shrink-0 ${
                     active
                       ? 'bg-gray-700 text-white'
                       : 'text-gray-400 hover:text-white hover:bg-gray-800'

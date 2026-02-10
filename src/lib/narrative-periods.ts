@@ -47,10 +47,10 @@ export interface NarrativePeriod {
 
 // Semantic color palette — same entity always the same color across all periods
 export const PALETTE = {
-  crown:       '#7c3aed', // violet — Crown / royal authority
+  crown:       '#b8860b', // dark gold — Crown / royal authority
   lancaster:   '#ea580c', // orange — Duchy of Lancaster / Lancaster family
   cornwall:    '#059669', // emerald — Duchy of Cornwall
-  crownEstate: '#2563eb', // blue — Crown Estate (modern)
+  crownEstate: '#1e40af', // deep blue — Crown Estate (modern institutional)
   manchester:  '#dc2626', // red — Manchester / Salford (focal point)
   context:     '#94a3b8', // slate — background / context territories
 } as const;
@@ -68,7 +68,7 @@ export const LEGEND_ENTRIES = [
 // Reusable markers
 const M = {
   manchester: { longitude: -2.24, latitude: 53.48, label: 'Manchester', color: PALETTE.manchester, size: 10 },
-  london:     { longitude: -0.12, latitude: 51.51, label: 'London', color: PALETTE.crown, size: 10 },
+  london:     { longitude: -0.12, latitude: 51.51, label: 'London', color: PALETTE.crown, size: 12 },
   lancaster:  { longitude: -2.80, latitude: 54.05, label: 'Lancaster Castle', color: PALETTE.lancaster, size: 8 },
   pontefract: { longitude: -1.31, latitude: 53.69, label: 'Pontefract', color: PALETTE.lancaster, size: 6 },
   windsor:    { longitude: -0.60, latitude: 51.48, label: 'Windsor', color: PALETTE.crownEstate, size: 7 },
@@ -98,8 +98,8 @@ The Domesday Book of 1086 would later record that the Salford Hundred (the distr
       { term: 'Burh', definition: 'A fortified town built for defence. Edward the Elder built one at Manchester in 919 as part of his campaign against the Vikings.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
-      { id: 'earldom_mercia', label: 'Earldom of Mercia', color: PALETTE.context, opacity: 0.2 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.15 },
+      { id: 'earldom_mercia', label: 'Earldom of Mercia', color: PALETTE.context, opacity: 0.25 },
       { id: 'manchester_point', label: 'Mameceastre', color: PALETTE.manchester, opacity: 0.5 },
     ],
     markers: [
@@ -138,7 +138,7 @@ Roger in turn granted Manchester itself to Albert de Gresle (Grelley), who becam
       { term: 'Barony', definition: 'An estate held by a Baron — a tenant-in-chief owing knight service to the king.' },
     ],
     territories: [
-      { id: 'england', label: 'Crown land (all England)', color: PALETTE.crown, opacity: 0.12 },
+      { id: 'england', label: 'Crown land (all England)', color: PALETTE.crown, opacity: 0.2 },
       { id: 'lancashire_historic', label: 'Roger de Poitou\'s grant', color: PALETTE.lancaster, opacity: 0.3 },
       { id: 'earldom_chester', label: 'Earldom of Chester', color: PALETTE.context, opacity: 0.2 },
       { id: 'salford_hundred', label: 'Salford Hundred', color: PALETTE.manchester, opacity: 0.35 },
@@ -181,7 +181,7 @@ The estate survived Thomas's fall. His brother Henry recovered the lands, and by
       { term: 'Duke', definition: 'A rank ABOVE Earl, invented in England in 1337. The first two English Dukes (Cornwall 1337, Lancaster 1351) came with real territory and real power. Later Dukes mostly just got the title.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.08 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
       { id: 'county_palatine', label: 'County Palatine of Lancaster', color: PALETTE.lancaster, opacity: 0.35 },
       { id: 'salford_hundred', label: 'Salford Hundred', color: PALETTE.manchester, opacity: 0.35 },
       { id: 'earldom_chester', label: 'County Palatine of Chester', color: PALETTE.context, opacity: 0.18 },
@@ -224,7 +224,7 @@ That decision, made out of insecurity in 1399, is why the Duchy of Lancaster sti
       { term: 'County Palatine', definition: 'Still the governance structure within Lancashire — own courts, own sheriff. But now the Duke IS the king.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.08 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
       { id: 'duchy_lancaster_core', label: 'Duchy core (Lancashire)', color: PALETTE.lancaster, opacity: 0.4 },
       { id: 'duchy_lancaster_yorkshire', label: 'Duchy (Yorkshire)', color: PALETTE.lancaster, opacity: 0.3 },
       { id: 'duchy_lancaster_midlands', label: 'Duchy (Midlands)', color: PALETTE.lancaster, opacity: 0.3 },
@@ -269,7 +269,7 @@ By this period, the word "Duke" had become mostly meaningless. Dozens of dukedom
       { term: 'Dissolution of the Monasteries', definition: 'Henry VIII seized all monastery lands (1530s-40s). Vastly expanded Crown holdings. The Duchy absorbed some too, keeping them separate.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.08 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
       { id: 'duchy_lancaster_core', label: 'Duchy of Lancaster (core)', color: PALETTE.lancaster, opacity: 0.35 },
       { id: 'duchy_lancaster_yorkshire', label: 'Duchy (Yorkshire)', color: PALETTE.lancaster, opacity: 0.25 },
       { id: 'duchy_lancaster_midlands', label: 'Duchy (Midlands)', color: PALETTE.lancaster, opacity: 0.25 },
@@ -313,7 +313,7 @@ By the early 1700s, the Crown estate produced very little revenue. The king was 
       { term: 'Sequestration', definition: 'Parliament\'s seizure of Royalist property during the Civil War. Crown lands were sequestered and sold.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.08 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
       { id: 'duchy_lancaster_core', label: 'Duchy of Lancaster (survived)', color: PALETTE.lancaster, opacity: 0.35 },
       { id: 'duchy_cornwall', label: 'Duchy of Cornwall (survived)', color: PALETTE.cornwall, opacity: 0.2 },
       { id: 'salford_hundred', label: 'Salford Hundred', color: PALETTE.manchester, opacity: 0.25 },
@@ -362,7 +362,7 @@ Meanwhile in Manchester, the Salford Hundred's Court Leet — still operating un
       { term: 'Crown Estate Commissioners', definition: 'The independent board that manages the Crown Estate. The king has no say in how it\'s run.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.08 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.12 },
       { id: 'crown_estate_london', label: 'Crown Estate (London)', color: PALETTE.crownEstate, opacity: 0.4 },
       { id: 'crown_estate_windsor', label: 'Crown Estate (Windsor)', color: PALETTE.crownEstate, opacity: 0.35 },
       { id: 'duchy_lancaster_core', label: 'Duchy of Lancaster', color: PALETTE.lancaster, opacity: 0.35 },
@@ -411,7 +411,7 @@ The whole structure exists because a medieval usurper hedged his bets in 1399 �
       { term: 'Chancellor of the Duchy of Lancaster', definition: 'Now a cabinet minister with no real Duchy duties. The title survives as a government role — one of the oddest hangovers of the medieval system.' },
     ],
     territories: [
-      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.06 },
+      { id: 'england', label: 'England', color: PALETTE.context, opacity: 0.1 },
       { id: 'crown_estate_london', label: 'Crown Estate (London)', color: PALETTE.crownEstate, opacity: 0.4 },
       { id: 'crown_estate_windsor', label: 'Crown Estate (Windsor)', color: PALETTE.crownEstate, opacity: 0.35 },
       { id: 'duchy_lancaster_core', label: 'Duchy of Lancaster', color: PALETTE.lancaster, opacity: 0.35 },

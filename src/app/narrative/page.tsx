@@ -152,23 +152,48 @@ export default function NarrativePage() {
     <div className="fixed inset-0 top-14 z-0">
       <div className="flex flex-col lg:flex-row h-full">
         {/* Left: Sticky map */}
-        <div className="h-[40vh] lg:h-full lg:w-1/2 flex-shrink-0">
+        <div className="h-[60vh] lg:h-full lg:w-1/2 flex-shrink-0">
           <NarrativeMap activePeriodId={activePeriodId} />
         </div>
 
         {/* Right: Header + Content + Timeline sidebar */}
         <div className="flex-1 flex flex-col min-h-0 bg-white dark:bg-gray-950">
-          {/* Sticky period header */}
-          <div className="flex-shrink-0 z-10 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-2">
-            <div className="flex items-baseline gap-2">
-              <span className="text-xs font-mono text-gray-400 dark:text-gray-500 tabular-nums flex-shrink-0">
-                {activePeriod?.yearStart}&ndash;{activePeriod?.yearEnd}
-              </span>
-              <span className="text-sm font-bold text-gray-900 dark:text-gray-100 truncate">
-                {activePeriod?.title}
-              </span>
-            </div>
-          </div>
+          {/* Sticky period header with nav arrows */}
+          {(() => {
+            const idx = NARRATIVE_PERIODS.findIndex(p => p.id === activePeriodId);
+            const hasPrev = idx > 0;
+            const hasNext = idx < NARRATIVE_PERIODS.length - 1;
+            return (
+              <div className="flex-shrink-0 z-10 bg-white/90 dark:bg-gray-950/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 py-2">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => hasPrev && scrollTo(NARRATIVE_PERIODS[idx - 1].id)}
+                    disabled={!hasPrev}
+                    className="text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:opacity-20 shrink-0 -ml-1 px-0.5"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <span className="text-xs font-mono text-gray-400 dark:text-gray-500 tabular-nums flex-shrink-0">
+                    {activePeriod?.yearStart}&ndash;{activePeriod?.yearEnd}
+                  </span>
+                  <span className="text-sm font-bold text-gray-900 dark:text-gray-100 truncate flex-1">
+                    {activePeriod?.title}
+                  </span>
+                  <button
+                    onClick={() => hasNext && scrollTo(NARRATIVE_PERIODS[idx + 1].id)}
+                    disabled={!hasNext}
+                    className="text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 disabled:invisible shrink-0 px-0.5 -mr-1"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Content + sidebar row */}
           <div className="flex-1 flex min-h-0">
@@ -227,6 +252,16 @@ export default function NarrativePage() {
               </div>
             </div>
 
+            {/* Floating "Back to top" pill — shows when scrolled past 80% */}
+            {scrollProgress > 0.8 && (
+              <button
+                onClick={() => scrollContainerRef.current?.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="fixed bottom-6 right-6 lg:right-16 z-30 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs font-medium px-4 py-2 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-transform"
+              >
+                Top &uarr;
+              </button>
+            )}
+
             {/* Timeline sidebar — desktop only */}
             <div className="hidden lg:block w-10 flex-shrink-0 border-l border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50 relative">
               {/* Track line (background) */}
@@ -284,15 +319,6 @@ export default function NarrativePage() {
           </div>
         </div>
 
-        {/* Mobile: floating active period pill */}
-        <div className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-10 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-full px-4 py-1.5 shadow-lg border border-gray-200 dark:border-gray-700">
-          <span className="text-xs font-mono text-gray-500 dark:text-gray-400 tabular-nums">
-            {activePeriod?.yearStart}
-          </span>
-          <span className="text-xs font-semibold text-gray-900 dark:text-gray-100 ml-2">
-            {activePeriod?.title}
-          </span>
-        </div>
       </div>
     </div>
   );

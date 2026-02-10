@@ -163,8 +163,8 @@ export default function NarrativeMap({ activePeriodId }: Props) {
             hierarchy: Cesium.Cartesian3.fromDegreesArray(flat),
             material: color.withAlpha(territory.opacity),
             outline: true,
-            outlineColor: color.withAlpha(Math.min(territory.opacity + 0.3, 1.0)),
-            outlineWidth: 2,
+            outlineColor: color.withAlpha(Math.min(territory.opacity + 0.4, 1.0)),
+            outlineWidth: 3,
           },
         }));
 
